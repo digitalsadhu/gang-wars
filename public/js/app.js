@@ -6,15 +6,15 @@ const IMAGE_PATH = '/images/hive-city.jpg';  // Now served from public/images/
 const IMAGE_WIDTH = 4032;
 const IMAGE_HEIGHT = 3024;
 
-// Infrastructure data (loaded from JSON)
-let infrastructureData = [];
+// Rackets data (loaded from JSON)
+let racketsData = [];
 
 // Power Level description
-const POWER_DESCRIPTION = `Each planet tracks a Power Level (1 - 4) for each Alliance.
-Power Level represents influence, control, and effectiveness on that planet.
+const POWER_DESCRIPTION = `Each district tracks a Power Level (0 - 4) for each faction.
+Power Level represents influence, control, and effectiveness in that district.
 Power Levels affect:
 • Mission gameplay and outcomes
-• Infrastructure placement priority
+• Racket placement priority
 • Event resolution`;
 
 // Player data (loaded from JSON)
@@ -29,7 +29,7 @@ const iconCache = {};
 let map;
 let markers = [];
 let markerLayer;
-let addMode = null; // null, 'gang', 'infrastructure', 'power', or 'theatre'
+let addMode = null; // null, 'gang', 'racket', 'power', or 'theatre'
 let isAuthenticated = false;
 let theatresData = null;
 let operationsData = null;
@@ -58,7 +58,7 @@ async function initMap() {
   await checkAuthStatus();
   await loadConfig();
   await loadPlayers();
-  await loadInfrastructure();
+  await loadRackets();
   await loadTheatres();
   await loadOperations();
   await loadPhases();
@@ -200,41 +200,41 @@ function getPlayerFaction(playerName) {
   return player ? player.faction : '';
 }
 
-// Load infrastructure data
-async function loadInfrastructure() {
+// Load rackets data
+async function loadRackets() {
   try {
-    const response = await fetch('/data/infrastructure.json');
+    const response = await fetch('/data/rackets.json');
     const data = await response.json();
-    infrastructureData = data.infrastructure;
-    populateInfrastructureDropdown();
+    racketsData = data.rackets;
+    populateRacketsDropdown();
   } catch (error) {
-    console.error('Failed to load infrastructure:', error);
+    console.error('Failed to load rackets:', error);
   }
 }
 
-// Populate infrastructure dropdown
-function populateInfrastructureDropdown() {
+// Populate rackets dropdown
+function populateRacketsDropdown() {
   const select = document.getElementById('infra-type');
   if (!select) return;
 
   select.innerHTML = '';
-  infrastructureData.forEach(infra => {
+  racketsData.forEach(racket => {
     const option = document.createElement('option');
-    option.value = infra.name;
-    option.textContent = infra.name;
+    option.value = racket.name;
+    option.textContent = racket.name;
     select.appendChild(option);
   });
 }
 
-// Get infrastructure description by name
-function getInfrastructureDescription(name) {
-  const infra = infrastructureData.find(i => i.name === name);
-  return infra ? infra.description : '';
+// Get racket description by name
+function getRacketDescription(name) {
+  const racket = racketsData.find(r => r.name === name);
+  return racket ? racket.description : '';
 }
 
-// Check if a title matches an infrastructure name
-function isInfrastructureName(title) {
-  return infrastructureData.some(i => i.name === title);
+// Check if a title matches a racket name
+function isRacketName(title) {
+  return racketsData.some(r => r.name === title);
 }
 
 // Load markers from the server
@@ -643,8 +643,8 @@ function renderMarkers() {
         iconSize: [24, 24],
         iconAnchor: [12, 12]
       });
-    } else if (isInfrastructure(marker)) {
-      // Infrastructure marker
+    } else if (isRacket(marker)) {
+      // Racket marker
       icon = L.divIcon({
         className: 'custom-marker',
         html: `<div style="width: 20px; height: 20px; border-radius: 50%; background: ${colors.background}; border: 2px solid ${colors.border};"></div>`,
@@ -686,11 +686,13 @@ function renderMarkers() {
   });
 }
 
-// Check if marker is infrastructure (by type or by title)
-function isInfrastructure(marker) {
+// Check if marker is a racket (by type or by title)
+function isRacket(marker) {
+  if (marker.markerType === 'racket') return true;
+  // Legacy support for old 'infrastructure' type
   if (marker.markerType === 'infrastructure') return true;
-  // Fallback: check if title matches an infrastructure type
-  return isInfrastructureName(marker.title);
+  // Fallback: check if title matches a racket type
+  return isRacketName(marker.title);
 }
 
 // Check if marker is power
@@ -715,14 +717,14 @@ function getTheatreByName(name) {
 
 // Create popup HTML content
 function createPopupContent(marker) {
-  const isInfra = isInfrastructure(marker);
+  const isInfra = isRacket(marker);
   const isPwr = isPower(marker);
   const isThtr = isTheatre(marker);
   const faction = marker.faction || '';
   const colors = getFactionColors(faction);
 
   let editFunction = 'editMarker';
-  if (isInfra) editFunction = 'editInfrastructure';
+  if (isInfra) editFunction = 'editRacket';
   if (isPwr) editFunction = 'editPower';
   if (isThtr) editFunction = 'editTheatre';
 
@@ -748,7 +750,7 @@ function createPopupContent(marker) {
   }
 
   if (isInfra) {
-    const rule = getInfrastructureDescription(marker.title);
+    const rule = getRacketDescription(marker.title);
     return `
       <div class="popup-title">${escapeHtml(marker.title)}</div>
       ${factionBadge}
@@ -815,8 +817,8 @@ function setupEventListeners() {
   // Add gang marker
   document.getElementById('add-marker-btn').addEventListener('click', () => toggleAddMode('gang'));
 
-  // Add infrastructure
-  document.getElementById('add-infra-btn').addEventListener('click', () => toggleAddMode('infrastructure'));
+  // Add racket
+  document.getElementById('add-infra-btn').addEventListener('click', () => toggleAddMode('racket'));
 
   // Add power
   document.getElementById('add-power-btn').addEventListener('click', () => toggleAddMode('power'));
@@ -835,12 +837,12 @@ function setupEventListeners() {
   document.getElementById('cancel-btn').addEventListener('click', closeMarkerModal);
   document.getElementById('delete-btn').addEventListener('click', handleDelete);
 
-  // Infrastructure form
+  // Racket form
   document.getElementById('infra-form').addEventListener('submit', handleInfraSubmit);
   document.getElementById('infra-cancel-btn').addEventListener('click', closeInfraModal);
   document.getElementById('infra-delete-btn').addEventListener('click', handleInfraDelete);
 
-  // Infrastructure type change - show rule
+  // Racket type change - show rule
   document.getElementById('infra-type').addEventListener('change', updateInfraRuleDisplay);
 
   // Power form
@@ -863,11 +865,11 @@ function setupEventListeners() {
   });
 }
 
-// Update infrastructure rule display
+// Update racket rule display
 function updateInfraRuleDisplay() {
   const infraType = document.getElementById('infra-type').value;
   const ruleDisplay = document.getElementById('infra-rule-display');
-  const rule = getInfrastructureDescription(infraType);
+  const rule = getRacketDescription(infraType);
   ruleDisplay.textContent = rule || '';
 }
 
@@ -940,7 +942,7 @@ function toggleAddMode(mode) {
 
   // Update button states
   document.getElementById('add-marker-btn').classList.toggle('active', addMode === 'gang');
-  document.getElementById('add-infra-btn').classList.toggle('active', addMode === 'infrastructure');
+  document.getElementById('add-infra-btn').classList.toggle('active', addMode === 'racket');
   document.getElementById('add-power-btn').classList.toggle('active', addMode === 'power');
   document.getElementById('add-theatre-btn').classList.toggle('active', addMode === 'theatre');
 
@@ -952,8 +954,8 @@ function toggleAddMode(mode) {
     instructions.classList.remove('hidden');
     if (addMode === 'gang') {
       instructionsText.textContent = 'Click on the map to place a gang marker';
-    } else if (addMode === 'infrastructure') {
-      instructionsText.textContent = 'Click on the map to place infrastructure';
+    } else if (addMode === 'racket') {
+      instructionsText.textContent = 'Click on the map to place a racket';
     } else if (addMode === 'power') {
       instructionsText.textContent = 'Click on the map to place a power marker';
     } else if (addMode === 'theatre') {
@@ -974,7 +976,7 @@ function handleMapClick(e) {
 
   if (addMode === 'gang') {
     openMarkerModal(null, x, y);
-  } else if (addMode === 'infrastructure') {
+  } else if (addMode === 'racket') {
     openInfraModal(null, x, y);
   } else if (addMode === 'power') {
     openPowerModal(null, x, y);
@@ -1085,7 +1087,7 @@ async function handleDelete() {
   }
 }
 
-// Infrastructure modal
+// Racket modal
 function openInfraModal(markerId = null, x = null, y = null) {
   const modal = document.getElementById('infra-modal');
   const form = document.getElementById('infra-form');
@@ -1098,7 +1100,7 @@ function openInfraModal(markerId = null, x = null, y = null) {
     const marker = markers.find(m => m.id === markerId);
     if (!marker) return;
 
-    title.textContent = 'Edit Infrastructure';
+    title.textContent = 'Edit Racket';
     document.getElementById('infra-id').value = marker.id;
     document.getElementById('infra-x').value = marker.x;
     document.getElementById('infra-y').value = marker.y;
@@ -1106,7 +1108,7 @@ function openInfraModal(markerId = null, x = null, y = null) {
     document.getElementById('infra-alliance').value = marker.faction || 'imperium';
     deleteBtn.classList.remove('hidden');
   } else {
-    title.textContent = 'Add Infrastructure';
+    title.textContent = 'Add Racket';
     document.getElementById('infra-id').value = '';
     document.getElementById('infra-x').value = x;
     document.getElementById('infra-y').value = y;
@@ -1121,7 +1123,7 @@ function closeInfraModal() {
   document.getElementById('infra-modal').classList.add('hidden');
 }
 
-// Handle infrastructure form submission
+// Handle racket form submission
 async function handleInfraSubmit(e) {
   e.preventDefault();
 
@@ -1131,7 +1133,7 @@ async function handleInfraSubmit(e) {
     y: parseFloat(document.getElementById('infra-y').value),
     title: document.getElementById('infra-type').value,
     faction: document.getElementById('infra-alliance').value,
-    markerType: 'infrastructure'
+    markerType: 'racket'
   };
 
   try {
@@ -1155,16 +1157,16 @@ async function handleInfraSubmit(e) {
     await loadMarkers();
     closeInfraModal();
   } catch (error) {
-    console.error('Failed to save infrastructure:', error);
+    console.error('Failed to save racket:', error);
   }
 }
 
-// Handle infrastructure deletion
+// Handle racket deletion
 async function handleInfraDelete() {
   const id = document.getElementById('infra-id').value;
   if (!id) return;
 
-  if (!confirm('Are you sure you want to delete this infrastructure?')) return;
+  if (!confirm('Are you sure you want to delete this racket?')) return;
 
   try {
     const response = await fetch(`/api/markers/${id}`, { method: 'DELETE' });
@@ -1180,7 +1182,7 @@ async function handleInfraDelete() {
     await loadMarkers();
     closeInfraModal();
   } catch (error) {
-    console.error('Failed to delete infrastructure:', error);
+    console.error('Failed to delete racket:', error);
   }
 }
 
@@ -1191,8 +1193,8 @@ window.editMarker = function(id) {
   openMarkerModal(id);
 };
 
-// Edit infrastructure (called from popup)
-window.editInfrastructure = function(id) {
+// Edit racket (called from popup)
+window.editRacket = function(id) {
   if (!isAuthenticated) return;
   map.closePopup();
   openInfraModal(id);

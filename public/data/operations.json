@@ -3,7 +3,7 @@
     {
       "name": "Turf War",
       "type": "common",
-      "description": "When selecting this campaign operation, select one of the campaign attack types, select this gang's district, then select one opposing faction. In the resolve battle operations stage, each faction will select players from their faction to defend against the turf war operations that have been declared against them. For each of those turf war operations, a player from that faction can be selected to play against the player whose gang declared it."
+      "description": "When selecting this campaign operation, select one of the campaign attack types, select this gang's district or one adjacent district, then select one opposing faction. In the resolve battle operations stage, each faction will select players from their faction to defend against the turf war operations that have been declared against them. For each of those turf war operations, a player from that faction can be selected to play against the player whose gang declared it."
     },
     {
       "name": "Relocate",
