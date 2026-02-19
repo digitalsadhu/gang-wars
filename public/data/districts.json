@@ -46,7 +46,7 @@
       "description": "A sprawling industrial zone where raw materials arrive at the docks, are processed in vast factories, and waste is dumped in ever-growing slag mountains.",
       "theatres": ["Factorum District", "The Docks", "Slag Heaps"],
       "playstyleFavored": "Mixed - factories, shipping, and waste disposal",
-      "center": { "x": 1900, "y": 750 }
+      "center": { "x": 2100, "y": 750 }
     },
     {
       "id": 7,

@@ -557,18 +557,65 @@ function renderDistrictLabels() {
   districtsData.forEach(district => {
     if (!district.center) return;
 
+    // Generate theatre icons HTML with onclick handlers
+    const theatreIconsHtml = district.theatres.map(theatreName => {
+      const theatreIndex = theatresData ? theatresData.findIndex(t => t.name === theatreName) : -1;
+      return `<div class="district-theatre-icon" onclick="handleDistrictTheatreClick(event, ${theatreIndex})" title="${escapeHtml(theatreName)}">
+        <svg viewBox="0 0 24 24" fill="#ffffff"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/></svg>
+      </div>`;
+    }).join('');
+
     const icon = L.divIcon({
       className: 'district-label',
-      html: `<div class="district-label-text">${escapeHtml(district.name)}</div>`,
-      iconSize: [150, 30],
-      iconAnchor: [75, 15]
+      html: `<div class="district-label-container">
+        <div class="district-label-text">${escapeHtml(district.name)}</div>
+        <div class="district-theatre-icons">${theatreIconsHtml}</div>
+      </div>`,
+      iconSize: [200, 70],
+      iconAnchor: [100, 35]
     });
 
     L.marker([district.center.y, district.center.x], {
       icon,
-      interactive: false
+      interactive: true
     }).addTo(districtLabelLayer);
   });
+}
+
+// Handle click on district theatre icon
+window.handleDistrictTheatreClick = function(event, theatreIndex) {
+  event.stopPropagation();
+  if (theatreIndex >= 0 && theatresData && theatresData[theatreIndex]) {
+    openDistrictTheatreModal(theatreIndex);
+  }
+};
+
+// Open theatre info modal from district label
+function openDistrictTheatreModal(theatreIndex) {
+  const theatre = theatresData[theatreIndex];
+  if (!theatre) return;
+
+  const modal = document.getElementById('theatre-modal');
+  const title = document.getElementById('theatre-modal-title');
+  const deleteBtn = document.getElementById('theatre-delete-btn');
+  const saveBtn = modal.querySelector('button[type="submit"]');
+  const select = document.getElementById('theatre-select');
+  const selectGroup = select.closest('.form-group');
+  const cancelBtn = document.getElementById('theatre-cancel-btn');
+
+  title.textContent = theatre.name;
+  select.value = theatreIndex;
+
+  // Display the full theatre info
+  displayTheatre(theatreIndex);
+
+  // Hide edit controls - this is view only
+  deleteBtn.classList.add('hidden');
+  saveBtn.classList.add('hidden');
+  selectGroup.classList.add('hidden');
+  cancelBtn.classList.add('hidden');
+
+  modal.classList.remove('hidden');
 }
 
 // Render all markers on the map
@@ -608,9 +655,9 @@ function renderMarkers() {
       // Theatre marker - hexagon shape
       icon = L.divIcon({
         className: 'custom-marker theatre-marker',
-        html: `<div class="theatre-icon"><svg viewBox="0 0 24 24" fill="#4a90d9"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/></svg></div>`,
-        iconSize: [36, 36],
-        iconAnchor: [18, 18]
+        html: `<div class="theatre-icon"><svg viewBox="0 0 24 24" fill="#ffffff"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/></svg></div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
       });
     } else {
       // Gang marker with faction-specific icon

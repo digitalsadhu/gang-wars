@@ -1,24 +1,6 @@
 {
   "markers": [
     {
-      "id": "1771512925923",
-      "x": 3036,
-      "y": 1116,
-      "title": "Robert",
-      "description": "",
-      "faction": "The Undergrid Syndicate",
-      "createdAt": "2026-02-19T14:55:25.923Z"
-    },
-    {
-      "id": "1771512932507",
-      "x": 2084,
-      "y": 864,
-      "title": "Fabien",
-      "description": "",
-      "faction": "Static Dominion",
-      "createdAt": "2026-02-19T14:55:32.507Z"
-    },
-    {
       "id": "1771512939140",
       "x": 992,
       "y": 912,
@@ -28,24 +10,6 @@
       "createdAt": "2026-02-19T14:55:39.140Z"
     },
     {
-      "id": "1771512954389",
-      "x": 720,
-      "y": 1548,
-      "title": "Richard",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T14:55:54.389Z"
-    },
-    {
-      "id": "1771512959890",
-      "x": 1144,
-      "y": 2204,
-      "title": "Kiran",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T14:55:59.890Z"
-    },
-    {
       "id": "1771513262624",
       "x": 2744,
       "y": 2632,
@@ -53,33 +17,6 @@
       "description": "",
       "faction": "The Undergrid Syndicate",
       "createdAt": "2026-02-19T15:01:02.624Z"
-    },
-    {
-      "id": "1771513272188",
-      "x": 1708,
-      "y": 760,
-      "title": "Stronghold",
-      "description": "",
-      "faction": "Static Dominion",
-      "createdAt": "2026-02-19T15:01:12.188Z"
-    },
-    {
-      "id": "1771513281554",
-      "x": 840,
-      "y": 2176,
-      "title": "Stronghold",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T15:01:21.554Z"
-    },
-    {
-      "id": "1771513671536",
-      "x": 2704,
-      "y": 1352,
-      "title": "Power Level 4",
-      "description": "",
-      "faction": "The Undergrid Syndicate",
-      "createdAt": "2026-02-19T15:07:51.536Z"
     },
     {
       "id": "1771513695468",
@@ -100,35 +37,6 @@
       "createdAt": "2026-02-19T15:08:23.467Z"
     },
     {
-      "id": "1771513765718",
-      "x": 1248,
-      "y": 2052,
-      "title": "Power Level 4",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T15:09:25.718Z",
-      "powerLevel": 4,
-      "markerType": "power"
-    },
-    {
-      "id": "1771513813852",
-      "x": 956,
-      "y": 1572,
-      "title": "Power Level 3",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T15:10:13.852Z"
-    },
-    {
-      "id": "1771513842200",
-      "x": 1880,
-      "y": 680,
-      "title": "Power Level 4",
-      "description": "",
-      "faction": "Static Dominion",
-      "createdAt": "2026-02-19T15:10:42.200Z"
-    },
-    {
       "id": "1771513850850",
       "x": 1216,
       "y": 1064,
@@ -138,42 +46,6 @@
       "createdAt": "2026-02-19T15:10:50.850Z"
     },
     {
-      "id": "1771513857899",
-      "x": 1920,
-      "y": 1664,
-      "title": "Power Level 2",
-      "description": "",
-      "faction": "Static Dominion",
-      "createdAt": "2026-02-19T15:10:57.899Z"
-    },
-    {
-      "id": "1771534538527",
-      "x": 3172,
-      "y": 1988,
-      "title": "Hab-Stack Warrens",
-      "description": "",
-      "faction": "imperium",
-      "createdAt": "2026-02-19T20:55:38.527Z"
-    },
-    {
-      "id": "1771535443196",
-      "x": 3588,
-      "y": 1840,
-      "title": "The Docks",
-      "description": "",
-      "faction": "imperium",
-      "createdAt": "2026-02-19T21:10:43.196Z"
-    },
-    {
-      "id": "1771535455276",
-      "x": 3224,
-      "y": 1636,
-      "title": "Fungal Depths",
-      "description": "",
-      "faction": "imperium",
-      "createdAt": "2026-02-19T21:10:55.276Z"
-    },
-    {
       "id": "1771539686078",
       "x": 2272,
       "y": 2064,
@@ -181,15 +53,6 @@
       "description": "",
       "faction": "The Undergrid Syndicate",
       "createdAt": "2026-02-19T22:21:26.078Z"
-    },
-    {
-      "id": "1771539718642",
-      "x": 1680,
-      "y": 2024,
-      "title": "Power Level 2",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T22:21:58.642Z"
     }
   ]
 }

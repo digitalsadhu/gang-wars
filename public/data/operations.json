@@ -3,17 +3,17 @@
     {
       "name": "Turf War",
       "type": "common",
-      "description": "When selecting this campaign operation, select one of the campaign attack types, select this gang's district or one connected to it, then select one opposing faction. In the resolve battle operations stage, each faction will select players from their faction to defend against the battle operations that have been declared against them. For each of those battle operations, a player from that faction can be selected to play against the player whose gang declared it."
+      "description": "When selecting this campaign operation, select one of the campaign attack types, select this gang's district, then select one opposing faction. In the resolve battle operations stage, each faction will select players from their faction to defend against the turf war operations that have been declared against them. For each of those turf war operations, a player from that faction can be selected to play against the player whose gang declared it."
     },
     {
       "name": "Relocate",
       "type": "common",
-      "description": "Move your gang to one district on the map."
+      "description": "Move this gang to one adjacent district on the map."
     },
     {
       "name": "Establish Racket",
       "type": "common",
-      "description": "Build an infrastructure (not Stronghold)."
+      "description": "Establish a racket in this gang's district."
     },
     {
       "name": "Home Turf Advantage",
@@ -21,9 +21,9 @@
       "description": "For this phase, each time this gang's faction is attacked on this district or one connected to it, the player from this faction fighting the battle can choose the theatre instead of the player from the attacking faction."
     },
     {
-      "name": "Send Enforcers",
+      "name": "Influence Inhabitants",
       "type": "common",
-      "description": "Select this gang's district or one connected to it. For each opposing faction, the war master rolls one D6; on a 5+, that faction's power level is reduced by 1."
+      "description": "Select this gang's district or one beside it. For each opposing faction, the war master rolls one D6; on a 5+, that faction's power level is reduced by 1."
     }
   ]
 }
