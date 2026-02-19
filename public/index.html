@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vespator Front Campaign - Star Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content login-modal">
+      <h2>Campaign Admin Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="Username" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Password" required />
+        </div>
+        <div id="login-error" class="error-message hidden"></div>
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="button" class="btn btn-secondary" id="login-cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Gang Form Modal -->
+  <div id="marker-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title">Add Gang</h2>
+      <form id="marker-form">
+        <input type="hidden" id="marker-id" />
+        <input type="hidden" id="marker-x" />
+        <input type="hidden" id="marker-y" />
+
+        <div class="form-group">
+          <label for="marker-player">Player</label>
+          <select id="marker-player" required>
+            <!-- Options loaded dynamically from players.json -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="marker-description">Description</label>
+          <textarea id="marker-description" rows="4" placeholder="Gang composition, mission, etc..."></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-danger hidden" id="delete-btn">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Infrastructure Form Modal -->
+  <div id="infra-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="infra-modal-title">Add Infrastructure</h2>
+      <form id="infra-form">
+        <input type="hidden" id="infra-id" />
+        <input type="hidden" id="infra-x" />
+        <input type="hidden" id="infra-y" />
+
+        <div class="form-group">
+          <label for="infra-type">Infrastructure</label>
+          <select id="infra-type" required>
+            <!-- Options loaded dynamically from infrastructure.json -->
+          </select>
+          <div id="infra-rule-display" class="infra-rule-display"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="infra-alliance">Faction</label>
+          <select id="infra-alliance" required>
+            <!-- Options loaded dynamically from config.json -->
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" id="infra-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-danger hidden" id="infra-delete-btn">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Power Form Modal -->
+  <div id="power-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="power-modal-title">Add Power</h2>
+      <form id="power-form">
+        <input type="hidden" id="power-id" />
+        <input type="hidden" id="power-x" />
+        <input type="hidden" id="power-y" />
+
+        <div class="form-group">
+          <label for="power-level">Power Level</label>
+          <select id="power-level" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="power-alliance">Faction</label>
+          <select id="power-alliance" required>
+            <!-- Options loaded dynamically from config.json -->
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" id="power-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-danger hidden" id="power-delete-btn">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Theatre Form Modal -->
+  <div id="theatre-modal" class="modal hidden">
+    <div class="modal-content theatre-modal">
+      <div class="theatre-header">
+        <h2 id="theatre-modal-title">Add Theatre</h2>
+        <button type="button" class="modal-close" id="theatre-close-btn">&times;</button>
+      </div>
+      <form id="theatre-form">
+        <input type="hidden" id="theatre-id" />
+        <input type="hidden" id="theatre-x" />
+        <input type="hidden" id="theatre-y" />
+
+        <div class="form-group">
+          <label for="theatre-select">Select Theatre</label>
+          <select id="theatre-select" required>
+            <!-- Options loaded dynamically from theatres.json -->
+          </select>
+        </div>
+
+        <div id="theatre-content" class="theatre-content hidden">
+          <p id="theatre-description" class="theatre-description"></p>
+          <div class="theatre-section">
+            <h4>Tactical Benefits</h4>
+            <p id="theatre-benefits"></p>
+          </div>
+          <div class="theatre-section">
+            <h4>Recommended Terrain</h4>
+            <p id="theatre-terrain"></p>
+          </div>
+          <div class="theatre-section">
+            <h4>Twists</h4>
+            <div id="theatre-twists" class="twists-container"></div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" id="theatre-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-danger hidden" id="theatre-delete-btn">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Operations Reference Modal -->
+  <div id="operations-modal" class="modal hidden">
+    <div class="modal-content operations-modal">
+      <div class="operations-header">
+        <h2>Operations Reference</h2>
+        <button type="button" class="modal-close" id="operations-close-btn">&times;</button>
+      </div>
+      <div class="form-group">
+        <label for="operations-select">Select Operation</label>
+        <select id="operations-select">
+          <option value="">-- Select an Operation --</option>
+        </select>
+      </div>
+      <div id="operations-content" class="operations-content hidden">
+        <span id="operations-type" class="operations-type-badge"></span>
+        <p id="operations-description" class="operations-description"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reference Controls (left side) -->
+  <div id="ref-controls">
+    <button id="operations-btn" class="control-btn">Operations</button>
+  </div>
+
+  <!-- Auth Status / Controls (right side) -->
+  <div id="auth-controls">
+    <div id="logged-out-controls">
+      <button id="login-btn" class="control-btn">Login</button>
+    </div>
+    <div id="logged-in-controls" class="hidden">
+      <span id="user-display"></span>
+      <button id="add-marker-btn" class="control-btn" title="Add Gang">+ Gang</button>
+      <button id="add-infra-btn" class="control-btn" title="Add Infrastructure">+ Infra</button>
+      <button id="add-power-btn" class="control-btn" title="Add Power">+ Power</button>
+      <button id="add-theatre-btn" class="control-btn" title="Add Theatre">+ Theatre</button>
+      <button id="logout-btn" class="control-btn logout">Logout</button>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div id="instructions" class="hidden">
+    <span id="instructions-text">Click on a planet to place a gang marker</span>
+    <button id="cancel-add" class="btn btn-small">Cancel</button>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

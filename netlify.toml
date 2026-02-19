@@ -1,0 +1,32 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# API redirects to functions
+[[redirects]]
+  from = "/api/markers"
+  to = "/.netlify/functions/markers"
+  status = 200
+
+[[redirects]]
+  from = "/api/markers/*"
+  to = "/.netlify/functions/markers-id"
+  status = 200
+
+[[redirects]]
+  from = "/api/login"
+  to = "/.netlify/functions/login"
+  status = 200
+
+[[redirects]]
+  from = "/api/logout"
+  to = "/.netlify/functions/logout"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth/status"
+  to = "/.netlify/functions/auth-status"
+  status = 200
