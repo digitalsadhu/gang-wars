@@ -1,15 +1,6 @@
 {
   "markers": [
     {
-      "id": "1771512907374",
-      "x": 2152,
-      "y": 1848,
-      "title": "William",
-      "description": "",
-      "faction": "The Undergrid Syndicate",
-      "createdAt": "2026-02-19T14:55:07.374Z"
-    },
-    {
       "id": "1771512925923",
       "x": 3036,
       "y": 1116,
@@ -129,15 +120,6 @@
       "createdAt": "2026-02-19T15:10:13.852Z"
     },
     {
-      "id": "1771513827234",
-      "x": 1716,
-      "y": 1832,
-      "title": "Power Level 2",
-      "description": "",
-      "faction": "Ashfall Covenant",
-      "createdAt": "2026-02-19T15:10:27.234Z"
-    },
-    {
       "id": "1771513842200",
       "x": 1880,
       "y": 680,
@@ -172,6 +154,42 @@
       "description": "",
       "faction": "imperium",
       "createdAt": "2026-02-19T20:55:38.527Z"
+    },
+    {
+      "id": "1771535443196",
+      "x": 3588,
+      "y": 1840,
+      "title": "The Docks",
+      "description": "",
+      "faction": "imperium",
+      "createdAt": "2026-02-19T21:10:43.196Z"
+    },
+    {
+      "id": "1771535455276",
+      "x": 3224,
+      "y": 1636,
+      "title": "Fungal Depths",
+      "description": "",
+      "faction": "imperium",
+      "createdAt": "2026-02-19T21:10:55.276Z"
+    },
+    {
+      "id": "1771539686078",
+      "x": 2272,
+      "y": 2064,
+      "title": "William",
+      "description": "",
+      "faction": "The Undergrid Syndicate",
+      "createdAt": "2026-02-19T22:21:26.078Z"
+    },
+    {
+      "id": "1771539718642",
+      "x": 1680,
+      "y": 2024,
+      "title": "Power Level 2",
+      "description": "",
+      "faction": "Ashfall Covenant",
+      "createdAt": "2026-02-19T22:21:58.642Z"
     }
   ]
 }

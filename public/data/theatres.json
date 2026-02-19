@@ -10,7 +10,7 @@
           "roll": "1-2",
           "name": "Rolling Fumes",
           "flavourText": "Thick, choking smoke from burning refuse and ruptured promethium lines fills the narrow passages.",
-          "rule": "Models in cover gain Stealth. Models with Stealth get an additional +1 to Defense rolls when targeted by shooting attacks from more than 12\" away."
+          "rule": "Models in cover gain Stealth. Models with Stealth get +1 to Defense against shooting from more than 12\" away. Additionally, charge distances are reduced by 2\" (minimum 1\") as fighters struggle to navigate the smoke."
         },
         {
           "roll": "3-4",
@@ -22,7 +22,7 @@
           "roll": "5-6",
           "name": "Maintenance Tunnels",
           "flavourText": "A labyrinth of service ducts and forgotten access corridors allows gangers to appear where least expected.",
-          "rule": "Once per round, after a model finishes its activation while in cover, its controlling player may immediately place it in cover anywhere within their deployment zone."
+          "rule": "Once per round, a model that did not yet activate may be placed within 6\" of any board edge and more than 9\" from enemies. That model may then activate normally but cannot charge this turn."
         }
       ]
     },
@@ -48,7 +48,7 @@
           "roll": "5-6",
           "name": "Toxic Spray",
           "flavourText": "Pressurized pipes full of corrosive chemicals make tempting targets for those willing to weaponize the environment.",
-          "rule": "All shooting attacks gain Poison. Poison attacks wound on 2+ regardless of target's Tough value, but only against targets within 12\"."
+          "rule": "All shooting attacks gain Poison. Poison attacks reduce the target's Tough value by 2 (minimum 1) for the purpose of that attack. This only affects targets within 12\"."
         }
       ]
     },
@@ -68,7 +68,7 @@
           "roll": "3-4",
           "name": "Surveillance Grid",
           "flavourText": "Hacking into the dock's pict-feeds provides invaluable intelligence on enemy movements.",
-          "rule": "Models gain Scout. Scout models may be deployed up to 12\" outside their deployment zone. Additionally, models that Fall Back may still shoot this activation at -1 to hit."
+          "rule": "Models gain Scout (deploy up to 12\" outside deployment zone). Models that Fall Back may still shoot at -1 to hit. Vehicles and models with Fast gain +2\" movement as they use the dock's transit lanes."
         },
         {
           "roll": "5-6",
@@ -152,7 +152,7 @@
           "roll": "5-6",
           "name": "Ash Clouds",
           "flavourText": "Movement kicks up choking clouds of ash and debris, providing concealment on the move.",
-          "rule": "Models with Tough(3) or higher that moved this activation gain Stealth until their next activation. Stealth provides +1 to Defense against shooting from more than 12\" away."
+          "rule": "Models that moved this activation gain Stealth until their next activation. Stealth provides +1 to Defense against shooting from more than 12\" away. However, models that did not move suffer -1 to Defense as they're easier to spot in the barren landscape."
         }
       ]
     },
@@ -178,7 +178,7 @@
           "roll": "5-6",
           "name": "Protective Fields",
           "flavourText": "Shimmering barriers of unknown energy flicker across the battlefield, deflecting incoming fire.",
-          "rule": "All models gain a 5+ invulnerable save against shooting attacks. This save is taken after the normal Defense roll fails."
+          "rule": "When a model is targeted by a shooting attack, roll a D6. On a 4+, the attack misses automatically as energy fields deflect it. On a 1, the shooter takes a hit with AP(1) from feedback. On 2-3, resolve the attack normally."
         }
       ]
     },
@@ -218,7 +218,7 @@
           "roll": "1-2",
           "name": "Rage Spores",
           "flavourText": "Inhaling the drifting spores drives fighters into a frenzy of violence.",
-          "rule": "All models gain Furious. Furious models get +1 attack in melee when they charge. Additionally, models that kill an enemy in melee may immediately move 3\" toward the nearest enemy."
+          "rule": "All models gain Furious. Furious models get +1 attack in melee when they charge. Models that kill an enemy in melee may immediately move 3\" toward the nearest enemy. Models that shoot suffer -1 to hit as the spores cloud their vision."
         },
         {
           "roll": "3-4",

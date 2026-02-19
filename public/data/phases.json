@@ -1,0 +1,15 @@
+{
+  "title": "Campaign Phases",
+  "description": "Each Campaign Phase follows this sequence:",
+  "phases": [
+    { "number": 1, "name": "Select Operations" },
+    { "number": 2, "name": "Reveal Operations" },
+    { "number": 3, "name": "Resolve Establish Racket Operations" },
+    { "number": 4, "name": "Resolve Turf War Operations" },
+    { "number": 5, "name": "Resolve Relocate Operations" },
+    { "number": 6, "name": "Resolve Send Enforcers Operations" },
+    { "number": 7, "name": "Campaign Events" },
+    { "number": 8, "name": "Relocate" },
+    { "number": 9, "name": "Establish Racket" }
+  ]
+}

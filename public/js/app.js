@@ -33,6 +33,9 @@ let addMode = null; // null, 'gang', 'infrastructure', 'power', or 'theatre'
 let isAuthenticated = false;
 let theatresData = null;
 let operationsData = null;
+let phasesData = null;
+let districtsData = null;
+let districtLabelLayer;
 
 // Initialize the map
 async function initMap() {
@@ -50,6 +53,7 @@ async function initMap() {
   map.fitBounds(bounds);
 
   markerLayer = L.layerGroup().addTo(map);
+  districtLabelLayer = L.layerGroup().addTo(map);
 
   await checkAuthStatus();
   await loadConfig();
@@ -57,6 +61,8 @@ async function initMap() {
   await loadInfrastructure();
   await loadTheatres();
   await loadOperations();
+  await loadPhases();
+  await loadDistricts();
   await loadMarkers();
   setupEventListeners();
 }
@@ -503,6 +509,68 @@ function closeOperationsModal() {
   document.getElementById('operations-modal').classList.add('hidden');
 }
 
+// Load phases data
+async function loadPhases() {
+  try {
+    const response = await fetch('/data/phases.json');
+    phasesData = await response.json();
+  } catch (error) {
+    console.error('Failed to load phases:', error);
+  }
+}
+
+// Phases modal functions
+function openPhasesModal() {
+  if (!phasesData) return;
+
+  document.getElementById('phases-modal-title').textContent = phasesData.title || 'Campaign Phases';
+  document.getElementById('phases-description').textContent = phasesData.description || '';
+
+  const list = document.getElementById('phases-list');
+  list.innerHTML = phasesData.phases.map(phase => `<li>${escapeHtml(phase.name)}</li>`).join('');
+
+  document.getElementById('phases-modal').classList.remove('hidden');
+}
+
+function closePhasesModal() {
+  document.getElementById('phases-modal').classList.add('hidden');
+}
+
+// Load districts data
+async function loadDistricts() {
+  try {
+    const response = await fetch('/data/districts.json');
+    const data = await response.json();
+    districtsData = data.districts;
+    renderDistrictLabels();
+  } catch (error) {
+    console.error('Failed to load districts:', error);
+  }
+}
+
+// Render district labels on the map
+function renderDistrictLabels() {
+  if (!districtsData) return;
+
+  districtLabelLayer.clearLayers();
+
+  districtsData.forEach(district => {
+    if (!district.center) return;
+
+    const icon = L.divIcon({
+      className: 'district-label',
+      html: `<div class="district-label-text">${escapeHtml(district.name)}</div>`,
+      iconSize: [150, 30],
+      iconAnchor: [75, 15]
+    });
+
+    L.marker([district.center.y, district.center.x], {
+      icon,
+      interactive: false
+    }).addTo(districtLabelLayer);
+  });
+}
+
 // Render all markers on the map
 function renderMarkers() {
   markerLayer.clearLayers();
@@ -541,8 +609,8 @@ function renderMarkers() {
       icon = L.divIcon({
         className: 'custom-marker theatre-marker',
         html: `<div class="theatre-icon"><svg viewBox="0 0 24 24" fill="#4a90d9"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/></svg></div>`,
-        iconSize: [30, 30],
-        iconAnchor: [15, 15]
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
       });
     } else {
       // Gang marker with faction-specific icon
@@ -684,6 +752,10 @@ function setupEventListeners() {
       document.getElementById('operations-content').classList.add('hidden');
     }
   });
+
+  // Phases reference
+  document.getElementById('phases-btn').addEventListener('click', openPhasesModal);
+  document.getElementById('phases-close-btn').addEventListener('click', closePhasesModal);
 
   // Login
   document.getElementById('login-btn').addEventListener('click', showLoginModal);
