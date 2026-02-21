@@ -36,6 +36,8 @@ let operationsData = null;
 let phasesData = null;
 let districtsData = null;
 let districtLabelLayer;
+let campaignEventsData = null;
+let campaignMissionsData = null;
 
 // Initialize the map
 async function initMap() {
@@ -62,6 +64,8 @@ async function initMap() {
   await loadTheatres();
   await loadOperations();
   await loadPhases();
+  await loadCampaignEvents();
+  await loadCampaignMissions();
   await loadDistricts();
   await loadMarkers();
   setupEventListeners();
@@ -536,6 +540,275 @@ function closePhasesModal() {
   document.getElementById('phases-modal').classList.add('hidden');
 }
 
+// Populate rackets reference dropdown
+function populateRacketsReferenceDropdown() {
+  const select = document.getElementById('rackets-select');
+  if (!select || !racketsData) return;
+
+  // Keep the default option and add rackets
+  select.innerHTML = '<option value="">-- Select a Racket --</option>';
+  racketsData.forEach((racket, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = racket.name;
+    select.appendChild(option);
+  });
+}
+
+// Display selected racket in reference modal
+function displayRacketReference(index) {
+  const racket = racketsData[index];
+  const content = document.getElementById('rackets-content');
+
+  if (!racket) {
+    content.classList.add('hidden');
+    return;
+  }
+
+  document.getElementById('rackets-description').textContent = racket.description;
+  content.classList.remove('hidden');
+}
+
+// Rackets reference modal functions
+function openRacketsReferenceModal() {
+  populateRacketsReferenceDropdown();
+  document.getElementById('rackets-modal').classList.remove('hidden');
+}
+
+function closeRacketsReferenceModal() {
+  document.getElementById('rackets-modal').classList.add('hidden');
+}
+
+// Load campaign events data
+async function loadCampaignEvents() {
+  try {
+    const response = await fetch('/data/campaign-events.json');
+    campaignEventsData = await response.json();
+  } catch (error) {
+    console.error('Failed to load campaign events:', error);
+  }
+}
+
+// Campaign events modal functions
+function openCampaignEventsModal() {
+  if (!campaignEventsData) return;
+
+  // Set description
+  document.getElementById('events-description').textContent = campaignEventsData.description;
+
+  // Render generation rules
+  const rulesContainer = document.getElementById('events-generation-rules');
+  rulesContainer.innerHTML = campaignEventsData.generationRules.steps.map(step => `
+    <div class="events-generation-step">
+      <div class="events-generation-step-name">${escapeHtml(step.name)}</div>
+      <div class="events-generation-step-condition">${escapeHtml(step.condition)}</div>
+      <div class="events-generation-step-trigger">${escapeHtml(step.trigger)}</div>
+    </div>
+  `).join('');
+
+  // Populate event table dropdown
+  const select = document.getElementById('events-table-select');
+  select.innerHTML = '<option value="">-- Select an Event Table --</option>';
+  campaignEventsData.eventTables.forEach((table, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = `${table.name} (${table.dieType})`;
+    select.appendChild(option);
+  });
+
+  // Hide event table content initially
+  document.getElementById('events-table-content').classList.add('hidden');
+
+  // Render special events
+  const specialList = document.getElementById('events-special-list');
+  specialList.innerHTML = campaignEventsData.specialEvents.map(event => `
+    <div class="event-card">
+      <div class="event-header">
+        <span class="event-name">${escapeHtml(event.name)}</span>
+      </div>
+      <p class="event-flavour">${escapeHtml(event.flavourText)}</p>
+      <p class="event-effect">${escapeHtml(event.effect)}</p>
+      <p class="event-trigger">${escapeHtml(event.trigger)}</p>
+    </div>
+  `).join('');
+
+  document.getElementById('events-modal').classList.remove('hidden');
+}
+
+function closeCampaignEventsModal() {
+  document.getElementById('events-modal').classList.add('hidden');
+}
+
+// Display selected event table
+function displayEventTable(index) {
+  const table = campaignEventsData.eventTables[index];
+  const content = document.getElementById('events-table-content');
+
+  if (!table) {
+    content.classList.add('hidden');
+    return;
+  }
+
+  document.getElementById('events-table-description').textContent = `${table.description} Roll ${table.dieType} to determine the event.`;
+
+  const eventsList = document.getElementById('events-list');
+  eventsList.innerHTML = table.events.map(event => `
+    <div class="event-card">
+      <div class="event-header">
+        <span class="event-roll">${event.roll}</span>
+        <span class="event-name">${escapeHtml(event.name)}</span>
+      </div>
+      <p class="event-flavour">${escapeHtml(event.flavourText)}</p>
+      <p class="event-effect">${escapeHtml(event.effect)}</p>
+    </div>
+  `).join('');
+
+  content.classList.remove('hidden');
+}
+
+// Load campaign missions data
+async function loadCampaignMissions() {
+  try {
+    const response = await fetch('/data/campaign-missions.json');
+    campaignMissionsData = await response.json();
+  } catch (error) {
+    console.error('Failed to load campaign missions:', error);
+  }
+}
+
+// Campaign missions modal functions
+function openCampaignMissionsModal() {
+  if (!campaignMissionsData) return;
+
+  // Set description
+  document.getElementById('missions-description').textContent = campaignMissionsData.description;
+
+  // Render mission selection rules
+  const rulesContainer = document.getElementById('missions-selection-rules');
+  rulesContainer.innerHTML = `
+    <h4>Mission Selection</h4>
+    <p>${escapeHtml(campaignMissionsData.missionSelection.description)}</p>
+    <ul>
+      ${campaignMissionsData.missionSelection.rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join('')}
+    </ul>
+  `;
+
+  // Populate missions dropdown
+  const select = document.getElementById('missions-select');
+  select.innerHTML = '<option value="">-- Select a Mission --</option>';
+  campaignMissionsData.missions.forEach((mission, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = mission.name;
+    select.appendChild(option);
+  });
+
+  // Hide mission content initially
+  document.getElementById('missions-content').classList.add('hidden');
+
+  document.getElementById('missions-modal').classList.remove('hidden');
+}
+
+function closeCampaignMissionsModal() {
+  document.getElementById('missions-modal').classList.add('hidden');
+}
+
+// Display selected mission
+function displayMission(index) {
+  const mission = campaignMissionsData.missions[index];
+  const content = document.getElementById('missions-content');
+
+  if (!mission) {
+    content.classList.add('hidden');
+    return;
+  }
+
+  // Build objectives HTML
+  const objectivesHtml = mission.objectives.map(obj => `
+    <div class="objective-card">
+      <div class="objective-header">
+        <span class="objective-type">${escapeHtml(obj.type)}</span>
+        <span class="objective-name">${escapeHtml(obj.name)}</span>
+      </div>
+      <p class="objective-description">${escapeHtml(obj.description)}</p>
+      <p class="objective-scoring">${escapeHtml(obj.scoring)}</p>
+    </div>
+  `).join('');
+
+  // Build mission rules HTML
+  const rulesHtml = mission.missionRules.map(rule => {
+    let subRulesHtml = '';
+    if (rule.subRules && rule.subRules.length > 0) {
+      subRulesHtml = `
+        <div class="sub-rules">
+          ${rule.subRules.map(sub => `
+            <div class="sub-rule">
+              <span class="sub-rule-name">${escapeHtml(sub.name)}</span>
+              <span class="sub-rule-requirement">(${escapeHtml(sub.requirement)})</span>
+              <p class="sub-rule-effect">${escapeHtml(sub.effect)}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    return `
+      <div class="rule-card">
+        <div class="rule-name">${escapeHtml(rule.name)}</div>
+        <div class="rule-description">${escapeHtml(rule.description)}</div>
+        ${subRulesHtml}
+      </div>
+    `;
+  }).join('');
+
+  // Build campaign outcomes HTML
+  const outcome = mission.campaignOutcome;
+  const outcomesHtml = `
+    <div class="outcome-card attacker">
+      <div class="outcome-header">Attacker Wins</div>
+      <p class="outcome-flavour">${escapeHtml(outcome.attackerWins.flavourText)}</p>
+      <ul class="outcome-effects">
+        ${outcome.attackerWins.effects.map(e => `<li>${escapeHtml(e)}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="outcome-card defender">
+      <div class="outcome-header">Defender Wins</div>
+      <p class="outcome-flavour">${escapeHtml(outcome.defenderWins.flavourText)}</p>
+      <ul class="outcome-effects">
+        ${outcome.defenderWins.effects.map(e => `<li>${escapeHtml(e)}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="outcome-card draw">
+      <div class="outcome-header">Draw</div>
+      <p class="outcome-flavour">${escapeHtml(outcome.draw.flavourText)}</p>
+      <ul class="outcome-effects">
+        ${outcome.draw.effects.map(e => `<li>${escapeHtml(e)}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+
+  content.innerHTML = `
+    <span class="mission-operation-type">${escapeHtml(mission.operationType)}</span>
+    <p class="mission-flavour">${escapeHtml(mission.flavourText)}</p>
+
+    <div class="mission-section">
+      <h4>Mission Objectives</h4>
+      <div class="mission-objectives">${objectivesHtml}</div>
+    </div>
+
+    <div class="mission-section">
+      <h4>Mission Rules</h4>
+      <div class="mission-rules">${rulesHtml}</div>
+    </div>
+
+    <div class="mission-section">
+      <h4>Campaign Outcome</h4>
+      <div class="campaign-outcomes">${outcomesHtml}</div>
+    </div>
+  `;
+
+  content.classList.remove('hidden');
+}
+
 // Load districts data
 async function loadDistricts() {
   try {
@@ -802,9 +1075,45 @@ function setupEventListeners() {
     }
   });
 
+  // Missions reference
+  document.getElementById('missions-btn').addEventListener('click', openCampaignMissionsModal);
+  document.getElementById('missions-close-btn').addEventListener('click', closeCampaignMissionsModal);
+  document.getElementById('missions-select').addEventListener('change', (e) => {
+    const index = e.target.value;
+    if (index !== '') {
+      displayMission(parseInt(index));
+    } else {
+      document.getElementById('missions-content').classList.add('hidden');
+    }
+  });
+
   // Phases reference
   document.getElementById('phases-btn').addEventListener('click', openPhasesModal);
   document.getElementById('phases-close-btn').addEventListener('click', closePhasesModal);
+
+  // Rackets reference
+  document.getElementById('rackets-btn').addEventListener('click', openRacketsReferenceModal);
+  document.getElementById('rackets-close-btn').addEventListener('click', closeRacketsReferenceModal);
+  document.getElementById('rackets-select').addEventListener('change', (e) => {
+    const index = e.target.value;
+    if (index !== '') {
+      displayRacketReference(parseInt(index));
+    } else {
+      document.getElementById('rackets-content').classList.add('hidden');
+    }
+  });
+
+  // Campaign events reference
+  document.getElementById('events-btn').addEventListener('click', openCampaignEventsModal);
+  document.getElementById('events-close-btn').addEventListener('click', closeCampaignEventsModal);
+  document.getElementById('events-table-select').addEventListener('change', (e) => {
+    const index = e.target.value;
+    if (index !== '') {
+      displayEventTable(parseInt(index));
+    } else {
+      document.getElementById('events-table-content').classList.add('hidden');
+    }
+  });
 
   // Login
   document.getElementById('login-btn').addEventListener('click', showLoginModal);

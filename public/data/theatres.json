@@ -10,19 +10,19 @@
           "roll": "1-2",
           "name": "Rolling Fumes",
           "flavourText": "Thick, choking smoke from burning refuse and ruptured promethium lines fills the narrow passages.",
-          "rule": "Models in cover gain Stealth. Models with Stealth get +1 to Defense against shooting from more than 12\" away. Additionally, charge distances are reduced by 2\" (minimum 1\") as fighters struggle to navigate the smoke."
+          "rule": "Models in cover terrain gain Stealth. Additionally, all charge distances are reduced by 2\" (minimum 6\") as fighters struggle to navigate the smoke."
         },
         {
           "roll": "3-4",
           "name": "Firing Positions",
           "flavourText": "Every doorway and window becomes a potential killzone. Gangers set up ambush points with practiced efficiency.",
-          "rule": "Models in cover gain Ambush. Models with Ambush that did not move this activation get +1 to hit with shooting attacks."
+          "rule": "Models in cover terrain that use a Hold action gain +1 to hit with shooting attacks."
         },
         {
           "roll": "5-6",
           "name": "Maintenance Tunnels",
           "flavourText": "A labyrinth of service ducts and forgotten access corridors allows gangers to appear where least expected.",
-          "rule": "Once per round, a model that did not yet activate may be placed within 6\" of any board edge and more than 9\" from enemies. That model may then activate normally but cannot charge this turn."
+          "rule": "Once per round, before a model activates, it may be placed within 6\" of any board edge and more than 9\" from enemies. That model may then activate normally but cannot charge this activation."
         }
       ]
     },
@@ -36,19 +36,19 @@
           "roll": "1-2",
           "name": "Unstable Munitions",
           "flavourText": "Abandoned ordnance and volatile chemicals litter the area, ready to be triggered by a well-placed shot.",
-          "rule": "At the start of each round, place 3 Explosive markers in no man's land. Any model may target an Explosive marker (Defense 4+). If hit, all models within 6\" take a hit with AP(1). Remove the marker after detonation."
+          "rule": "After deployment, players alternate placing one Explosive marker each (starting with the player who deploys second) in no man's land, at least 6\" from any model. Any model may target an Explosive marker (Defense 4+). If hit, all models within 3\" take a hit with AP(1). Remove the marker after detonation."
         },
         {
           "roll": "3-4",
           "name": "Crumbling Platforms",
           "flavourText": "The corroded gantries and walkways groan under the weight of combat, threatening to collapse at any moment.",
-          "rule": "When a model takes a wound while on elevated terrain, roll a die. On a 1-2, that model falls and takes an additional hit with AP(1)."
+          "rule": "When a model on elevated terrain takes one or more wounds, roll a die. On a 1-2, that model falls to ground level and takes an additional hit with AP(1). Place the model directly below its previous position."
         },
         {
           "roll": "5-6",
-          "name": "Toxic Spray",
-          "flavourText": "Pressurized pipes full of corrosive chemicals make tempting targets for those willing to weaponize the environment.",
-          "rule": "All shooting attacks gain Poison. Poison attacks reduce the target's Tough value by 2 (minimum 1) for the purpose of that attack. This only affects targets within 12\"."
+          "name": "Toxic Pools",
+          "flavourText": "Bubbling pools of corrosive chemicals make tempting hazards to drive enemies toward.",
+          "rule": "After deployment, place 3 Toxic Pool markers in no man's land (each 3\" diameter). Models ending an activation within a Toxic Pool take a hit with AP(2). Models pushed into a Toxic Pool take a hit with AP(3)."
         }
       ]
     },
@@ -61,14 +61,14 @@
         {
           "roll": "1-2",
           "name": "Lockdown Protocol",
-          "flavourText": "Securing cargo bays triggers automated systems that seal bulkheads and restrict access.",
-          "rule": "When a model ends its activation holding an objective, that objective counts as held by that player even if the model moves away, until an enemy model holds it."
+          "flavourText": "Securing cargo bays triggers automated defense systems that punish intruders.",
+          "rule": "When an enemy model moves within 3\" of an objective marker you control, that model immediately takes a hit with AP(0) from automated defenses."
         },
         {
           "roll": "3-4",
           "name": "Surveillance Grid",
           "flavourText": "Hacking into the dock's pict-feeds provides invaluable intelligence on enemy movements.",
-          "rule": "Models gain Scout (deploy up to 12\" outside deployment zone). Models that Fall Back may still shoot at -1 to hit. Vehicles and models with Fast gain +2\" movement as they use the dock's transit lanes."
+          "rule": "All models gain Scout. Additionally, models with Fast gain +2\" to Advance movement."
         },
         {
           "roll": "5-6",
@@ -94,13 +94,13 @@
           "roll": "3-4",
           "name": "Chem-Burns",
           "flavourText": "Prolonged exposure to the caustic atmosphere weakens even the toughest fighters, leaving them sluggish and vulnerable.",
-          "rule": "At the start of each round after the first, all models not in cover take a hit with AP(0). Models with Tough reduce their Tough value by 1 for the duration of the game (minimum 1)."
+          "rule": "At the start of each round after the first, all models not within cover terrain take a hit with AP(0). Models with Tough reduce their Tough value by 1 for the duration of the game (minimum 1)."
         },
         {
           "roll": "5-6",
           "name": "Interference Storm",
-          "flavourText": "Electromagnetic discharges from unstable chemicals disrupt communications and targeting systems.",
-          "rule": "Models cannot use special abilities that require targeting allies. All shooting attacks suffer -1 to hit. The player who deploys second gains 1 bonus command point."
+          "flavourText": "Electromagnetic discharges from unstable chemicals disrupt targeting systems.",
+          "rule": "All shooting attacks suffer -1 to hit. Models with Quality 5+ are unaffected by this penalty. The player who deploys second may redeploy one model after all deployment is complete."
         }
       ]
     },
@@ -114,19 +114,19 @@
           "roll": "1-2",
           "name": "Corrosive Vapour",
           "flavourText": "Clouds of acidic steam vent from cracked pipes, eating through armor and flesh alike.",
-          "rule": "All attacks against targets within 6\" gain AP(1). Models without Tough that are wounded in melee take an additional wound on a roll of 5+."
+          "rule": "All attacks against targets within 6\" of terrain gain AP(1). Models without Tough that are wounded in melee take an additional wound on an unmodified roll of 6."
         },
         {
           "roll": "3-4",
           "name": "Fuel Line Rupture",
-          "flavourText": "Damaged fuel conduits build pressure until they detonate with terrifying force.",
-          "rule": "At the start of round 2 and round 4, roll a die for each model within 6\" of terrain. On a 1, that model becomes Stunned and skips its next activation."
+          "flavourText": "Damaged fuel conduits leak volatile promethium, punishing those who linger near machinery.",
+          "rule": "Models within 3\" of terrain that use a Hold action take a hit with AP(0) at the end of their activation. Models that Advance or Rush are unaffected."
         },
         {
           "roll": "5-6",
           "name": "Scorching Floors",
           "flavourText": "Heat radiates from cooling forges and slag pools, making footing treacherous.",
-          "rule": "Models that Advance (move more than their base move) take a hit with AP(0) at the end of their activation. Models with Tough are immune to this effect."
+          "rule": "Models that Advance more than 3\" or charge more than 6\" take a hit with AP(0) at the end of their activation. Models with Tough are immune to this effect."
         }
       ]
     },
@@ -140,19 +140,19 @@
           "roll": "1-2",
           "name": "Open Ground",
           "flavourText": "With no cover to impede them, heavier assets surge across the devastation.",
-          "rule": "Models with Tough(3) or higher gain Fast. Fast models add 2\" to their movement. All other models suffer -1 to Defense when not in cover."
+          "rule": "Models with Tough(3) or higher gain Fast. All other models suffer -1 to Defense rolls when not in cover terrain."
         },
         {
           "roll": "3-4",
           "name": "Rubble Piles",
           "flavourText": "Collapsed walls and debris mounds provide elevated firing positions for those heavy enough to climb them.",
-          "rule": "Models with Tough(3) or higher that did not move this activation gain +1 to hit with shooting attacks and may re-roll one failed hit roll."
+          "rule": "Models with Tough(3) or higher that use a Hold action gain +1 to hit with shooting attacks and may re-roll one failed Defense roll until their next activation."
         },
         {
           "roll": "5-6",
           "name": "Ash Clouds",
           "flavourText": "Movement kicks up choking clouds of ash and debris, providing concealment on the move.",
-          "rule": "Models that moved this activation gain Stealth until their next activation. Stealth provides +1 to Defense against shooting from more than 12\" away. However, models that did not move suffer -1 to Defense as they're easier to spot in the barren landscape."
+          "rule": "Models that moved this activation gain Stealth until their next activation. Models that used a Hold action suffer -1 to Defense rolls as they're easier to spot in the barren landscape."
         }
       ]
     },
@@ -166,19 +166,19 @@
           "roll": "1-2",
           "name": "Unstable Passages",
           "flavourText": "The ancient corridors shift and buckle, hurling combatants toward one another unexpectedly.",
-          "rule": "All models add +D6\" to their movement value. However, if they roll a 1 on this die, they become Shaken and suffer -1 to hit until their next activation."
+          "rule": "Models may add +D3\" to Advance or Rush movement. However, if they roll a 1 on this die, they become Shaken at the end of their activation."
         },
         {
           "roll": "3-4",
           "name": "Ancient Tech",
           "flavourText": "Glowing devices of unknown origin pulse with strange energies, disrupting modern equipment.",
-          "rule": "All weapons gain +6\" range. However, each time a model shoots, roll a die. On a 1, that model takes a hit with AP(2) from energy feedback."
+          "rule": "All weapons gain +6\" range. However, each time a model shoots, on an unmodified hit roll of 1, that model takes a hit with AP(2) from energy feedback."
         },
         {
           "roll": "5-6",
           "name": "Protective Fields",
           "flavourText": "Shimmering barriers of unknown energy flicker across the battlefield, deflecting incoming fire.",
-          "rule": "When a model is targeted by a shooting attack, roll a D6. On a 4+, the attack misses automatically as energy fields deflect it. On a 1, the shooter takes a hit with AP(1) from feedback. On 2-3, resolve the attack normally."
+          "rule": "All models gain +1 to Defense rolls against shooting attacks. However, on an unmodified Defense roll of 1, that model takes an additional hit with AP(1) from energy feedback."
         }
       ]
     },
@@ -192,45 +192,45 @@
           "roll": "1-2",
           "name": "Treacherous Footing",
           "flavourText": "The unstable ground shifts constantly, favoring lighter and more agile fighters.",
-          "rule": "Models without Tough gain +2\" movement and +1 to charge rolls. Models with Tough(3) or higher suffer -2\" movement and -1 to charge rolls."
+          "rule": "Models without Tough gain +2\" to Advance and Rush movement. Models with Tough(3) or higher suffer -2\" to all movement (minimum 3\")."
         },
         {
           "roll": "3-4",
           "name": "Scrap Cover",
           "flavourText": "Piles of refuse provide ample concealment for those who know how to use them.",
-          "rule": "Models without Tough may deploy using Ambush (deploy after seeing enemy deployment, up to 12\" from any enemy). Models with Ambush gain +1 to their first shooting attack."
+          "rule": "Models without Tough gain Ambush. Models that deploy via Ambush gain +1 to hit on their first shooting attack."
         },
         {
           "roll": "5-6",
           "name": "Junk Barricades",
           "flavourText": "Improvised fortifications of scrap metal and debris provide surprisingly effective cover.",
-          "rule": "Models without Tough that are in cover gain +2 to Defense instead of +1. Heavy weapons (weapons with Blast or AP(3+)) suffer -1 to hit."
+          "rule": "Models without Tough that are in cover terrain gain +2 to Defense rolls instead of +1. Weapons with Blast suffer -1 to hit."
         }
       ]
     },
     {
       "name": "Fungal Depths",
       "description": "Sections of the underhive where mutant fungi and toxic growths have taken over, creating a choking maze of spore-clouds and grasping tendrils. Only the most desperate venture here.",
-      "tacticalBenefits": "These Twists boost melee-oriented gangs with improved damage and punishment for those who retreat.",
+      "tacticalBenefits": "These Twists boost melee-oriented gangs with improved damage and punishment for those who flee combat.",
       "recommendedTerrain": "Use organic-looking terrain and ruins to represent areas overrun with mutant growth, scattered across the battlefield.",
       "twists": [
         {
           "roll": "1-2",
           "name": "Rage Spores",
           "flavourText": "Inhaling the drifting spores drives fighters into a frenzy of violence.",
-          "rule": "All models gain Furious. Furious models get +1 attack in melee when they charge. Models that kill an enemy in melee may immediately move 3\" toward the nearest enemy. Models that shoot suffer -1 to hit as the spores cloud their vision."
+          "rule": "All models gain Furious. Models that remove an enemy from play in melee may immediately move 3\" toward the nearest enemy. Models shooting suffer -1 to hit as the spores cloud their vision."
         },
         {
           "roll": "3-4",
           "name": "Strangling Growth",
-          "flavourText": "Grasping tendrils and toxic thorns make retreat a deadly proposition.",
-          "rule": "Models that Fall Back take a hit with AP(1) from the grasping vegetation. Models that Fall Back cannot shoot or charge for the rest of that activation."
+          "flavourText": "Grasping tendrils and toxic thorns punish those who break from combat.",
+          "rule": "After melee combat, models that must separate take a hit with AP(1) from the grasping vegetation. Additionally, models that become Shaken during melee immediately take an additional hit with AP(0)."
         },
         {
           "roll": "5-6",
           "name": "Carnivorous Flora",
           "flavourText": "Maw-plants, toxin-spitters, and acid-drippers lurk throughout, waiting for unwary prey.",
-          "rule": "At the end of each round, each model not in base contact with a friendly model takes a hit with AP(0) from the predatory plants. Models in melee are immune as the plants avoid the struggle."
+          "rule": "At the end of each round, each model not within 1\" of a friendly model takes a hit with AP(0) from the predatory plants. Models currently engaged in melee are immune."
         }
       ]
     }

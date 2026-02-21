@@ -13,7 +13,7 @@
     {
       "name": "Establish Racket",
       "type": "common",
-      "description": "Establish a racket in this gang's district."
+      "description": "Establish a racket in this gang's district. You may not select the same racket twice in the same district, but you may select the same racket in different districts. Rackets provide ongoing benefits to the controlling faction as long as they remain established. You may not select the stronghold racket."
     },
     {
       "name": "Home Turf Advantage",

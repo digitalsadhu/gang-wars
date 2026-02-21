@@ -207,10 +207,87 @@
     </div>
   </div>
 
+  <!-- Rackets Reference Modal -->
+  <div id="rackets-modal" class="modal hidden">
+    <div class="modal-content rackets-modal">
+      <div class="rackets-header">
+        <h2>Rackets Reference</h2>
+        <button type="button" class="modal-close" id="rackets-close-btn">&times;</button>
+      </div>
+      <div class="form-group">
+        <label for="rackets-select">Select Racket</label>
+        <select id="rackets-select">
+          <option value="">-- Select a Racket --</option>
+        </select>
+      </div>
+      <div id="rackets-content" class="rackets-content hidden">
+        <p id="rackets-description" class="rackets-description"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campaign Events Reference Modal -->
+  <div id="events-modal" class="modal hidden">
+    <div class="modal-content events-modal">
+      <div class="events-header">
+        <h2>Campaign Events</h2>
+        <button type="button" class="modal-close" id="events-close-btn">&times;</button>
+      </div>
+      <p id="events-description" class="events-description"></p>
+
+      <div class="events-section">
+        <h3>Generating Events</h3>
+        <div id="events-generation-rules"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="events-table-select">Event Table</label>
+        <select id="events-table-select">
+          <option value="">-- Select an Event Table --</option>
+        </select>
+      </div>
+
+      <div id="events-table-content" class="events-table-content hidden">
+        <p id="events-table-description" class="events-table-description"></p>
+        <div id="events-list" class="events-list"></div>
+      </div>
+
+      <div class="events-section">
+        <h3>Special Events (War Master Discretion)</h3>
+        <div id="events-special-list" class="events-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Missions Reference Modal -->
+  <div id="missions-modal" class="modal hidden">
+    <div class="modal-content missions-modal">
+      <div class="missions-header">
+        <h2>Campaign Missions</h2>
+        <button type="button" class="modal-close" id="missions-close-btn">&times;</button>
+      </div>
+      <p id="missions-description" class="missions-description"></p>
+
+      <div id="missions-selection-rules" class="missions-selection-rules"></div>
+
+      <div class="form-group">
+        <label for="missions-select">Select Mission</label>
+        <select id="missions-select">
+          <option value="">-- Select a Mission --</option>
+        </select>
+      </div>
+
+      <div id="missions-content" class="missions-content hidden"></div>
+    </div>
+  </div>
+
   <!-- Reference Controls (left side) -->
   <div id="ref-controls">
     <button id="operations-btn" class="control-btn">Operations</button>
+    <button id="missions-btn" class="control-btn">Missions</button>
     <button id="phases-btn" class="control-btn">Phases</button>
+    <button id="rackets-btn" class="control-btn">Rackets</button>
+    <button id="events-btn" class="control-btn">Events</button>
   </div>
 
   <!-- Auth Status / Controls (right side) -->

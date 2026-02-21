@@ -717,6 +717,173 @@ body {
   flex-shrink: 0;
 }
 
+/* Campaign Events Modal */
+.events-modal {
+  width: 650px;
+  max-width: 95%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.events-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.events-header h2 {
+  margin-bottom: 0;
+}
+
+.events-description {
+  font-style: italic;
+  color: #aaa;
+  line-height: 1.5;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.events-section {
+  margin-top: 20px;
+}
+
+.events-section h3 {
+  color: #4a90d9;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.events-generation-step {
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.events-generation-step-name {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.events-generation-step-condition {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.events-generation-step-trigger {
+  font-size: 13px;
+  color: #4a90d9;
+}
+
+.events-table-content {
+  margin-top: 16px;
+}
+
+.events-table-description {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event-card {
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.event-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.event-roll {
+  background: #4a90d9;
+  color: #fff;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  min-width: 28px;
+  text-align: center;
+}
+
+.event-name {
+  font-weight: bold;
+  color: #fff;
+  font-size: 15px;
+}
+
+.event-flavour {
+  font-style: italic;
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.event-effect {
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.5;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+
+.event-trigger {
+  font-size: 12px;
+  color: #4a90d9;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* Rackets Modal */
+.rackets-modal {
+  width: 500px;
+  max-width: 95%;
+}
+
+.rackets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.rackets-header h2 {
+  margin-bottom: 0;
+}
+
+.rackets-content {
+  margin-top: 16px;
+}
+
+.rackets-description {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 14px;
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-left: 3px solid #4a90d9;
+  border-radius: 4px;
+  padding: 14px;
+}
+
 /* District Labels */
 .district-label {
   background: transparent !important;
@@ -777,4 +944,274 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+/* Missions Modal */
+.missions-modal {
+  width: 700px;
+  max-width: 95%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.missions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.missions-header h2 {
+  margin-bottom: 0;
+}
+
+.missions-description {
+  font-style: italic;
+  color: #aaa;
+  line-height: 1.5;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.missions-selection-rules {
+  margin-top: 16px;
+  padding: 14px;
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-radius: 6px;
+}
+
+.missions-selection-rules h4 {
+  color: #4a90d9;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.missions-selection-rules p {
+  color: #aaa;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.missions-selection-rules ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.missions-content {
+  margin-top: 20px;
+}
+
+.mission-operation-type {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  background: #4a90d9;
+  color: #fff;
+}
+
+.mission-flavour {
+  font-style: italic;
+  color: #888;
+  line-height: 1.5;
+  font-size: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.mission-section {
+  margin-top: 20px;
+}
+
+.mission-section h4 {
+  color: #4a90d9;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.mission-objectives {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.objective-card {
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.objective-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.objective-type {
+  background: #2a6aa6;
+  color: #fff;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.objective-name {
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+}
+
+.objective-description {
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.objective-scoring {
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.5;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+}
+
+.mission-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rule-card {
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-left: 3px solid #4a90d9;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.rule-name {
+  font-weight: bold;
+  color: #fff;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.rule-description {
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sub-rules {
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 2px solid #333;
+}
+
+.sub-rule {
+  margin-bottom: 8px;
+}
+
+.sub-rule:last-child {
+  margin-bottom: 0;
+}
+
+.sub-rule-name {
+  color: #4a90d9;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.sub-rule-requirement {
+  color: #888;
+  font-size: 11px;
+  font-style: italic;
+  margin-left: 8px;
+}
+
+.sub-rule-effect {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.campaign-outcomes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.outcome-card {
+  background: #0a0a0f;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.outcome-card.attacker {
+  border-left: 3px solid #27ae60;
+}
+
+.outcome-card.defender {
+  border-left: 3px solid #e74c3c;
+}
+
+.outcome-card.draw {
+  border-left: 3px solid #f39c12;
+}
+
+.outcome-header {
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.outcome-card.attacker .outcome-header {
+  color: #27ae60;
+}
+
+.outcome-card.defender .outcome-header {
+  color: #e74c3c;
+}
+
+.outcome-card.draw .outcome-header {
+  color: #f39c12;
+}
+
+.outcome-flavour {
+  font-style: italic;
+  color: #888;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.outcome-effects {
+  list-style: disc;
+  padding-left: 20px;
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.outcome-effects li {
+  margin-bottom: 4px;
 }
