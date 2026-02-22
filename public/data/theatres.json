@@ -1,218 +1,12 @@
 {
   "theatres": [
     {
-      "name": "Hab-Stack Warrens",
-      "description": "Towering hab-blocks crammed with thousands of desperate souls, connected by rusting gantries and crumbling walkways. When gang war erupts here, it becomes a grinding close-quarters fight through endless corridors and cramped chambers.",
-      "tacticalBenefits": "These Twists provide a boost to units in cover, increasing their survivability. Well suited to gangs with large numbers of fighters that can take advantage of dense terrain.",
-      "recommendedTerrain": "Use a mixture of ruins and buildings placed evenly across the battlefield to represent the cramped hab-blocks.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Rolling Fumes",
-          "flavourText": "Thick, choking smoke from burning refuse and ruptured promethium lines fills the narrow passages.",
-          "rule": "All models gain Stealth. Maximum shooting range is 18\"."
-        },
-        {
-          "roll": "3-4",
-          "name": "Firing Positions",
-          "flavourText": "Every doorway and window becomes a potential killzone. Gangers set up ambush points with practiced efficiency.",
-          "rule": "All models gain Ambush. Models that use a Hold action gain +1 to hit with shooting attacks."
-        },
-        {
-          "roll": "5-6",
-          "name": "Maintenance Tunnels",
-          "flavourText": "A labyrinth of service ducts and forgotten access corridors allows gangers to appear where least expected.",
-          "rule": "Once per round, when one of your models activates, you may place it within 3\" of any terrain feature and more than 6\" from enemies. That model then activates normally."
-        }
-      ]
-    },
-    {
-      "name": "The Sump",
-      "description": "The lowest depths where toxic runoff pools and desperate scavengers pick through industrial waste. Fighting here means navigating treacherous footing and lethal environmental hazards.",
-      "tacticalBenefits": "These Twists help weaker fighters take down tougher targets using environmental hazards and improvised explosives.",
-      "recommendedTerrain": "Use pipes, containers, barrels and barricades as well as scattered industrial debris to reflect salvage operations and jury-rigged defenses.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Unstable Munitions",
-          "flavourText": "Abandoned ordnance and volatile chemicals litter the area, ready to be triggered by a well-placed shot.",
-          "rule": "Models may target terrain features (Defense 4+). If hit, all models within 3\" of that terrain take a hit with AP(1). Each terrain feature can only be detonated once per game."
-        },
-        {
-          "roll": "3-4",
-          "name": "Crumbling Platforms",
-          "flavourText": "The corroded gantries and walkways groan under the weight of combat, threatening to collapse at any moment.",
-          "rule": "Elevated terrain is Dangerous. When a model on elevated terrain takes one or more wounds, it immediately falls to ground level."
-        },
-        {
-          "roll": "5-6",
-          "name": "Toxic Runoff",
-          "flavourText": "Bubbling pools of corrosive chemicals seep across the ground, burning through boots and armour alike.",
-          "rule": "All attacks gain AP(1). Models that Rush or Charge take a hit with AP(0) at the end of their activation as they splash through toxic pools."
-        }
-      ]
-    },
-    {
-      "name": "The Docks",
-      "description": "Cargo transit hubs where goods flow in and out of the hive. Control of the docks means control of supplies, making them fiercely contested territory.",
-      "tacticalBenefits": "These Twists make holding objectives easier and improve mobility, helping elite gangs avoid getting bogged down.",
-      "recommendedTerrain": "Use cargo containers, loading cranes, and warehouse structures with gaps wide enough for movement.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Lockdown Protocol",
-          "flavourText": "Securing cargo bays triggers automated defense systems that punish intruders.",
-          "rule": "When an enemy model moves within 3\" of an objective marker you control, that model takes a hit with AP(1)."
-        },
-        {
-          "roll": "3-4",
-          "name": "Surveillance Grid",
-          "flavourText": "Hacking into the dock's pict-feeds provides invaluable intelligence on enemy movements.",
-          "rule": "All models gain Scout. After all deployment is complete, each player may move one enemy model up to 3\" in any direction (the player who deployed second moves a model first)."
-        },
-        {
-          "roll": "5-6",
-          "name": "Cargo Lifts",
-          "flavourText": "Industrial elevators and cargo movers allow rapid repositioning across the dock complex.",
-          "rule": "Models within 3\" of an objective marker may spend their activation to be placed within 3\" of any other objective marker."
-        }
-      ]
-    },
-    {
-      "name": "Chem-Spill Sector",
-      "description": "A blighted zone where industrial accidents have left the air thick with toxins and the ground saturated with mutagenic chemicals. Only the desperate or the foolhardy fight here.",
-      "tacticalBenefits": "These Twists reduce shooting effectiveness and improve survivability, favoring attritional gangs.",
-      "recommendedTerrain": "Use terrain that limits visibility, with structures huddled in more sheltered areas.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Toxic Cloud",
-          "flavourText": "Clouds of corrosive vapor drift unpredictably, reducing visibility and fouling targeter systems.",
-          "rule": "Rounds 1-2: Maximum shooting range is 24\". Rounds 3-4: Maximum shooting range is 18\"."
-        },
-        {
-          "roll": "3-4",
-          "name": "Chem-Burns",
-          "flavourText": "Prolonged exposure to the caustic atmosphere weakens even the toughest fighters, leaving them sluggish and vulnerable.",
-          "rule": "At the start of each round after the first, roll a die for each model not in cover terrain. On a 1-3, that model takes a hit with AP(1)."
-        },
-        {
-          "roll": "5-6",
-          "name": "Interference Storm",
-          "flavourText": "Electromagnetic discharges from unstable chemicals disrupt targeting systems.",
-          "rule": "All shooting attacks suffer -1 to hit. The player who deploys second may place one model using Scout deployment."
-        }
-      ]
-    },
-    {
-      "name": "Factorum District",
-      "description": "Abandoned manufacturing plants where rusting machinery still groans and sparks. The forges may have cooled, but the hazards remain - volatile fuel lines, unstable structures, and choking industrial fumes.",
-      "tacticalBenefits": "These Twists aid tough, durable models while punishing lighter fighters with environmental damage.",
-      "recommendedTerrain": "Use industrial terrain elements - machinery, pipes, and manufacturing equipment.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Venting Steam",
-          "flavourText": "Clouds of scalding steam vent from cracked pipes, obscuring vision and searing exposed flesh.",
-          "rule": "All models gain Stealth. All melee attacks gain AP(1) as scalding steam burns exposed flesh."
-        },
-        {
-          "roll": "3-4",
-          "name": "Volatile Machinery",
-          "flavourText": "Damaged fuel conduits and unstable equipment threaten to explode when struck.",
-          "rule": "Models may target terrain features (Defense 4+). If hit, all models within 3\" take a hit with AP(2). Each terrain feature can only be detonated once per game."
-        },
-        {
-          "roll": "5-6",
-          "name": "Scorching Floors",
-          "flavourText": "Heat radiates from cooling forges and slag pools, making footing treacherous.",
-          "rule": "Models that Rush or Charge take a hit with AP(0) at the end of their activation. Models that use a Hold action may re-roll one failed hit roll."
-        }
-      ]
-    },
-    {
-      "name": "Burnout Zone",
-      "description": "Sectors gutted by fire, riot, or gang warfare. Nothing remains but ash-covered rubble and the charred shells of former structures. Wide open and merciless.",
-      "tacticalBenefits": "These Twists benefit larger models and vehicles with increased mobility and durability in open terrain.",
-      "recommendedTerrain": "Cluster terrain features together with wide gaps between them for increased movement.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Open Ground",
-          "flavourText": "With no cover to impede them, heavier assets surge across the devastation.",
-          "rule": "Models with Tough(3) or higher gain Fast. All other models suffer -1 to Defense rolls when not in cover terrain."
-        },
-        {
-          "roll": "3-4",
-          "name": "Elevated Rubble",
-          "flavourText": "Collapsed walls and debris mounds provide elevated firing positions for those heavy enough to climb them.",
-          "rule": "Models with Tough(3) or higher that use a Hold action gain +1 to hit with shooting attacks."
-        },
-        {
-          "roll": "5-6",
-          "name": "Ash Clouds",
-          "flavourText": "Movement kicks up choking clouds of ash and debris, providing concealment on the move.",
-          "rule": "Models that Rush or Charge gain Stealth until their next activation. Models that use a Hold action gain +1 to hit with shooting attacks."
-        }
-      ]
-    },
-    {
-      "name": "The Undercroft",
-      "description": "Ancient tunnels and forgotten chambers beneath the hive, predating the current structures by millennia. Strange technologies and older dangers lurk in these depths.",
-      "tacticalBenefits": "These Twists are unpredictable and chaotic, creating varied and interesting battles.",
-      "recommendedTerrain": "Mix standard terrain with unusual pieces to represent ancient architecture.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Unstable Passages",
-          "flavourText": "The ancient corridors shift and buckle, hurling combatants toward one another unexpectedly.",
-          "rule": "Models may add +D3\" to Advance, Rush or Charge movement. If they roll a 1, they become Shaken at the end of their activation."
-        },
-        {
-          "roll": "3-4",
-          "name": "Ancient Tech",
-          "flavourText": "Glowing devices of unknown origin pulse with strange energies, enhancing modern weapons.",
-          "rule": "All ranged weapons gain +6\" range. On an unmodified hit roll of 1, the shooter takes a hit with AP(2) from feedback."
-        },
-        {
-          "roll": "5-6",
-          "name": "Protective Fields",
-          "flavourText": "Shimmering barriers of unknown energy flicker across the battlefield, deflecting incoming fire.",
-          "rule": "All models gain +1 to Defense rolls against shooting. On an unmodified Defense roll of 1, that model takes an additional hit with AP(1)."
-        }
-      ]
-    },
-    {
-      "name": "Slag Heaps",
-      "description": "Mountains of industrial waste and discarded refuse, constantly shifting and unstable. Scavengers pick through the debris while gangs fight for control of valuable salvage.",
-      "tacticalBenefits": "These Twists favor infantry models, enabling them to outmaneuver heavier opponents.",
-      "recommendedTerrain": "Use similar-sized terrain features scattered through no man's land to represent refuse piles and salvage camps.",
-      "twists": [
-        {
-          "roll": "1-2",
-          "name": "Treacherous Footing",
-          "flavourText": "The unstable ground shifts constantly, favoring lighter and more agile fighters.",
-          "rule": "Models without Tough gain +2\" to all movement and Strider. Models with Tough(3) or higher suffer -2\" to all movement and treat all terrain as Difficult."
-        },
-        {
-          "roll": "3-4",
-          "name": "Scrap Cover",
-          "flavourText": "Piles of refuse provide ample concealment for those who know how to use them.",
-          "rule": "Models without Tough gain Ambush. Models that deploy via Ambush gain +1 to hit on their first shooting attack."
-        },
-        {
-          "roll": "5-6",
-          "name": "Junk Barricades",
-          "flavourText": "Improvised fortifications of scrap metal and debris provide surprisingly effective cover.",
-          "rule": "All models in cover terrain gain +2 to Defense rolls instead of +1. Models without Tough may deploy using Scout."
-        }
-      ]
-    },
-    {
       "name": "Fungal Depths",
-      "description": "Sections of the underhive where mutant fungi and toxic growths have taken over, creating a choking maze of spore-clouds and grasping tendrils. Only the most desperate venture here.",
-      "tacticalBenefits": "These Twists boost melee-oriented gangs with improved damage and punishment for those who flee combat.",
-      "recommendedTerrain": "Use organic-looking terrain and ruins to represent areas overrun with mutant growth, scattered across the battlefield.",
+      "description": "Sections of the underhive where mutant fungi and toxic growths have taken over, creating a choking maze of spore-clouds and grasping tendrils. Visibility is near-zero and the air itself drives fighters into a frenzy.",
+      "advantages": "Melee gangs",
+      "disadvantages": "Ranged gangs",
+      "tacticalBenefits": "All three twists boost melee combat while crippling shooting. Melee gangs will dominate here.",
+      "recommendedTerrain": "Dense organic-looking terrain with short sight lines. No long fire lanes.",
       "twists": [
         {
           "roll": "1-2",
@@ -222,15 +16,211 @@
         },
         {
           "roll": "3-4",
-          "name": "Strangling Growth",
-          "flavourText": "Grasping tendrils and toxic thorns drag combatants together, refusing to let them disengage.",
-          "rule": "After melee, the charging player may choose not to separate. If they remain engaged, neither unit may shoot or be targeted by shooting until one is destroyed or they separate at the start of a later activation."
+          "name": "Choking Clouds",
+          "flavourText": "Thick spore-clouds reduce visibility to arm's length, making ranged combat nearly impossible.",
+          "rule": "Maximum shooting range is 12\". Models that shoot at targets more than 6\" away suffer an additional -1 to hit."
         },
         {
           "roll": "5-6",
-          "name": "Carnivorous Flora",
-          "flavourText": "Maw-plants, toxin-spitters, and acid-drippers lurk throughout, waiting for isolated prey.",
-          "rule": "Models that activate more than 6\" from all friendly models take a hit with AP(0) at the start of their activation."
+          "name": "Grasping Tendrils",
+          "flavourText": "Writhing fungal tendrils drag combatants together and shield them from outside interference.",
+          "rule": "After melee, the charging player may choose not to separate. While engaged, models cannot be targeted by shooting attacks. All melee attacks gain AP(1)."
+        }
+      ]
+    },
+    {
+      "name": "The Killing Fields",
+      "description": "Former industrial zones cleared by sustained bombardment, now nothing but rubble-strewn open ground with nowhere to hide. Long sight lines and elevated positions make this a shooter's paradise.",
+      "advantages": "Ranged gangs",
+      "disadvantages": "Melee gangs",
+      "tacticalBenefits": "All three twists reward shooting and punish attempts to close distance. Ranged gangs excel here.",
+      "recommendedTerrain": "Sparse terrain with long sight lines. Few buildings, mostly low rubble and craters.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Open Sightlines",
+          "flavourText": "With nothing to obstruct vision, every fighter is a potential target from across the battlefield.",
+          "rule": "All ranged weapons gain +6\" range. Models not in cover terrain suffer -1 to Defense rolls against shooting."
+        },
+        {
+          "roll": "3-4",
+          "name": "Killing Ground",
+          "flavourText": "The open approaches are perfect kill zones, and any attempt to cross them invites withering fire.",
+          "rule": "Models that Charge take a hit with AP(1) at the start of their activation as they cross the open ground. Models using Hold gain +1 to hit with shooting."
+        },
+        {
+          "roll": "5-6",
+          "name": "Elevated Positions",
+          "flavourText": "Rubble mounds and ruined foundations provide perfect firing platforms for those who claim them first.",
+          "rule": "Models in cover terrain or on elevated terrain gain +1 to hit with shooting. Models that Charge must pass a Quality test or become Shaken after their attack."
+        }
+      ]
+    },
+    {
+      "name": "Burnout Zone",
+      "description": "Sectors gutted by fire and radiation, where only the toughest can survive. The weak are picked off quickly while heavily armoured fighters stride through the devastation unopposed.",
+      "advantages": "Elite gangs (Tough models)",
+      "disadvantages": "Horde gangs (many weak models)",
+      "tacticalBenefits": "All three twists reward Tough(3)+ models and punish or ignore non-Tough models. Elite gangs dominate here.",
+      "recommendedTerrain": "Sparse terrain clustered together with wide open gaps. Radiation markers optional.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Scorched Earth",
+          "flavourText": "The devastated landscape offers no protection to the unarmoured, while heavy units surge forward.",
+          "rule": "Models with Tough(3) or higher gain Fast. All other models suffer -1 to Defense rolls."
+        },
+        {
+          "roll": "3-4",
+          "name": "Radiation Pockets",
+          "flavourText": "Lingering radiation eats through light armour and exposed flesh, while the heavily protected endure.",
+          "rule": "At the start of each round after the first, models without Tough take a hit with AP(1). Models with Tough are immune."
+        },
+        {
+          "roll": "5-6",
+          "name": "Dominant Presence",
+          "flavourText": "The largest fighters dominate the battlefield, their mere presence breaking the morale of lesser foes.",
+          "rule": "Models with Tough(3) or higher gain +1 to hit with all attacks. Enemy models within 6\" of a Tough(3)+ model suffer -1 to hit."
+        }
+      ]
+    },
+    {
+      "name": "Slag Heaps",
+      "description": "Mountains of industrial waste and debris, constantly shifting underfoot. Heavy units sink and struggle while nimble fighters swarm through the refuse with ease.",
+      "advantages": "Horde gangs (many models)",
+      "disadvantages": "Elite gangs (Tough models)",
+      "tacticalBenefits": "All three twists reward having many models and punish relying on a few elite fighters. Horde gangs excel here.",
+      "recommendedTerrain": "Dense, cluttered terrain representing refuse piles. Difficult to navigate for large models.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Treacherous Footing",
+          "flavourText": "The unstable ground shifts constantly, swallowing heavy fighters while light ones dance across the surface.",
+          "rule": "Models without Tough gain +2\" to all movement and Strider. Models with Tough(3) or higher suffer -4\" to all movement (minimum 3\") and treat all terrain as Dangerous."
+        },
+        {
+          "roll": "3-4",
+          "name": "Swarm Tactics",
+          "flavourText": "In the chaos of the slag heaps, numbers matter more than individual prowess.",
+          "rule": "Models within 3\" of two or more friendly models gain +1 to hit with all attacks. Models with no friendly models within 6\" suffer -1 to hit."
+        },
+        {
+          "roll": "5-6",
+          "name": "Death by a Thousand Cuts",
+          "flavourText": "Surrounded by enemies on all sides, even the mightiest warrior will eventually fall.",
+          "rule": "When attacking a model, gain +1 AP for each other friendly model within 3\" of the target (maximum AP+3). Models with Tough(3)+ cannot benefit from cover."
+        }
+      ]
+    },
+    {
+      "name": "Hab-Stack Warrens",
+      "description": "Towering hab-blocks with endless corridors, hidden passages, and countless ambush points. Those who know the warrens can strike from nowhere and vanish without a trace.",
+      "advantages": "Stealth/Ambush gangs",
+      "disadvantages": "Direct assault gangs",
+      "tacticalBenefits": "All three twists reward sneaky deployment and punish straightforward approaches. Ambush-focused gangs thrive here.",
+      "recommendedTerrain": "Dense buildings and ruins with many hiding spots. Multiple levels and blocked sight lines.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Dense Cover",
+          "flavourText": "Every shadow hides a potential threat, every doorway conceals a killer.",
+          "rule": "All models gain Stealth. Maximum shooting range is 18\". Models in cover terrain gain +2 to Defense instead of +1."
+        },
+        {
+          "roll": "3-4",
+          "name": "Ambush Points",
+          "flavourText": "The warrens offer countless spots to lie in wait for the unwary.",
+          "rule": "All models gain Ambush. Models deploying via Ambush gain +1 to hit on all attacks during their first activation. Models that deployed normally suffer -1 to hit on Round 1."
+        },
+        {
+          "roll": "5-6",
+          "name": "Hidden Passages",
+          "flavourText": "Secret tunnels and forgotten corridors allow fighters to appear anywhere.",
+          "rule": "Once per activation, any model may be placed within 3\" of any terrain feature and more than 6\" from enemies, then activate normally. Models that do this gain Stealth until their next activation."
+        }
+      ]
+    },
+    {
+      "name": "The Dockyards",
+      "description": "Brightly-lit cargo bays with floodlights blazing and clear firing lanes between containers. There's nowhere to hide here - only direct confrontation will carry the day.",
+      "advantages": "Direct assault gangs",
+      "disadvantages": "Stealth/Ambush gangs",
+      "tacticalBenefits": "All three twists negate stealth tactics and reward aggressive, head-on engagement. Direct assault gangs excel here.",
+      "recommendedTerrain": "Cargo containers and warehouses with clear lanes between them. Well-lit, open areas.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Floodlights",
+          "flavourText": "Blazing industrial lighting illuminates every corner, leaving nowhere to hide.",
+          "rule": "Stealth has no effect. Models cannot benefit from Ambush or Scout deployment - all models must deploy normally. All shooting attacks gain +1 to hit."
+        },
+        {
+          "roll": "3-4",
+          "name": "Clear Lanes",
+          "flavourText": "The orderly cargo rows create perfect kill corridors with no room for subtlety.",
+          "rule": "Cover terrain provides no Defense bonus. Models gain +1 to hit against targets that have not yet activated this round."
+        },
+        {
+          "roll": "5-6",
+          "name": "Aggressive Advance",
+          "flavourText": "Fortune favours the bold - those who push forward are rewarded.",
+          "rule": "Models that Charge gain +1 to hit in melee and AP(1) on all melee attacks. Models that used Hold on their previous activation suffer -1 to Defense."
+        }
+      ]
+    },
+    {
+      "name": "The Sump",
+      "description": "The lowest depths where toxic sludge pools knee-deep and every step risks a twisted ankle or worse. Speed is death here - only the cautious survive.",
+      "advantages": "Slow/defensive gangs",
+      "disadvantages": "Fast/mobile gangs",
+      "tacticalBenefits": "All three twists punish fast movement and reward careful, defensive play. Slow gangs that hunker down will outlast faster opponents.",
+      "recommendedTerrain": "Industrial debris, pipes, pools of toxic waste. Difficult terrain throughout.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Toxic Pools",
+          "flavourText": "Rushing through the sump means splashing through corrosive chemicals that eat through boots and armour.",
+          "rule": "Models that Rush or Charge take a hit with AP(2) at the end of their activation. Models that Advance take a hit with AP(0). Models using Hold are unaffected."
+        },
+        {
+          "roll": "3-4",
+          "name": "Treacherous Ground",
+          "flavourText": "The unstable footing punishes those who move too quickly.",
+          "rule": "Models with Fast lose Fast. All models suffer -2\" to Rush and Charge movement. Models using Hold gain +1 to hit with shooting."
+        },
+        {
+          "roll": "5-6",
+          "name": "Defensive Positions",
+          "flavourText": "Those who find solid ground and hold it gain a crucial advantage.",
+          "rule": "Models that used Hold on their previous activation gain +1 to Defense and +1 to hit until their next activation. Models that Rush or Charge cannot benefit from cover."
+        }
+      ]
+    },
+    {
+      "name": "Transit Corridors",
+      "description": "Arterial passages where high-speed cargo trains once ran. The wide corridors and smooth floors reward those who keep moving, while those who stand still become easy targets.",
+      "advantages": "Fast/mobile gangs",
+      "disadvantages": "Slow/defensive gangs",
+      "tacticalBenefits": "All three twists reward constant movement and punish static play. Fast gangs that stay mobile will dominate.",
+      "recommendedTerrain": "Long corridors with minimal obstacles. Open spaces that allow full movement.",
+      "twists": [
+        {
+          "roll": "1-2",
+          "name": "Moving Targets",
+          "flavourText": "A fighter in motion is harder to track and hit.",
+          "rule": "Models that moved this activation gain +1 to Defense until their next activation. Models that used Hold suffer -1 to Defense until their next activation."
+        },
+        {
+          "roll": "3-4",
+          "name": "Momentum",
+          "flavourText": "Speed is power in the corridors - the faster you move, the harder you hit.",
+          "rule": "Models that Rush gain +1 to hit on their next activation. Models that Charge gain +1 to hit and AP(1) in melee. Models with Fast gain an additional +1 to hit."
+        },
+        {
+          "roll": "5-6",
+          "name": "Kill Zones",
+          "flavourText": "Standing still in the open corridors is suicide - keep moving or die.",
+          "rule": "At the start of each round after the first, models that used Hold on their previous activation take a hit with AP(1). Models that Rush or Charge gain Stealth until their next activation."
         }
       ]
     }
