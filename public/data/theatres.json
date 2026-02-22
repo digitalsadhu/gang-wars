@@ -10,19 +10,19 @@
           "roll": "1-2",
           "name": "Rolling Fumes",
           "flavourText": "Thick, choking smoke from burning refuse and ruptured promethium lines fills the narrow passages.",
-          "rule": "All models gain Stealth. Charge distances are reduced by 2\" (minimum 6\")."
+          "rule": "All models gain Stealth. Maximum shooting range is 18\"."
         },
         {
           "roll": "3-4",
           "name": "Firing Positions",
           "flavourText": "Every doorway and window becomes a potential killzone. Gangers set up ambush points with practiced efficiency.",
-          "rule": "Models in cover terrain that use a Hold action gain +1 to hit with shooting attacks."
+          "rule": "All models gain Ambush. Models that use a Hold action gain +1 to hit with shooting attacks."
         },
         {
           "roll": "5-6",
           "name": "Maintenance Tunnels",
           "flavourText": "A labyrinth of service ducts and forgotten access corridors allows gangers to appear where least expected.",
-          "rule": "Once per round, when one of your models activates, you may place it within 6\" of any board edge and more than 9\" from enemies. That model may then activate normally but cannot charge this activation."
+          "rule": "Once per round, when one of your models activates, you may place it within 3\" of any terrain feature and more than 6\" from enemies. That model then activates normally."
         }
       ]
     },
@@ -42,13 +42,13 @@
           "roll": "3-4",
           "name": "Crumbling Platforms",
           "flavourText": "The corroded gantries and walkways groan under the weight of combat, threatening to collapse at any moment.",
-          "rule": "When a model on elevated terrain takes one or more wounds, roll a die. On a 1-2, that model falls to ground level and takes an additional hit with AP(1)."
+          "rule": "Elevated terrain is Dangerous. When a model on elevated terrain takes one or more wounds, it immediately falls to ground level."
         },
         {
           "roll": "5-6",
           "name": "Toxic Runoff",
           "flavourText": "Bubbling pools of corrosive chemicals seep across the ground, burning through boots and armour alike.",
-          "rule": "All terrain is Dangerous. Models activating within or moving through terrain roll a die; on a 1 they take a hit with AP(1)."
+          "rule": "All attacks gain AP(1). Models that Rush or Charge take a hit with AP(0) at the end of their activation as they splash through toxic pools."
         }
       ]
     },
@@ -62,13 +62,13 @@
           "roll": "1-2",
           "name": "Lockdown Protocol",
           "flavourText": "Securing cargo bays triggers automated defense systems that punish intruders.",
-          "rule": "When an enemy model moves within 3\" of an objective marker you control, that model takes a hit with AP(0)."
+          "rule": "When an enemy model moves within 3\" of an objective marker you control, that model takes a hit with AP(1)."
         },
         {
           "roll": "3-4",
           "name": "Surveillance Grid",
           "flavourText": "Hacking into the dock's pict-feeds provides invaluable intelligence on enemy movements.",
-          "rule": "All models gain Scout. Models with Fast gain +2\" to Advance movement."
+          "rule": "All models gain Scout. After all deployment is complete, each player may move one enemy model up to 3\" in any direction (the player who deployed second moves a model first)."
         },
         {
           "roll": "5-6",
@@ -94,7 +94,7 @@
           "roll": "3-4",
           "name": "Chem-Burns",
           "flavourText": "Prolonged exposure to the caustic atmosphere weakens even the toughest fighters, leaving them sluggish and vulnerable.",
-          "rule": "At the start of each round after the first, all models not in cover terrain take a hit with AP(0)."
+          "rule": "At the start of each round after the first, roll a die for each model not in cover terrain. On a 1-3, that model takes a hit with AP(1)."
         },
         {
           "roll": "5-6",
@@ -114,19 +114,19 @@
           "roll": "1-2",
           "name": "Venting Steam",
           "flavourText": "Clouds of scalding steam vent from cracked pipes, obscuring vision and searing exposed flesh.",
-          "rule": "All models gain Stealth. Models without Tough that charge take a hit with AP(0) after resolving their attacks."
+          "rule": "All models gain Stealth. All melee attacks gain AP(1) as scalding steam burns exposed flesh."
         },
         {
           "roll": "3-4",
           "name": "Volatile Machinery",
           "flavourText": "Damaged fuel conduits and unstable equipment threaten to explode when struck.",
-          "rule": "When a model in cover terrain takes a wound, roll a die. On a 1, all models within 3\" of that model take a hit with AP(1)."
+          "rule": "Models may target terrain features (Defense 4+). If hit, all models within 3\" take a hit with AP(2). Each terrain feature can only be detonated once per game."
         },
         {
           "roll": "5-6",
           "name": "Scorching Floors",
           "flavourText": "Heat radiates from cooling forges and slag pools, making footing treacherous.",
-          "rule": "Models that Rush or Charge take a hit with AP(0) at the end of their activation. Models with Tough are immune."
+          "rule": "Models that Rush or Charge take a hit with AP(0) at the end of their activation. Models that use a Hold action may re-roll one failed hit roll."
         }
       ]
     },
@@ -152,7 +152,7 @@
           "roll": "5-6",
           "name": "Ash Clouds",
           "flavourText": "Movement kicks up choking clouds of ash and debris, providing concealment on the move.",
-          "rule": "Models that moved this activation gain Stealth until their next activation. Models that used a Hold action suffer -1 to Defense rolls."
+          "rule": "Models that Rush or Charge gain Stealth until their next activation. Models that use a Hold action gain +1 to hit with shooting attacks."
         }
       ]
     },
@@ -166,7 +166,7 @@
           "roll": "1-2",
           "name": "Unstable Passages",
           "flavourText": "The ancient corridors shift and buckle, hurling combatants toward one another unexpectedly.",
-          "rule": "Models may add +D3\" to Advance or Rush movement. If they roll a 1, they become Shaken at the end of their activation."
+          "rule": "Models may add +D3\" to Advance, Rush or Charge movement. If they roll a 1, they become Shaken at the end of their activation."
         },
         {
           "roll": "3-4",
@@ -192,7 +192,7 @@
           "roll": "1-2",
           "name": "Treacherous Footing",
           "flavourText": "The unstable ground shifts constantly, favoring lighter and more agile fighters.",
-          "rule": "Models without Tough gain +2\" to all movement. Models with Tough(3) or higher suffer -2\" to all movement (minimum 4\")."
+          "rule": "Models without Tough gain +2\" to all movement and Strider. Models with Tough(3) or higher suffer -2\" to all movement and treat all terrain as Difficult."
         },
         {
           "roll": "3-4",
@@ -204,7 +204,7 @@
           "roll": "5-6",
           "name": "Junk Barricades",
           "flavourText": "Improvised fortifications of scrap metal and debris provide surprisingly effective cover.",
-          "rule": "Models without Tough in cover terrain gain +2 to Defense rolls instead of +1. Weapons with Blast suffer -1 to hit."
+          "rule": "All models in cover terrain gain +2 to Defense rolls instead of +1. Models without Tough may deploy using Scout."
         }
       ]
     },
@@ -223,8 +223,8 @@
         {
           "roll": "3-4",
           "name": "Strangling Growth",
-          "flavourText": "Grasping tendrils and toxic thorns punish those who break from combat.",
-          "rule": "After melee, models that must separate take a hit with AP(1) from the grasping vegetation."
+          "flavourText": "Grasping tendrils and toxic thorns drag combatants together, refusing to let them disengage.",
+          "rule": "After melee, the charging player may choose not to separate. If they remain engaged, neither unit may shoot or be targeted by shooting until one is destroyed or they separate at the start of a later activation."
         },
         {
           "roll": "5-6",
