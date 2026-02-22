@@ -1,0 +1,12 @@
+{
+  // Player roster for the Gang Wars campaign
+  // Each player belongs to a faction
+  players: [
+    { name: "William", faction: "The Undergrid Syndicate" },
+    { name: "Robert", faction: "The Undergrid Syndicate" },
+    { name: "Fabien", faction: "Static Dominion" },
+    { name: "Valentin", faction: "Static Dominion" },
+    { name: "Richard", faction: "Ashfall Covenant" },
+    { name: "Kiran", faction: "Ashfall Covenant" },
+  ],
+}

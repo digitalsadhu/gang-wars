@@ -102,11 +102,17 @@ function updateAuthUI(username = null) {
   renderMarkers();
 }
 
+// Helper to fetch and parse JSON5 files
+async function fetchJSON5(url) {
+  const response = await fetch(url);
+  const text = await response.text();
+  return JSON5.parse(text);
+}
+
 // Load config data
 async function loadConfig() {
   try {
-    const response = await fetch('/data/config.json');
-    configData = await response.json();
+    configData = await fetchJSON5('/data/config.json5');
     populateAllianceDropdowns();
     await preloadIcons();
   } catch (error) {
@@ -177,8 +183,7 @@ function populateAllianceDropdowns() {
 // Load players data
 async function loadPlayers() {
   try {
-    const response = await fetch('/data/players.json');
-    const data = await response.json();
+    const data = await fetchJSON5('/data/players.json5');
     playersData = data.players;
     populatePlayerDropdown();
   } catch (error) {
@@ -207,8 +212,7 @@ function getPlayerFaction(playerName) {
 // Load rackets data
 async function loadRackets() {
   try {
-    const response = await fetch('/data/rackets.json');
-    const data = await response.json();
+    const data = await fetchJSON5('/data/rackets.json5');
     racketsData = data.rackets;
     populateRacketsDropdown();
   } catch (error) {
@@ -255,8 +259,7 @@ async function loadMarkers() {
 // Load theatres data
 async function loadTheatres() {
   try {
-    const response = await fetch('/data/theatres.json');
-    const data = await response.json();
+    const data = await fetchJSON5('/data/theatres.json5');
     theatresData = data.theatres;
     populateTheatreDropdown();
   } catch (error) {
@@ -485,8 +488,7 @@ function openTheatreViewModal(markerId) {
 // Load operations data
 async function loadOperations() {
   try {
-    const response = await fetch('/data/operations.json');
-    const data = await response.json();
+    const data = await fetchJSON5('/data/operations.json5');
     operationsData = data.operations;
     populateOperationsDropdown();
   } catch (error) {
@@ -533,8 +535,7 @@ function closeOperationsModal() {
 // Load phases data
 async function loadPhases() {
   try {
-    const response = await fetch('/data/phases.json');
-    phasesData = await response.json();
+    phasesData = await fetchJSON5('/data/phases.json5');
   } catch (error) {
     console.error('Failed to load phases:', error);
   }
@@ -547,8 +548,19 @@ function openPhasesModal() {
   document.getElementById('phases-modal-title').textContent = phasesData.title || 'Campaign Phases';
   document.getElementById('phases-description').textContent = phasesData.description || '';
 
-  const list = document.getElementById('phases-list');
-  list.innerHTML = phasesData.phases.map(phase => `<li>${escapeHtml(phase.name)}</li>`).join('');
+  const accordion = document.getElementById('phases-accordion');
+  accordion.innerHTML = phasesData.phases.map((phase, index) => `
+    <div class="phase-item">
+      <div class="phase-header" onclick="togglePhase(${index})">
+        <span class="phase-number">${phase.number}</span>
+        <span class="phase-name">${escapeHtml(phase.name)}</span>
+        <span class="phase-chevron">&#9662;</span>
+      </div>
+      <div class="phase-content" id="phase-content-${index}">
+        <p>${escapeHtml(phase.description || '')}</p>
+      </div>
+    </div>
+  `).join('');
 
   document.getElementById('phases-modal').classList.remove('hidden');
 }
@@ -556,6 +568,25 @@ function openPhasesModal() {
 function closePhasesModal() {
   document.getElementById('phases-modal').classList.add('hidden');
 }
+
+// Toggle phase accordion item
+window.togglePhase = function(index) {
+  const content = document.getElementById(`phase-content-${index}`);
+  const header = content.previousElementSibling;
+  const isOpen = content.classList.contains('open');
+
+  // Close all other items
+  document.querySelectorAll('.phase-content.open').forEach(el => {
+    el.classList.remove('open');
+    el.previousElementSibling.classList.remove('open');
+  });
+
+  // Toggle this item
+  if (!isOpen) {
+    content.classList.add('open');
+    header.classList.add('open');
+  }
+};
 
 // Populate rackets reference dropdown
 function populateRacketsReferenceDropdown() {
@@ -599,8 +630,7 @@ function closeRacketsReferenceModal() {
 // Load campaign events data
 async function loadCampaignEvents() {
   try {
-    const response = await fetch('/data/campaign-events.json');
-    campaignEventsData = await response.json();
+    campaignEventsData = await fetchJSON5('/data/campaign-events.json5');
   } catch (error) {
     console.error('Failed to load campaign events:', error);
   }
@@ -686,8 +716,7 @@ function displayEventTable(index) {
 // Load campaign missions data
 async function loadCampaignMissions() {
   try {
-    const response = await fetch('/data/campaign-missions.json');
-    campaignMissionsData = await response.json();
+    campaignMissionsData = await fetchJSON5('/data/campaign-missions.json5');
   } catch (error) {
     console.error('Failed to load campaign missions:', error);
   }
@@ -829,8 +858,7 @@ function displayMission(index) {
 // Load districts data
 async function loadDistricts() {
   try {
-    const response = await fetch('/data/districts.json');
-    const data = await response.json();
+    const data = await fetchJSON5('/data/districts.json5');
     districtsData = data.districts;
     renderDistrictLabels();
   } catch (error) {
