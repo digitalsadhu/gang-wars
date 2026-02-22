@@ -287,6 +287,23 @@ function displayTheatre(index) {
   }
 
   document.getElementById('theatre-description').textContent = theatre.description;
+
+  // Display advantages/disadvantages tags
+  const advantagesEl = document.getElementById('theatre-advantages');
+  const disadvantagesEl = document.getElementById('theatre-disadvantages');
+  if (theatre.advantages) {
+    advantagesEl.textContent = `Favors: ${theatre.advantages}`;
+    advantagesEl.classList.remove('hidden');
+  } else {
+    advantagesEl.classList.add('hidden');
+  }
+  if (theatre.disadvantages) {
+    disadvantagesEl.textContent = `Punishes: ${theatre.disadvantages}`;
+    disadvantagesEl.classList.remove('hidden');
+  } else {
+    disadvantagesEl.classList.add('hidden');
+  }
+
   document.getElementById('theatre-benefits').textContent = theatre.tacticalBenefits;
   document.getElementById('theatre-terrain').textContent = theatre.recommendedTerrain;
 
