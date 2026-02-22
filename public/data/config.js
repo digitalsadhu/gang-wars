@@ -1,6 +1,7 @@
-{
-  // Faction configuration for the Gang Wars campaign
-  // Each faction has a color scheme and icon for map display
+// Faction configuration for the Gang Wars campaign
+// Each faction has a color scheme and icon for map display
+
+export default {
   factions: {
     "The Undergrid Syndicate": {
       background: "#2563eb",
@@ -18,4 +19,4 @@
       icon: "/images/icons/ashfall-covenant.svg",
     },
   },
-}
+};

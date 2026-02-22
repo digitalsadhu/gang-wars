@@ -102,17 +102,11 @@ function updateAuthUI(username = null) {
   renderMarkers();
 }
 
-// Helper to fetch and parse JSON5 files
-async function fetchJSON5(url) {
-  const response = await fetch(url);
-  const text = await response.text();
-  return JSON5.parse(text);
-}
-
 // Load config data
 async function loadConfig() {
   try {
-    configData = await fetchJSON5('/data/config.json5');
+    const module = await import('/data/config.js');
+    configData = module.default;
     populateAllianceDropdowns();
     await preloadIcons();
   } catch (error) {
@@ -183,8 +177,8 @@ function populateAllianceDropdowns() {
 // Load players data
 async function loadPlayers() {
   try {
-    const data = await fetchJSON5('/data/players.json5');
-    playersData = data.players;
+    const module = await import('/data/players.js');
+    playersData = module.default.players;
     populatePlayerDropdown();
   } catch (error) {
     console.error('Failed to load players:', error);
@@ -212,8 +206,8 @@ function getPlayerFaction(playerName) {
 // Load rackets data
 async function loadRackets() {
   try {
-    const data = await fetchJSON5('/data/rackets.json5');
-    racketsData = data.rackets;
+    const module = await import('/data/rackets.js');
+    racketsData = module.default.rackets;
     populateRacketsDropdown();
   } catch (error) {
     console.error('Failed to load rackets:', error);
@@ -259,8 +253,8 @@ async function loadMarkers() {
 // Load theatres data
 async function loadTheatres() {
   try {
-    const data = await fetchJSON5('/data/theatres.json5');
-    theatresData = data.theatres;
+    const module = await import('/data/theatres.js');
+    theatresData = module.default.theatres;
     populateTheatreDropdown();
   } catch (error) {
     console.error('Failed to load theatres:', error);
@@ -488,8 +482,8 @@ function openTheatreViewModal(markerId) {
 // Load operations data
 async function loadOperations() {
   try {
-    const data = await fetchJSON5('/data/operations.json5');
-    operationsData = data.operations;
+    const module = await import('/data/operations.js');
+    operationsData = module.default.operations;
     populateOperationsDropdown();
   } catch (error) {
     console.error('Failed to load operations:', error);
@@ -535,7 +529,8 @@ function closeOperationsModal() {
 // Load phases data
 async function loadPhases() {
   try {
-    phasesData = await fetchJSON5('/data/phases.json5');
+    const module = await import('/data/phases.js');
+    phasesData = module.default;
   } catch (error) {
     console.error('Failed to load phases:', error);
   }
@@ -630,7 +625,8 @@ function closeRacketsReferenceModal() {
 // Load campaign events data
 async function loadCampaignEvents() {
   try {
-    campaignEventsData = await fetchJSON5('/data/campaign-events.json5');
+    const module = await import('/data/campaign-events.js');
+    campaignEventsData = module.default;
   } catch (error) {
     console.error('Failed to load campaign events:', error);
   }
@@ -716,7 +712,8 @@ function displayEventTable(index) {
 // Load campaign missions data
 async function loadCampaignMissions() {
   try {
-    campaignMissionsData = await fetchJSON5('/data/campaign-missions.json5');
+    const module = await import('/data/campaign-missions.js');
+    campaignMissionsData = module.default;
   } catch (error) {
     console.error('Failed to load campaign missions:', error);
   }
@@ -858,8 +855,8 @@ function displayMission(index) {
 // Load districts data
 async function loadDistricts() {
   try {
-    const data = await fetchJSON5('/data/districts.json5');
-    districtsData = data.districts;
+    const module = await import('/data/districts.js');
+    districtsData = module.default.districts;
     renderDistrictLabels();
   } catch (error) {
     console.error('Failed to load districts:', error);

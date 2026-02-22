@@ -1,6 +1,7 @@
-{
-  // Player roster for the Gang Wars campaign
-  // Each player belongs to a faction
+// Player roster for the Gang Wars campaign
+// Each player belongs to a faction
+
+export default {
   players: [
     { name: "William", faction: "The Undergrid Syndicate" },
     { name: "Robert", faction: "The Undergrid Syndicate" },
@@ -9,4 +10,4 @@
     { name: "Richard", faction: "Ashfall Covenant" },
     { name: "Kiran", faction: "Ashfall Covenant" },
   ],
-}
+};

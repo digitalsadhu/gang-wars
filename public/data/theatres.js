@@ -1,11 +1,17 @@
-{
-  // Theatres - battlefield environments that modify battle rules
-  // Each theatre favors certain gang archetypes and punishes others
-  // Roll D6 to determine which twist applies during the battle
+// Theatres - battlefield environments that modify battle rules
+// Each theatre favors certain gang archetypes and punishes others
+// Roll D6 to determine which twist applies during the battle
+
+export default {
   theatres: [
     {
       name: "Fungal Depths",
-      description: "Sections of the underhive where mutant fungi and toxic growths have taken over, creating a choking maze of spore-clouds and grasping tendrils. Visibility is near-zero and the air itself drives fighters into a frenzy.",
+      description: `
+        Sections of the underhive where mutant fungi and toxic growths have
+        taken over, creating a choking maze of spore-clouds and grasping
+        tendrils. Visibility is near-zero and the air itself drives fighters
+        into a frenzy.
+      `,
       advantages: "Melee gangs",
       disadvantages: "Ranged gangs",
       tacticalBenefits: "All three twists boost melee combat while crippling shooting. Melee gangs will dominate here.",
@@ -21,7 +27,7 @@
           roll: "3-4",
           name: "Choking Clouds",
           flavourText: "Thick spore-clouds reduce visibility to arm's length, making ranged combat nearly impossible.",
-          rule: "Maximum shooting range is 18\". Models that shoot at targets more than 9\" away suffer an additional -1 to hit.",
+          rule: `Maximum shooting range is 18". Models that shoot at targets more than 9" away suffer an additional -1 to hit.`,
         },
         {
           roll: "5-6",
@@ -33,7 +39,11 @@
     },
     {
       name: "The Killing Fields",
-      description: "Former industrial zones cleared by sustained bombardment, now nothing but rubble-strewn open ground with nowhere to hide. Long sight lines and elevated positions make this a shooter's paradise.",
+      description: `
+        Former industrial zones cleared by sustained bombardment, now nothing
+        but rubble-strewn open ground with nowhere to hide. Long sight lines
+        and elevated positions make this a shooter's paradise.
+      `,
       advantages: "Ranged gangs",
       disadvantages: "Melee gangs",
       tacticalBenefits: "All three twists reward shooting and punish attempts to close distance. Ranged gangs excel here.",
@@ -43,25 +53,29 @@
           roll: "1-2",
           name: "Open Sightlines",
           flavourText: "With nothing to obstruct vision, every fighter is a potential target from across the battlefield.",
-          rule: "All ranged weapons gain +6\" range. Models not in cover terrain suffer -1 to Defense rolls against shooting.",
+          rule: `All ranged weapons gain +6" range. Models not in cover terrain suffer -1 to Defense rolls against shooting.`,
         },
         {
           roll: "3-4",
           name: "Killing Ground",
           flavourText: "The open approaches are perfect kill zones, and any attempt to cross them invites withering fire.",
-          rule: "Models must pass a quality test to charge more than 6\". Models using Hold gain +1 to hit with shooting.",
+          rule: `Models must pass a quality test to charge more than 6". Models using Hold gain +1 to hit with shooting.`,
         },
         {
           roll: "5-6",
           name: "Elevated Positions",
           flavourText: "Rubble mounds and ruined foundations provide perfect firing platforms for those who claim them first.",
-          rule: "Models in cover terrain or on elevated terrain gain +1 to hit with shooting. Models that Charge must pass a Quality test to charge more than 6\".",
+          rule: `Models in cover terrain or on elevated terrain gain +1 to hit with shooting. Models that Charge must pass a Quality test to charge more than 6".`,
         },
       ],
     },
     {
       name: "Burnout Zone",
-      description: "Sectors gutted by fire and radiation, where only the toughest can survive. The weak are picked off quickly while heavily armoured fighters stride through the devastation unopposed.",
+      description: `
+        Sectors gutted by fire and radiation, where only the toughest can
+        survive. The weak are picked off quickly while heavily armoured
+        fighters stride through the devastation unopposed.
+      `,
       advantages: "Elite gangs (Tough models)",
       disadvantages: "Horde gangs (many weak models)",
       tacticalBenefits: "All three twists reward Tough models and punish or ignore non-Tough models. Elite gangs dominate here.",
@@ -83,13 +97,17 @@
           roll: "5-6",
           name: "Dominant Presence",
           flavourText: "The largest fighters dominate the battlefield, their mere presence breaking the morale of lesser foes.",
-          rule: "Models with Tough gain +1 to hit with all attacks. Enemy models within 6\" of a Tough model suffer -1 to hit.",
+          rule: `Models with Tough gain +1 to hit with all attacks. Enemy models within 6" of a Tough model suffer -1 to hit.`,
         },
       ],
     },
     {
       name: "Slag Heaps",
-      description: "Mountains of industrial waste and debris, constantly shifting underfoot. Heavy units sink and struggle while nimble fighters swarm through the refuse with ease.",
+      description: `
+        Mountains of industrial waste and debris, constantly shifting underfoot.
+        Heavy units sink and struggle while nimble fighters swarm through the
+        refuse with ease.
+      `,
       advantages: "Horde gangs (many models)",
       disadvantages: "Elite gangs (Tough models)",
       tacticalBenefits: "All three twists reward having many models and punish relying on a few elite fighters. Horde gangs excel here.",
@@ -99,25 +117,29 @@
           roll: "1-2",
           name: "Treacherous Footing",
           flavourText: "The unstable ground shifts constantly, swallowing heavy fighters while light ones dance across the surface.",
-          rule: "Models without Tough gain +2\" to all movement and Strider. Models with Tough suffer -4\" to all movement (minimum 3\") and treat all terrain as Dangerous.",
+          rule: `Models without Tough gain +2" to all movement and Strider. Models with Tough suffer -4" to all movement (minimum 3") and treat all terrain as Dangerous.`,
         },
         {
           roll: "3-4",
           name: "Swarm Tactics",
           flavourText: "In the chaos of the slag heaps, numbers matter more than individual prowess.",
-          rule: "Models within 3\" of two or more friendly models gain +1 to hit with all attacks. Models with no friendly models within 6\" suffer -1 to hit.",
+          rule: `Models within 3" of two or more friendly models gain +1 to hit with all attacks. Models with no friendly models within 6" suffer -1 to hit.`,
         },
         {
           roll: "5-6",
           name: "Death by a Thousand Cuts",
           flavourText: "Surrounded by enemies on all sides, even the mightiest warrior will eventually fall.",
-          rule: "When attacking a model, gain +1 AP for each other friendly model within 3\" of the target (maximum AP+3). Models with Tough cannot benefit from cover.",
+          rule: `When attacking a model, gain +1 AP for each other friendly model within 3" of the target (maximum AP+3). Models with Tough cannot benefit from cover.`,
         },
       ],
     },
     {
       name: "Hab-Stack Warrens",
-      description: "Towering hab-blocks with endless corridors, hidden passages, and countless ambush points. Those who know the warrens can strike from nowhere and vanish without a trace.",
+      description: `
+        Towering hab-blocks with endless corridors, hidden passages, and
+        countless ambush points. Those who know the warrens can strike from
+        nowhere and vanish without a trace.
+      `,
       advantages: "Stealth/Ambush gangs",
       disadvantages: "Direct assault gangs",
       tacticalBenefits: "All three twists reward sneaky deployment and punish straightforward approaches. Ambush-focused gangs thrive here.",
@@ -127,7 +149,7 @@
           roll: "1-2",
           name: "Dense Cover",
           flavourText: "Every shadow hides a potential threat, every doorway conceals a killer.",
-          rule: "Models with ambush gain Stealth. Maximum shooting range is 18\". Models in cover gain +2 to Defense rolls instead of +1.",
+          rule: `Models with ambush gain Stealth. Maximum shooting range is 18". Models in cover gain +2 to Defense rolls instead of +1.`,
         },
         {
           roll: "3-4",
@@ -139,13 +161,23 @@
           roll: "5-6",
           name: "Hidden Passages",
           flavourText: "Secret tunnels and forgotten corridors allow fighters to appear anywhere.",
-          rule: "Instead of a regular activation, a model within 3\" of a terrain feature may be removed from the table and immediately placed within 3\" of another terrain feature at least 1\" from other models. Models that do this gain Stealth until the end of the round but they may not shoot or contest objectives this round.",
+          rule: `
+            Instead of a regular activation, a model within 3" of a terrain feature
+            may be removed from the table and immediately placed within 3" of another
+            terrain feature at least 1" from other models. Models that do this gain
+            Stealth until the end of the round but they may not shoot or contest
+            objectives this round.
+          `,
         },
       ],
     },
     {
       name: "The Dockyards",
-      description: "Brightly-lit cargo bays with floodlights blazing and clear firing lanes between containers. There's nowhere to hide here - only direct confrontation will carry the day.",
+      description: `
+        Brightly-lit cargo bays with floodlights blazing and clear firing lanes
+        between containers. There's nowhere to hide here - only direct
+        confrontation will carry the day.
+      `,
       advantages: "Direct assault gangs",
       disadvantages: "Stealth/Ambush gangs",
       tacticalBenefits: "All three twists negate stealth tactics and reward aggressive, head-on engagement. Direct assault gangs excel here.",
@@ -167,13 +199,17 @@
           roll: "5-6",
           name: "Aggressive Advance",
           flavourText: "Fortune favours the bold - those who push forward are rewarded.",
-          rule: "Models that Charge at least 6\" gain +1 to hit in melee and AP(1) on all melee attacks that activation. Models that have not yet activated this round suffer -1 to Defense.",
+          rule: `Models that Charge at least 6" gain +1 to hit in melee and AP(1) on all melee attacks that activation. Models that have not yet activated this round suffer -1 to Defense.`,
         },
       ],
     },
     {
       name: "The Sump",
-      description: "The lowest depths where toxic sludge pools knee-deep and every step risks a twisted ankle or worse. Speed is death here - only the cautious survive.",
+      description: `
+        The lowest depths where toxic sludge pools knee-deep and every step
+        risks a twisted ankle or worse. Speed is death here - only the cautious
+        survive.
+      `,
       advantages: "Slow/defensive gangs",
       disadvantages: "Fast/mobile gangs",
       tacticalBenefits: "All three twists punish fast movement and reward careful, defensive play. Slow gangs that hunker down will outlast faster opponents.",
@@ -183,13 +219,13 @@
           roll: "1-2",
           name: "Toxic Pools",
           flavourText: "Rushing through the sump means splashing through corrosive chemicals that eat through boots and armour.",
-          rule: "Models that Charge more than 6\" or Rush must test quality or take a hit with AP(2) at the end of their activation. Models using Hold gain +1 to hit with shooting.",
+          rule: `Models that Charge more than 6" or Rush must test quality or take a hit with AP(2) at the end of their activation. Models using Hold gain +1 to hit with shooting.`,
         },
         {
           roll: "3-4",
           name: "Treacherous Ground",
           flavourText: "The unstable footing punishes those who move too quickly.",
-          rule: "Models with Fast lose Fast. All models suffer -2\" to Rush and Charge movement. Models using Hold gain +1 to hit with shooting.",
+          rule: `Models with Fast lose Fast. All models suffer -2" to Rush and Charge movement. Models using Hold gain +1 to hit with shooting.`,
         },
         {
           roll: "5-6",
@@ -201,7 +237,11 @@
     },
     {
       name: "Transit Corridors",
-      description: "Arterial passages where high-speed cargo trains once ran. The wide corridors and smooth floors reward those who keep moving, while those who stand still become easy targets.",
+      description: `
+        Arterial passages where high-speed cargo trains once ran. The wide
+        corridors and smooth floors reward those who keep moving, while those
+        who stand still become easy targets.
+      `,
       advantages: "Fast/mobile gangs",
       disadvantages: "Slow/defensive gangs",
       tacticalBenefits: "All three twists reward constant movement and punish static play. Fast gangs that stay mobile will dominate.",
@@ -211,21 +251,31 @@
           roll: "1-2",
           name: "Moving Targets",
           flavourText: "A fighter in motion is harder to track and hit.",
-          rule: "Models that move more than 3\" from their starting position this activation gain +1 to Defense until the end of the round. Models that do not suffer -1 to Defense until the end of round.",
+          rule: `Models that move more than 3" from their starting position this activation gain +1 to Defense until the end of the round. Models that do not suffer -1 to Defense until the end of round.`,
         },
         {
           roll: "3-4",
           name: "Momentum",
           flavourText: "Speed is power in the corridors - the faster you move, the harder you hit.",
-          rule: "Models that move more than 3\" from their starting position gain +1 to hit when shooting until the end of the round. Models that Charge more than 6\" from their starting position gain +1 to hit and AP(1) in melee. Models with Fast gain an additional +1 to hit.",
+          rule: `
+            Models that move more than 3" from their starting position gain +1 to hit
+            when shooting until the end of the round. Models that Charge more than 6"
+            from their starting position gain +1 to hit and AP(1) in melee. Models
+            with Fast gain an additional +1 to hit.
+          `,
         },
         {
           roll: "5-6",
           name: "Kill Zones",
           flavourText: "Standing still in the open corridors is suicide - keep moving or die.",
-          rule: "Models that do not move at least 3\" from their starting position take a hit with AP(1) at the end of their activation. Models that Rush or Charge more than 6\" from their starting position gain Stealth until the end of the round.",
+          rule: `
+            Models that do not move at least 3" from their starting position take a
+            hit with AP(1) at the end of their activation. Models that Rush or Charge
+            more than 6" from their starting position gain Stealth until the end of
+            the round.
+          `,
         },
       ],
     },
   ],
-}
+};
