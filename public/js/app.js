@@ -39,6 +39,10 @@ let districtLabelLayer;
 let campaignEventsData = null;
 let campaignMissionsData = null;
 
+// Theatre navigation state (for cycling through district theatres)
+let currentDistrictTheatres = [];
+let currentDistrictTheatreIndex = 0;
+
 // Initialize the map
 async function initMap() {
   const bounds = [[0, 0], [IMAGE_HEIGHT, IMAGE_WIDTH]];
@@ -875,7 +879,7 @@ function renderDistrictLabels() {
     // Generate theatre icons HTML with onclick handlers
     const theatreIconsHtml = district.theatres.map(theatreName => {
       const theatreIndex = theatresData ? theatresData.findIndex(t => t.name === theatreName) : -1;
-      return `<div class="district-theatre-icon" onclick="handleDistrictTheatreClick(event, ${theatreIndex})" title="${escapeHtml(theatreName)}">
+      return `<div class="district-theatre-icon" onclick="handleDistrictTheatreClick(event, ${theatreIndex}, '${escapeHtml(district.name)}')" title="${escapeHtml(theatreName)}">
         <svg viewBox="0 0 24 24" fill="#ffffff"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/></svg>
       </div>`;
     }).join('');
@@ -898,15 +902,15 @@ function renderDistrictLabels() {
 }
 
 // Handle click on district theatre icon
-window.handleDistrictTheatreClick = function(event, theatreIndex) {
+window.handleDistrictTheatreClick = function(event, theatreIndex, districtName) {
   event.stopPropagation();
   if (theatreIndex >= 0 && theatresData && theatresData[theatreIndex]) {
-    openDistrictTheatreModal(theatreIndex);
+    openDistrictTheatreModal(theatreIndex, districtName);
   }
 };
 
 // Open theatre info modal from district label
-function openDistrictTheatreModal(theatreIndex) {
+function openDistrictTheatreModal(theatreIndex, districtName = null) {
   const theatre = theatresData[theatreIndex];
   if (!theatre) return;
 
@@ -917,6 +921,39 @@ function openDistrictTheatreModal(theatreIndex) {
   const select = document.getElementById('theatre-select');
   const selectGroup = select.closest('.form-group');
   const cancelBtn = document.getElementById('theatre-cancel-btn');
+  const prevBtn = document.getElementById('theatre-prev-btn');
+  const nextBtn = document.getElementById('theatre-next-btn');
+
+  // Set up district theatre navigation if we have a district name
+  if (districtName && districtsData) {
+    const district = districtsData.find(d => d.name === districtName);
+    if (district && district.theatres && district.theatres.length > 1) {
+      // Store the district's theatre indices
+      currentDistrictTheatres = district.theatres.map(name =>
+        theatresData.findIndex(t => t.name === name)
+      ).filter(idx => idx >= 0);
+
+      // Find current index within district theatres
+      currentDistrictTheatreIndex = currentDistrictTheatres.indexOf(theatreIndex);
+      if (currentDistrictTheatreIndex < 0) currentDistrictTheatreIndex = 0;
+
+      // Show navigation buttons
+      prevBtn.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    } else {
+      // Only one theatre in district, hide nav
+      currentDistrictTheatres = [];
+      currentDistrictTheatreIndex = 0;
+      prevBtn.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+    }
+  } else {
+    // Not opened from district, hide nav
+    currentDistrictTheatres = [];
+    currentDistrictTheatreIndex = 0;
+    prevBtn.classList.add('hidden');
+    nextBtn.classList.add('hidden');
+  }
 
   title.textContent = theatre.name;
   select.value = theatreIndex;
@@ -931,6 +968,42 @@ function openDistrictTheatreModal(theatreIndex) {
   cancelBtn.classList.add('hidden');
 
   modal.classList.remove('hidden');
+}
+
+// Navigate to previous theatre in district
+function navigateToPrevTheatre() {
+  if (currentDistrictTheatres.length === 0) return;
+
+  currentDistrictTheatreIndex--;
+  if (currentDistrictTheatreIndex < 0) {
+    currentDistrictTheatreIndex = currentDistrictTheatres.length - 1;
+  }
+
+  const theatreIndex = currentDistrictTheatres[currentDistrictTheatreIndex];
+  const theatre = theatresData[theatreIndex];
+  if (!theatre) return;
+
+  document.getElementById('theatre-modal-title').textContent = theatre.name;
+  document.getElementById('theatre-select').value = theatreIndex;
+  displayTheatre(theatreIndex);
+}
+
+// Navigate to next theatre in district
+function navigateToNextTheatre() {
+  if (currentDistrictTheatres.length === 0) return;
+
+  currentDistrictTheatreIndex++;
+  if (currentDistrictTheatreIndex >= currentDistrictTheatres.length) {
+    currentDistrictTheatreIndex = 0;
+  }
+
+  const theatreIndex = currentDistrictTheatres[currentDistrictTheatreIndex];
+  const theatre = theatresData[theatreIndex];
+  if (!theatre) return;
+
+  document.getElementById('theatre-modal-title').textContent = theatre.name;
+  document.getElementById('theatre-select').value = theatreIndex;
+  displayTheatre(theatreIndex);
 }
 
 // Render all markers on the map
@@ -1214,6 +1287,49 @@ function setupEventListeners() {
       document.getElementById('theatre-content').classList.add('hidden');
     }
   });
+
+  // Theatre navigation buttons
+  document.getElementById('theatre-prev-btn').addEventListener('click', navigateToPrevTheatre);
+  document.getElementById('theatre-next-btn').addEventListener('click', navigateToNextTheatre);
+
+  // Close modals on Escape key
+  document.addEventListener('keydown', handleEscapeKey);
+
+  // Close modals on background click
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', handleModalBackgroundClick);
+  });
+}
+
+// Handle Escape key to close modals
+function handleEscapeKey(e) {
+  if (e.key === 'Escape') {
+    closeAllModals();
+  }
+}
+
+// Handle clicking on modal background (outside modal content)
+function handleModalBackgroundClick(e) {
+  // Only close if clicking directly on the modal backdrop, not the content
+  if (e.target.classList.contains('modal')) {
+    closeAllModals();
+  }
+}
+
+// Close all open modals
+function closeAllModals() {
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.classList.add('hidden');
+  });
+
+  // Reset any forms
+  document.querySelectorAll('.modal form').forEach(form => {
+    form.reset();
+  });
+
+  // Clear theatre navigation state
+  currentDistrictTheatres = [];
+  currentDistrictTheatreIndex = 0;
 }
 
 // Update racket rule display

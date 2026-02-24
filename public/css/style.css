@@ -474,10 +474,39 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  gap: 12px;
 }
 
 .theatre-header h2 {
   margin-bottom: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.theatre-nav-btn {
+  background: #2a2a4e;
+  border: 1px solid #4a90d9;
+  color: #4a90d9;
+  font-size: 18px;
+  font-weight: bold;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.theatre-nav-btn:hover {
+  background: #4a90d9;
+  color: #fff;
+}
+
+.theatre-nav-btn.hidden {
+  display: none;
 }
 
 .modal-close {
@@ -488,10 +517,17 @@ body {
   cursor: pointer;
   padding: 0;
   line-height: 1;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .modal-close:hover {
   color: #e0e0e0;
+}
+
+/* When nav buttons are visible, close button doesn't need margin-left auto */
+.theatre-header .modal-close {
+  margin-left: 0;
 }
 
 .theatre-content {
