@@ -142,6 +142,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Fortifications racket in this district.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -151,7 +153,7 @@ export default {
           `,
           effects: [
             "The Defender retains their Fortifications.",
-            "The Defender may capture one surviving Attacker model (Attacker's choice). That fighter misses the next two battles.",
+            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
           ],
         },
         draw: {
