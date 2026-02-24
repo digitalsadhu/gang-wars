@@ -1,266 +1,99 @@
 // Campaign Missions - battle scenarios for Turf War operations
-// Each mission has objectives, rules, and campaign outcomes
+// Each mission is tied to a battle size and rewards a specific Racket type
+// 100pts = Covert Ops, 200pts = Tactical Raids, 500pts = All-Out Assault
 
 export default {
   title: "Underhive Operations",
   description: `
     When gangs clash in the underhive, the stakes are never merely survival.
-    Territory, resources, and reputation hang in the balance. These missions
-    represent the brutal operations that shape the gang war.
+    Territory, resources, and reputation hang in the balance. The mission you undertake determines what 
+    size battle you fight - from small covert teams to full-scale assaults.
   `,
 
   missionSelection: {
-    description: "When a Turf War operation results in a battle, the mission is determined by the operation type and circumstances:",
+    description: "When a Turf War operation results in a battle, the attacker chooses the mission:",
     rules: [
-      "The attacker (gang declaring the operation) chooses the mission unless specified otherwise.",
-      "If the defender has an Informant Network in the district, the defender chooses the mission instead.",
-      "Some operations specify which mission must be played.",
+      "The attacker chooses the mission based on what they want to achieve. Each mission has an associated battle size (100, 200, or 500 points).",
+      "A mission can only be chosen if the defender has the associated Racket in the district (e.g., Sabotage Run requires the defender to have Fortifications). Total War is the exception and can always be chosen.",
+      "Both gangs must field a roster matching the mission's battle size.",
+      "The attacker chooses the Theatre for the battle.",
+      "If the defender has an Informant Network in the district, OR if any gang in the defender's faction selected the Home Turf Advantage operation in this district this phase, the defender chooses the Theatre instead.",
+      "Winning a mission allows the attacker to take over the defender's associated Racket - it is removed from the defender and the attacker gains it in that district.",
     ],
   },
 
+  powerLevelRules: {
+    description: "Power Level changes when the attacker wins a battle:",
+    rules: [
+      "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+      "Then the attacker gains 1 Power Level in that district (maximum 4).",
+    ],
+  },
+
+  battleSizes: [
+    {
+      points: 100,
+      name: "Covert Operations",
+      description: `
+        Small strike teams of fighters sent on high-risk, high-reward
+        missions. Speed, stealth, and precision are essential - there's no
+        backup coming if things go wrong.
+      `,
+    },
+    {
+      points: 200,
+      name: "Tactical Raids",
+      description: `
+        Balanced strike forces conducting focused operations with clear
+        objectives. Enough fighters to hold ground, but not so many that
+        stealth is impossible.
+      `,
+    },
+    {
+      points: 500,
+      name: "All-Out Assault",
+      description: `
+        Major operations with full gang commitment. These are decisive battles
+        that can reshape the balance of power in a district. High stakes,
+        high casualties, high rewards.
+      `,
+    },
+  ],
+
   missions: [
     // =========================================================================
-    // SEIZE THE RACKET
-    // =========================================================================
-    {
-      id: "seize-racket",
-      name: "Seize the Racket",
-      flavourText: `
-        In the underhive, the strong take what they want. A rival faction's
-        racket has been identified, and your gang has been sent to claim it.
-        Strike fast, hold the ground, and the operation will be yours.
-      `,
-      operationType: "Turf War (when targeting a district with enemy Rackets)",
-      objectives: [
-        {
-          name: "Escalating Control",
-          type: "Progressive",
-          description: `
-            It is not enough to merely seize access to the racket. The longer
-            it is held, the greater your faction's claim over its profits.
-          `,
-          scoring: `
-            From the second round onwards, at the end of each player's
-            activation phase, that player scores 1VP for each objective marker
-            they control, and 2VP if they control more objective markers than
-            their opponent.
-          `,
-        },
-        {
-          name: "Secure the Prize",
-          type: "Progressive",
-          description: `
-            The primary objective represents the heart of the enemy's operation.
-            Control it when the dust settles, and the racket is yours.
-          `,
-          scoring: "At the end of round 4, the player controlling the primary objective marker scores 5VP.",
-        },
-      ],
-      missionRules: [
-        {
-          name: "Rapid Strike",
-          description: "The Attacker has the first turn.",
-        },
-        {
-          name: "Racket Assets",
-          description: `
-            At the end of deployment, the Defender places one primary objective
-            marker at the center of the battlefield and two secondary objective
-            markers anywhere on the battlefield more than 6" from deployment
-            zones and more than 6" from each other. For each Racket the
-            Defender's faction has in this district, they may give one objective
-            marker one of the following abilities (each marker may only have
-            one ability):
-          `,
-          subRules: [
-            {
-              name: "Stronghold Cache",
-              requirement: "Stronghold",
-              effect: `
-                Once per round, when a friendly unit within 3" of this marker
-                takes a Wound, roll a D6: on a 5+, that Wound is ignored.
-              `,
-            },
-            {
-              name: "Fighting Pit Veterans",
-              requirement: "Fighting Pit",
-              effect: `Units within 3" of this marker gain +1 to melee hit rolls.`,
-            },
-            {
-              name: "Fortified Position",
-              requirement: "Fortifications",
-              effect: `Units within 3" of this marker count as being in Heavy Cover.`,
-            },
-            {
-              name: "Informant Warning",
-              requirement: "Informant Network",
-              effect: `
-                Once per battle, the Defender may force the Attacker to re-roll
-                one hit roll made against a unit within 3" of this marker.
-              `,
-            },
-          ],
-        },
-        {
-          name: "Local Enforcers",
-          description: `
-            At the start of deployment, for each Power Level the Defender's
-            faction has in this district (up to 3), the Defender may deploy
-            one model from their gang within 3" of any objective marker,
-            ignoring normal deployment rules.
-          `,
-        },
-      ],
-      campaignOutcome: {
-        attackerWins: {
-          flavourText: `
-            With the racket seized, your faction moves quickly to install
-            loyal operatives. The former owners are driven out or put to work,
-            and the profits now flow to your cause.
-          `,
-          effects: [
-            "The Attacker selects one of the Defending faction's Rackets at this district (excluding Stronghold). That Racket is removed and the Attacking faction builds one Racket of the same type in its place.",
-            "If the Attacking faction's Power Level at this district is 2 or more, they may also build one additional Racket (excluding Stronghold) at this district.",
-            "Add 1 to the Attacking faction's Power Level at this district.",
-          ],
-        },
-        defenderWins: {
-          flavourText: `
-            The attackers have been driven back, their ambitions crushed against
-            the well-defended operation. Word spreads of the failed assault,
-            and rivals think twice before striking here again.
-          `,
-          effects: [
-            "The Defending faction may build one Fortifications at this district or a connected district.",
-            "If the Defending faction's Power Level at this district is 3 or more, they may build a Safe House instead.",
-            "Add 1 to the Defending faction's Power Level at this district.",
-          ],
-        },
-        draw: {
-          flavourText: "Neither side can claim clear victory. The battle has disrupted operations, but the status quo remains... for now.",
-          effects: [
-            "Add 1 to the Attacking faction's Power Level at this district.",
-          ],
-        },
-      },
-    },
-
-    // =========================================================================
-    // TURF WAR
-    // =========================================================================
-    {
-      id: "turf-war",
-      name: "Turf War",
-      flavourText: `
-        This is what it all comes down to: two gangs, one territory. Every
-        inch of ground is contested, every scrap of cover becomes a fortress.
-        When the fighting stops, only one faction will call this place home.
-      `,
-      operationType: "Turf War (standard)",
-      objectives: [
-        {
-          name: "Claim the Ground",
-          type: "Progressive",
-          description: "Territory is won meter by bloody meter. The more ground you hold, the stronger your claim becomes.",
-          scoring: "At the end of each round, score 2VP for each objective marker you control.",
-        },
-        {
-          name: "Break Their Will",
-          type: "Progressive",
-          description: "A gang that cannot hold its fighters cannot hold its turf. Casualties speak louder than words.",
-          scoring: "Score 1VP each time an enemy model is removed as a casualty. Score 2VP instead if it was a Hero or the enemy Leader.",
-        },
-      ],
-      missionRules: [
-        {
-          name: "Contested Ground",
-          description: `
-            Place three objective markers along the centerline of the
-            battlefield, each at least 8" from the others and from battlefield
-            edges.
-          `,
-        },
-        {
-          name: "Home Advantage",
-          description: "The player whose faction has higher Power Level in this district may choose their deployment zone. If tied, roll off.",
-        },
-        {
-          name: "Reinforcement Lines",
-          description: `
-            At the start of round 3, each player may return one previously
-            destroyed basic fighter (not Hero) to the battlefield, deploying
-            within 3" of their deployment zone edge.
-          `,
-        },
-        {
-          name: "Fight to the Last",
-          description: "Morale tests are only required when a gang has lost more than half its starting models (instead of the normal threshold).",
-        },
-      ],
-      campaignOutcome: {
-        attackerWins: {
-          flavourText: `
-            The defenders break and scatter into the depths. Your gang plants
-            its banner in the blood-soaked rubble, claiming this turf for your
-            faction.
-          `,
-          effects: [
-            "Add 1 to the Attacking faction's Power Level at this district.",
-            "If the Defending faction's Power Level at this district would drop to 0, they must relocate one of their Rackets here to a connected district where they have Power Level 1+, or it is destroyed.",
-          ],
-        },
-        defenderWins: {
-          flavourText: `
-            The invaders are repelled, their bodies left as a warning to others.
-            This territory remains firmly in your faction's grip.
-          `,
-          effects: [
-            "Add 1 to the Defending faction's Power Level at this district.",
-            "The Defending faction may immediately relocate one gang from a connected district to this district at no cost.",
-          ],
-        },
-        draw: {
-          flavourText: "Both gangs withdraw to lick their wounds. The border remains disputed, the conflict unresolved.",
-          effects: [
-            "No Power Level changes occur.",
-            "Both factions' gangs that participated must rest and cannot be selected for operations in the next Campaign Phase.",
-          ],
-        },
-      },
-    },
-
-    // =========================================================================
-    // SABOTAGE RUN
+    // 100 POINTS - COVERT OPERATIONS
     // =========================================================================
     {
       id: "sabotage-run",
       name: "Sabotage Run",
+      battleSize: 100,
+      racketReward: "Fortifications",
       flavourText: `
-        Sometimes the best way to hurt a rival isn't to fight their gangers -
-        it's to burn what they've built. Your gang has infiltrated enemy
-        territory with one goal: leave nothing but ashes and broken machinery
-        behind.
+        A small demolition team infiltrates enemy territory to destroy
+        defensive emplacements. Plant the charges, get out alive, and watch
+        their carefully constructed defenses crumble.
       `,
-      operationType: "Sabotage",
       objectives: [
         {
           name: "Plant the Charges",
           type: "Progressive",
-          description: "Each piece of infrastructure must be rigged for destruction. Work fast before the defenders can respond.",
+          description: "Each defensive position must be rigged for destruction.",
           scoring: `
-            A model in base contact with an objective marker may spend an action
-            to 'rig' it. Once rigged, the Attacker scores 3VP. A rigged marker
-            cannot be rigged again.
+            A model in base contact with an objective marker may spend an
+            action to 'rig' it. Once rigged, the Attacker scores 3VP. A rigged
+            marker cannot be rigged again.
           `,
         },
         {
-          name: "Detonate and Escape",
+          name: "Clean Extraction",
           type: "End Game",
           description: "The charges are set - now get out before everything blows.",
           scoring: `
             At the end of round 4, the Attacker scores 2VP for each of their
-            models wholly within their deployment zone and 3VP for each rigged
-            objective marker still on the battlefield.
+            models that exits via their deployment zone edge. Models still on
+            the battlefield score 1VP each if within 6" of their deployment
+            zone edge.
           `,
         },
       ],
@@ -274,257 +107,247 @@ export default {
           `,
         },
         {
-          name: "Sabotage Targets",
+          name: "Skeleton Crew",
           description: `
-            The Defender places one objective marker for each Racket their
-            faction has in this district (minimum 2, maximum 4). Markers must
-            be placed more than 6" from each other and more than 3" from
-            battlefield edges.
+            The Defender deploys only 50pts of models initially. At the start
+            of round 2, the remaining models arrive as reinforcements within
+            3" of any battlefield edge.
           `,
         },
         {
-          name: "Alarm Raised",
+          name: "Demolition Targets",
           description: `
-            At the start of round 2, the Defender receives reinforcements:
-            they may deploy up to 3 basic fighters (total value up to 50pts)
-            within 3" of any battlefield edge.
+            The Defender places 3 objective markers representing defensive
+            structures. Markers must be placed more than 6" from each other
+            and more than 6" from the Attacker's deployment zone.
           `,
         },
         {
           name: "Explosive Charges",
           description: `
-            If a rigged objective marker is within 3" of a model when the
-            battle ends, that model's controlling player rolls a D6. On a 1-2,
-            the model is removed as a casualty.
+            At the end of the battle, each rigged objective marker explodes.
+            Any model within 3" of a rigged marker must pass a Quality test
+            or be removed as a casualty.
           `,
         },
       ],
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            The explosions echo through the hab-stacks as the enemy's carefully
-            built infrastructure crumbles. Months of work, gone in moments.
-            Your faction's message is clear.
+            The explosions echo through the hab-stacks as defensive positions
+            crumble. The enemy's fortifications are nothing but rubble now.
           `,
           effects: [
-            "For each rigged objective marker at the end of the battle, the Attacking player selects one of the Defending faction's Rackets at this district. Roll D6: on a 3+, that Racket is destroyed.",
-            "Reduce the Defending faction's Power Level at this district by 1 (minimum 0).",
+            "The Attacker takes over the Defender's Fortifications racket in this district.",
           ],
         },
         defenderWins: {
           flavourText: `
-            The saboteurs are caught and dealt with before they can complete
-            their mission. Your faction's infrastructure stands, and the failed
-            attackers serve as a grim example.
+            The saboteurs are caught before they can complete their mission.
+            The defenses stand, and the attackers pay the price for failure.
           `,
           effects: [
-            "The Defending faction captures one enemy fighter (Attacker's choice, excluding Leader). That fighter misses the next two battles while imprisoned.",
-            "The Defending faction may build one Informant Network at this district for free (if they don't already have one).",
+            "The Defender may capture one surviving Attacker model (Attacker's choice). That fighter misses the next two battles.",
+            "Add 1 to the Defending faction's Power Level at this district.",
           ],
         },
         draw: {
-          flavourText: "Some charges detonate, others are defused. Both sides retreat as the dust settles on a half-destroyed operation.",
+          flavourText: "Some charges detonate, others are defused. The damage is done, but not decisively.",
           effects: [
-            "The Defender must select one of their Rackets at this district. Roll D6: on a 4+, it is destroyed.",
+            "The Defender retains their Fortifications, but roll D6: on 4+, it is destroyed.",
+            "No Power Level changes occur.",
           ],
         },
       },
     },
 
-    // =========================================================================
-    // EXTRACTION
-    // =========================================================================
     {
-      id: "extraction",
-      name: "Extraction",
+      id: "flip-the-asset",
+      name: "Flip the Asset",
+      battleSize: 100,
+      racketReward: "Informant Network",
       flavourText: `
-        Intelligence reports indicate a high-value target is being held in
-        enemy territory - perhaps a captured ally, a vital informant, or stolen
-        data-slates. Your gang must get in, secure the asset, and get out.
+        Intelligence reports indicate a double agent is ready to defect -
+        but the enemy knows too. Both sides race to reach the informant
+        first. Whoever secures them gains invaluable intelligence.
       `,
-      operationType: "Special Operation",
       objectives: [
         {
-          name: "Secure the Asset",
+          name: "Secure the Informant",
           type: "Progressive",
-          description: "The target must be located and secured before extraction can begin.",
+          description: "The informant will join whoever reaches them first.",
           scoring: `
-            A model in base contact with the primary objective may spend an
-            action to 'secure' the asset. Once secured, the asset moves with
-            that model (if the model is removed, the asset is dropped in place).
-            The Attacker scores 5VP when the asset is first secured.
+            The first model to move into base contact with the Informant
+            'secures' them - that player scores 5VP immediately. The Informant
+            then moves with that model (4" movement, no actions).
           `,
         },
         {
-          name: "Extract",
+          name: "Extract the Asset",
           type: "End Game",
-          description: "Getting the asset is only half the battle. Now you have to get it home.",
+          description: "Getting the informant is only half the battle.",
           scoring: `
-            If the asset is carried off the Attacker's deployment zone edge,
-            the Attacker scores 10VP. If the battle ends with the asset still
-            on the battlefield, the player whose model is carrying it (or
-            closest to it if dropped) scores 5VP.
+            If the Informant is carried off a player's deployment zone edge,
+            that player scores 8VP. If the model carrying the Informant is
+            killed, the Informant is 'dropped' and can be secured again by
+            any model moving into base contact.
           `,
         },
       ],
       missionRules: [
         {
-          name: "Hidden Asset",
+          name: "The Informant",
           description: `
-            The Defender places three decoy markers and one asset marker
-            (face-down so the Attacker cannot tell them apart) anywhere on
-            the battlefield more than 9" from the Attacker's deployment zone.
-            When an Attacker model moves within 3", flip the marker - decoys
-            are removed, the asset marker becomes the objective.
+            Place a neutral 'Informant' model at the center of the battlefield.
+            The Informant cannot be targeted by attacks until secured. Once
+            secured, the Informant can be targeted normally - if reduced to
+            0 wounds, both players lose (the asset is dead).
           `,
         },
         {
-          name: "High Alert",
-          description: "Defender models gain +1 to hit rolls when shooting at models carrying the asset.",
-        },
-        {
-          name: "Desperate Measures",
+          name: "Covert Approach",
           description: `
-            If the asset is secured by round 3, the Defender may immediately
-            activate one Hero that has already activated this round.
+            Both players deploy within 6" of opposite battlefield edges.
+            All models gain Stealth until they make an attack or secure
+            the Informant.
           `,
         },
         {
           name: "Valuable Cargo",
           description: `
-            The model carrying the asset reduces their movement by 2" but
-            cannot be targeted by abilities that would instantly remove them
-            from play.
+            A model carrying the Informant reduces their movement by 2" but
+            gains +1 to Defense rolls (using the Informant as a human shield).
+          `,
+        },
+        {
+          name: "Time Pressure",
+          description: `
+            The battle lasts only 3 rounds. At the end of round 3, if the
+            Informant has not been extracted, the player whose model is
+            closest to the Informant scores 3VP.
           `,
         },
       ],
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            The asset is secured and spirited away to safety. Whether a rescued
-            ally or stolen intelligence, your faction gains a significant
-            advantage.
+            The informant is secured and spirited away. Their knowledge of
+            enemy movements and plans will prove invaluable in battles to come.
           `,
           effects: [
-            "If the extracted asset was a captured friendly fighter, that fighter is returned to the gang roster.",
-            "The Attacking faction gains one of the following (Attacker's choice): Build one Informant Network for free at any district where they have Power Level 1+, OR one Attacking gang may recruit a Hero (up to 50pts) for free.",
-            "Add 1 to the Attacking faction's Power Level at this district.",
+            "The Attacker takes over the Defender's Informant Network racket in this district.",
           ],
         },
         defenderWins: {
           flavourText: `
-            The would-be rescuers are driven off empty-handed. The asset
-            remains secure, and the failed extraction reveals just how far
-            your enemies will go.
+            The informant is recovered - and will be made an example of.
+            The enemy's intelligence network in this district is compromised.
           `,
           effects: [
-            "The Defending faction may execute the asset if it was a captured enemy fighter (remove them from the enemy gang roster permanently) OR ransom them back for one free Racket.",
+            "If the Attacker has an Informant Network in this or any adjacent district, it is destroyed.",
             "Add 1 to the Defending faction's Power Level at this district.",
           ],
         },
         draw: {
-          flavourText: `
-            The chaos of battle leaves the asset's fate uncertain. It may have
-            escaped in the confusion, or lies hidden somewhere in the debris.
-          `,
+          flavourText: "The informant escapes in the chaos, their loyalties and location now unknown.",
           effects: [
-            "The asset is lost - no faction benefits.",
-            "Both gangs that participated may recruit one basic fighter (up to 30pts) for free, representing scavengers who joined during the confusion.",
+            "The Defender retains their Informant Network.",
+            "Both gangs that participated may not use Informant Network benefits in the next Campaign Phase.",
           ],
         },
       },
     },
 
-    // =========================================================================
-    // AMBUSH
-    // =========================================================================
     {
-      id: "ambush",
-      name: "Ambush",
+      id: "dead-drop",
+      name: "Dead Drop",
+      battleSize: 100,
+      racketReward: "Safe House",
       flavourText: `
-        Your scouts have tracked an enemy gang moving through the district.
-        The route is known, the kill-zone selected. All that remains is to
-        spring the trap and leave no survivors.
+        A hidden cache has been located - supplies, weapons, and a secure
+        bolt-hole for operations. But which of the three locations is real?
+        Find it before the enemy, and secure a vital safe house.
       `,
-      operationType: "Ambush (requires Smuggling Route or Informant Network)",
       objectives: [
         {
-          name: "Spring the Trap",
-          type: "Immediate",
-          description: "The first moments of an ambush determine its success. Strike hard and fast.",
-          scoring: "At the end of round 1, the Attacker scores 3VP for each enemy model removed as a casualty.",
+          name: "Search the Locations",
+          type: "Progressive",
+          description: "Only one cache is real. The others are decoys or traps.",
+          scoring: `
+            When a model moves into base contact with a face-down objective
+            marker, flip it. Decoys are removed (score 1VP for eliminating
+            possibilities). The real cache is revealed - that player scores
+            5VP immediately.
+          `,
         },
         {
-          name: "No Witnesses",
-          type: "Progressive",
-          description: "An ambush fails if word gets out. No one can be allowed to escape.",
+          name: "Secure the Cache",
+          type: "End Game",
+          description: "Once found, the cache must be held against all comers.",
           scoring: `
-            Score 2VP for each enemy model removed after round 1. The Defender
-            scores 5VP for each of their models that exits via the Attacker's
-            deployment zone edge.
+            At the end of round 4, the player controlling the revealed cache
+            (model within 3", no enemy models within 3") scores 6VP.
           `,
         },
       ],
       missionRules: [
         {
-          name: "Kill Zone",
+          name: "Hidden Caches",
           description: `
-            The battlefield should have a clear 'path' through the center
-            (road, tunnel, corridor). The Defender deploys their entire gang
-            along this path, with all models within 6" of the centerline.
+            The Defender places 3 face-down objective markers (one real cache,
+            two decoys) anywhere on the battlefield more than 9" from either
+            deployment zone and more than 6" from each other. The Defender
+            secretly notes which is the real cache.
           `,
         },
         {
-          name: "Concealed Positions",
+          name: "Booby Traps",
           description: `
-            The Attacker deploys after the Defender, with models placed
-            anywhere more than 9" from enemy models. Attacker models count
-            as having Cover until they make their first attack.
+            When a decoy is revealed, roll D6. On a 1-2, it's booby-trapped:
+            the model that revealed it takes a hit with AP(1).
           `,
         },
         {
-          name: "Caught Off Guard",
-          description: "In round 1, Defender models suffer -1 to hit rolls and cannot use Ambush or Overwatch abilities.",
+          name: "Small Teams",
+          description: `
+            Both players deploy within 6" of opposite battlefield corners
+            (diagonally opposite). The small battlefield and scattered
+            objectives reward splitting forces.
+          `,
         },
         {
-          name: "Fighting Retreat",
+          name: "Desperate Search",
           description: `
-            From round 2 onwards, Defender models may move an additional 2"
-            when taking a movement action toward the Attacker's deployment
-            zone edge.
+            Models may spend an action to 'search' while in base contact with
+            an unrevealed marker, allowing them to flip it without ending
+            their activation.
           `,
         },
       ],
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            The ambush is devastatingly successful. The enemy gang is gutted,
-            their presence in this district shattered. Word of the massacre
-            spreads, and your faction's reputation for brutality grows.
+            The safe house is yours. A hidden bolt-hole where your gang can
+            lie low, store supplies, and escape the consequences of failure.
           `,
           effects: [
-            "The Defending gang loses D3 random fighters permanently (removed from roster).",
-            "Reduce the Defending faction's Power Level at this district by 1.",
-            "Add 1 to the Attacking faction's Power Level at this district.",
-            "The Attacking faction may build one Toll Gate at this district for free.",
+            "The Attacker takes over the Defender's Safe House racket in this district.",
           ],
         },
         defenderWins: {
           flavourText: `
-            Against all odds, the ambushed gang fights free, turning the tables
-            on their would-be executioners. Tales of their survival against
-            impossible odds inspire the faction.
+            The cache remains in friendly hands. The enemy's search was for
+            nothing, and your faction's hidden resources stay hidden.
           `,
           effects: [
-            "Any Defending fighters that survived the battle may gain one free advancement.",
-            "The Attacking faction's Smuggling Route or Informant Network used to enable this ambush is destroyed (enemy spies have been rooted out).",
+            "The Defender's Safe House cannot be destroyed by any means during the next Campaign Phase.",
             "Add 1 to the Defending faction's Power Level at this district.",
           ],
         },
         draw: {
-          flavourText: "The ambush descends into a chaotic running battle. Both sides take losses, but neither achieves their objective.",
+          flavourText: "Both sides withdraw, the cache's true location still contested.",
           effects: [
-            "Both gangs lose one random basic fighter permanently.",
+            "The Defender retains their Safe House.",
             "No Power Level changes occur.",
           ],
         },
@@ -532,113 +355,519 @@ export default {
     },
 
     // =========================================================================
-    // HOLD THE LINE
+    // 200 POINTS - TACTICAL RAIDS
     // =========================================================================
     {
-      id: "hold-the-line",
-      name: "Hold the Line",
+      id: "run-the-gauntlet",
+      name: "Run the Gauntlet",
+      battleSize: 200,
+      racketReward: "Smuggling Route",
       flavourText: `
-        They're coming, and they're coming in force. Your gang has been tasked
-        with holding this position at all costs. Reinforcements are on the way -
-        but they won't arrive in time if you break now.
+        A smuggling corridor runs through this district - whoever controls
+        the checkpoints controls the flow of contraband. Seize all three
+        positions simultaneously to claim the route.
       `,
-      operationType: "Defense (when Defending against Turf War with Fortifications)",
       objectives: [
         {
-          name: "Stand Firm",
+          name: "Secure the Checkpoints",
           type: "Progressive",
-          description: "Every round you hold is another round for reinforcements to arrive and for the enemy's morale to crack.",
+          description: "Each checkpoint must be held to control the route.",
           scoring: `
-            At the end of each round, the Defender scores VP equal to the
-            current round number if they control the primary objective
-            (1VP round 1, 2VP round 2, etc.).
+            At the end of each round (starting round 2), score 1VP for each
+            objective marker you control. Score 3VP bonus if you control
+            all three simultaneously.
           `,
         },
         {
-          name: "Bleed Them Dry",
-          type: "Progressive",
-          description: "Make them pay for every inch. The more they lose taking this position, the weaker they'll be even if they win.",
+          name: "Lock Down the Route",
+          type: "End Game",
+          description: "Total control means total profit.",
           scoring: `
-            The Defender scores 1VP each time an Attacker model is removed
-            as a casualty within 6" of the primary objective.
+            At the end of round 4, score 5VP if you control all three
+            objective markers. Score 2VP if you control more markers than
+            your opponent.
           `,
         },
       ],
       missionRules: [
         {
-          name: "Fortified Position",
+          name: "The Corridor",
           description: `
-            The Defender places one primary objective marker in the center
-            of their deployment zone. All terrain within 6" of this marker
-            counts as Heavy Cover for Defender models.
+            Place three objective markers in a line down the center of the
+            battlefield, each 12" apart. These represent the smuggling
+            checkpoints. Terrain should create a 'corridor' feel with
+            approaches from both sides.
           `,
         },
         {
-          name: "Defensive Preparations",
+          name: "Running Battle",
           description: `
-            Before the battle, the Defender may place up to 3 barricade terrain
-            pieces within 9" of the primary objective. Enemy models treat these
-            barricades as difficult terrain.
+            Players deploy within 9" of opposite long battlefield edges.
+            The battle is fought across the width of the table rather than
+            the length.
           `,
         },
         {
-          name: "Human Wave",
+          name: "Contested Ground",
           description: `
-            The Attacker receives reinforcements. At the start of rounds 2, 3,
-            and 4, the Attacker may deploy one basic fighter (up to 30pts)
-            within 3" of any battlefield edge in their half.
+            An objective marker is only controlled if you have a model within
+            3" and no enemy models within 3". Contested markers are not
+            controlled by either player.
           `,
         },
         {
-          name: "Relief Force",
+          name: "Reinforcement Tunnels",
           description: `
-            If the Defender still controls the primary objective at the start
-            of round 4, they receive reinforcements: deploy up to 50pts of
-            models within 3" of any battlefield edge in their half.
-          `,
-        },
-        {
-          name: "Victory or Death",
-          description: `
-            Defender models within 6" of the primary objective automatically
-            pass Morale tests.
+            Once per battle, each player may remove a model within 3" of an
+            objective marker they control and immediately place it within
+            3" of a different objective marker (at least 1" from enemies).
           `,
         },
       ],
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            The defensive line crumbles. Your gang surges over the barricades,
-            driving the defenders into the depths. This district belongs to
-            you now.
+            The smuggling route is yours. Contraband, weapons, and fighters
+            can now move freely through this district under your control.
           `,
           effects: [
-            "Destroy one of the Defending faction's Fortifications at this district.",
-            "Add 2 to the Attacking faction's Power Level at this district.",
-            "Reduce the Defending faction's Power Level at this district by 1.",
+            "The Attacker takes over the Defender's Smuggling Route racket in this district.",
           ],
         },
         defenderWins: {
           flavourText: `
-            The line holds. Wave after wave breaks against your defenses, and
-            when the dust settles, the enemy retreats in disarray. Your faction's
-            grip on this district is unshakeable.
+            The smuggling route remains secure. The attackers are driven off,
+            and your faction's supply lines continue uninterrupted.
           `,
           effects: [
-            "The Defending faction's Fortifications at this district cannot be destroyed by any means during the next Campaign Phase.",
+            "The Defender retains their Smuggling Route and may immediately move one gang from an adjacent district to this district for free.",
             "Add 1 to the Defending faction's Power Level at this district.",
-            "The Attacking gang that participated cannot be selected for Turf War operations in the next Campaign Phase.",
           ],
         },
         draw: {
+          flavourText: "The checkpoints change hands multiple times. Neither side can claim clear control.",
+          effects: [
+            "The Defender retains their Smuggling Route.",
+            "Both factions' gangs in this district may not use Relocate operations next Campaign Phase (routes are too contested).",
+          ],
+        },
+      },
+    },
+
+    {
+      id: "blood-sport",
+      name: "Blood Sport",
+      battleSize: 200,
+      racketReward: "Fighting Pit",
+      flavourText: `
+        An underground fighting ring operates in this district. Take over
+        the pit by killing the Pit Boss and proving your gang's dominance
+        in brutal close-quarters combat.
+      `,
+      objectives: [
+        {
+          name: "Kill the Pit Boss",
+          type: "Immediate",
+          description: "The Pit Boss controls the venue. Kill them and take over.",
+          scoring: `
+            A neutral 'Pit Boss' model starts in the center of the pit.
+            The player who removes the Pit Boss as a casualty scores 6VP
+            immediately. The Pit Boss activates at the end of each round,
+            attacking the nearest model.
+          `,
+        },
+        {
+          name: "Dominate the Pit",
+          type: "Progressive",
+          description: "The crowd respects only strength. Prove yours.",
+          scoring: `
+            At the end of each round, score 2VP if you have more models
+            within 6" of the pit center than your opponent. Score 1VP for
+            each enemy model killed inside the pit.
+          `,
+        },
+      ],
+      missionRules: [
+        {
+          name: "The Pit",
+          description: `
+            The center of the battlefield is a sunken fighting pit (6" radius
+            circle). Models in the pit cannot draw line of sight to models
+            outside the pit and vice versa. The pit edge is difficult terrain.
+          `,
+        },
+        {
+          name: "The Pit Boss",
+          description: `
+            The Pit Boss is a Q4+ model with 3 wounds, Tough(3), and a
+            brutal melee weapon (A3, AP(1)). They are hostile to all gangs.
+            At the end of each round, the Pit Boss charges the nearest model
+            within 12" (or moves toward the nearest model if none in range).
+          `,
+        },
+        {
+          name: "Thrown into the Pit",
+          description: `
+            A model that wins melee against an enemy within 3" of the pit
+            edge may push them into the pit instead of dealing damage.
+            The pushed model takes a hit with AP(0) from the fall.
+          `,
+        },
+        {
+          name: "Crowd Favorite",
+          description: `
+            Models in the pit gain +1 to hit in melee. Models outside the
+            pit suffer -1 to hit when shooting at models inside the pit
+            (crowd interference).
+          `,
+        },
+      ],
+      campaignOutcome: {
+        attackerWins: {
           flavourText: `
-            The attackers are repelled, but just barely. The defensive line is
-            battered and will need significant repairs before it can withstand
-            another assault.
+            The Pit Boss falls, and your gang claims the fighting ring. Fresh
+            recruits, hardened by the pit, will flock to your banner.
           `,
           effects: [
-            "The Defending faction's Fortifications at this district are damaged: they provide no benefit in the next Campaign Phase but are not destroyed.",
+            "The Attacker takes over the Defender's Fighting Pit racket in this district.",
+            "The Attacker may immediately recruit one basic fighter (up to 30pts) for free.",
+          ],
+        },
+        defenderWins: {
+          flavourText: `
+            The attackers are thrown into the pit and torn apart by its
+            defenders. The Fighting Pit remains under your faction's control.
+          `,
+          effects: [
+            "The Defender may execute one captured Attacker model (if any were captured) in the pit for a free advancement on any Hero.",
             "Add 1 to the Defending faction's Power Level at this district.",
+          ],
+        },
+        draw: {
+          flavourText: "Both gangs retreat battered and bloody, neither able to claim the pit.",
+          effects: [
+            "The Defender retains their Fighting Pit.",
+            "No Power Level changes occur.",
+          ],
+        },
+      },
+    },
+
+    // =========================================================================
+    // 500 POINTS - ALL-OUT ASSAULT
+    // =========================================================================
+    {
+      id: "chokepoint",
+      name: "Chokepoint",
+      battleSize: 500,
+      racketReward: "Toll Gate",
+      flavourText: `
+        A critical passage between districts - whoever controls this crossing
+        controls all movement through the area. The defenders have fortified
+        heavily. The attackers must break through at any cost.
+      `,
+      objectives: [
+        {
+          name: "Break the Line",
+          type: "Progressive",
+          description: "The defensive line must be breached before the gate can be seized.",
+          scoring: `
+            The battlefield is divided into three zones: Attacker's zone,
+            No-Man's Land, and Defender's zone. At the end of each round,
+            the Attacker scores 2VP for each model in the Defender's zone.
+            The Defender scores 1VP for each model in their own zone.
+          `,
+        },
+        {
+          name: "Seize the Gate",
+          type: "End Game",
+          description: "The toll gate itself is the prize.",
+          scoring: `
+            An objective marker represents the Toll Gate in the center of
+            the Defender's zone. At the end of round 4, the player controlling
+            the gate scores 8VP. If contested, no one scores.
+          `,
+        },
+      ],
+      missionRules: [
+        {
+          name: "Fortified Crossing",
+          description: `
+            The Defender places the Toll Gate objective in the center of
+            their deployment zone (the back third of the table). They may
+            place up to 4 barricade terrain pieces anywhere in No-Man's Land
+            or their deployment zone.
+          `,
+        },
+        {
+          name: "Numerical Superiority",
+          description: `
+            The Attacker has committed everything to this assault. The
+            Attacker may field 550pts instead of 500pts.
+          `,
+        },
+        {
+          name: "Defensive Positions",
+          description: `
+            Defender models wholly within their deployment zone gain +1 to
+            Defense rolls during rounds 1 and 2.
+          `,
+        },
+        {
+          name: "Grinding Assault",
+          description: `
+            This battle lasts 5 rounds instead of 4. Reinforcements matter:
+            at the start of round 3, both players may deploy up to 50pts of
+            previously destroyed basic fighters within 3" of their deployment
+            zone edge.
+          `,
+        },
+        {
+          name: "No Retreat",
+          description: `
+            Neither side can afford to give ground. Models automatically pass
+            Morale tests while within their own deployment zone.
+          `,
+        },
+      ],
+      campaignOutcome: {
+        attackerWins: {
+          flavourText: `
+            The defensive line crumbles. Your gang surges through the
+            chokepoint, claiming control of all traffic through this corridor.
+          `,
+          effects: [
+            "The Attacker takes over the Defender's Toll Gate racket in this district.",
+          ],
+        },
+        defenderWins: {
+          flavourText: `
+            The assault breaks against your fortifications. The chokepoint
+            holds, and the enemy retreats leaving their dead behind.
+          `,
+          effects: [
+            "The Defender retains their Toll Gate, and it cannot be destroyed by any means next Campaign Phase.",
+            "The Attacking gang that participated cannot declare Turf War operations next Campaign Phase.",
+            "Add 1 to the Defending faction's Power Level at this district.",
+          ],
+        },
+        draw: {
+          flavourText: "The battle grinds to a stalemate. The chokepoint remains contested.",
+          effects: [
+            "The Defender retains their Toll Gate.",
+            "Both factions reduce their Power Level in this district by 1 (casualties and exhaustion).",
+          ],
+        },
+      },
+    },
+
+    {
+      id: "storm-the-gates",
+      name: "Storm the Gates",
+      battleSize: 500,
+      racketReward: "Stronghold",
+      flavourText: `
+        A full-scale assault on a faction's seat of power. The defenders
+        fight for everything they've built. The attackers seek to tear it
+        all down. This is the endgame.
+      `,
+      objectives: [
+        {
+          name: "Breach the Defenses",
+          type: "Progressive",
+          description: "The Stronghold has multiple defensive layers.",
+          scoring: `
+            Three objective markers are placed in a line leading to the
+            Stronghold (Outer Gate, Inner Courtyard, Command Center). The
+            Attacker scores 3VP the first time they control each marker.
+            Markers must be captured in order.
+          `,
+        },
+        {
+          name: "Take the Stronghold",
+          type: "End Game",
+          description: "The Command Center is the heart of enemy operations.",
+          scoring: `
+            At the end of round 4, the player controlling the Command Center
+            marker scores 10VP. The Defender scores 5VP if no markers have
+            been captured.
+          `,
+        },
+      ],
+      missionRules: [
+        {
+          name: "Fortified Stronghold",
+          description: `
+            The Defender places their Stronghold terrain in the center of
+            their deployment zone. The Command Center marker is placed inside.
+            The Inner Courtyard marker is placed 6" in front of it. The Outer
+            Gate marker is placed at the edge of the Defender's deployment zone.
+          `,
+        },
+        {
+          name: "Layered Defense",
+          description: `
+            Each objective marker provides benefits while controlled by the
+            Defender: Outer Gate - models within 6" gain Heavy Cover. Inner
+            Courtyard - models within 6" gain +1 to hit. Command Center -
+            models within 6" automatically pass Morale tests.
+          `,
+        },
+        {
+          name: "All In",
+          description: `
+            Both sides have committed everything. This battle lasts 5 rounds.
+            No models may voluntarily leave the battlefield.
+          `,
+        },
+        {
+          name: "Desperate Defense",
+          description: `
+            When the Defender loses control of an objective marker, they may
+            immediately activate one Hero that has already activated this round.
+          `,
+        },
+        {
+          name: "Total Commitment",
+          description: `
+            The Attacker fields their entire available roster. The Defender
+            may exceed 500pts by up to 50pts (defensive preparations).
+          `,
+        },
+      ],
+      campaignOutcome: {
+        attackerWins: {
+          flavourText: `
+            The Stronghold falls. Your gang plants their banner in the
+            smoldering ruins of enemy command. Their power in this district
+            is broken utterly.
+          `,
+          effects: [
+            "The Attacker takes over the Defender's Stronghold racket in this district.",
+            "Destroy all other Defender Rackets in this district.",
+          ],
+        },
+        defenderWins: {
+          flavourText: `
+            The assault is repelled. Your Stronghold stands bloodied but
+            unbroken, a testament to your faction's strength.
+          `,
+          effects: [
+            "The Defender retains their Stronghold.",
+            "The Attacker's Leader is captured (misses next 2 Campaign Phases) OR the Attacker loses D3 random fighters permanently.",
+            "Add 2 to the Defending faction's Power Level at this district.",
+            "The Attacking faction cannot declare any operations against this district for 2 Campaign Phases.",
+          ],
+        },
+        draw: {
+          flavourText: "The battle rages to exhaustion. The Stronghold stands, but barely.",
+          effects: [
+            "The Defender retains their Stronghold, but it is damaged - they lose all Stronghold benefits next Campaign Phase.",
+            "Both factions reduce their Power Level in this district by 1.",
+          ],
+        },
+      },
+    },
+
+    {
+      id: "total-war",
+      name: "Total War",
+      battleSize: 500,
+      racketReward: null,
+      flavourText: `
+        No objectives. No tricks. This is a battle of annihilation - drive
+        the enemy from this district entirely, or be driven out yourself.
+        Only one faction walks away.
+      `,
+      objectives: [
+        {
+          name: "Annihilation",
+          type: "Progressive",
+          description: "Every enemy fighter removed is a step toward total victory.",
+          scoring: `
+            Score 1VP for each enemy model removed as a casualty. Score 2VP
+            instead for Heroes and 3VP for the enemy Leader.
+          `,
+        },
+        {
+          name: "Break Their Spirit",
+          type: "End Game",
+          description: "When a gang breaks, they lose everything.",
+          scoring: `
+            If one gang is completely wiped out or voluntarily retreats
+            (removes all remaining models), the other player scores 10VP.
+            At the end of round 4, the player with more surviving models
+            scores 5VP.
+          `,
+        },
+      ],
+      missionRules: [
+        {
+          name: "No Quarter",
+          description: `
+            This is a fight to the death. There are no objective markers.
+            Deployment zones are 12" from opposite battlefield edges.
+          `,
+        },
+        {
+          name: "Fighting Retreat",
+          description: `
+            At the start of any round after round 2, a player may declare
+            a retreat. All their remaining models are removed from the
+            battlefield. These models count as casualties for VP purposes
+            but do not roll on injury tables.
+          `,
+        },
+        {
+          name: "Committed Forces",
+          description: `
+            Both sides have committed everything. No reinforcements. No
+            reserves. What you deploy is what you have.
+          `,
+        },
+        {
+          name: "Blood Frenzy",
+          description: `
+            From round 3 onwards, all models gain +1 to hit in melee.
+            The battle grows more desperate as it continues.
+          `,
+        },
+        {
+          name: "Decisive Battle",
+          description: `
+            This battle lasts until one side is wiped out, retreats, or
+            5 rounds have passed, whichever comes first.
+          `,
+        },
+      ],
+      campaignOutcome: {
+        attackerWins: {
+          flavourText: `
+            Total victory. The defenders are broken, scattered, driven into
+            the depths. This district belongs to your faction now.
+          `,
+          effects: [
+            "Destroy all Defender Rackets in this district.",
+            "The Defending gang must relocate to an adjacent district.",
+          ],
+        },
+        defenderWins: {
+          flavourText: `
+            The assault is crushed utterly. The attackers retreat in disarray,
+            their ambitions in this district shattered for the foreseeable future.
+          `,
+          effects: [
+            "Reduce the Attacking faction's Power Level in this district by 2 (minimum 0).",
+            "The Attacking gang cannot declare Turf War operations against this district for 2 Campaign Phases.",
+            "Add 1 to the Defending faction's Power Level at this district.",
+          ],
+        },
+        draw: {
+          flavourText: "Both sides are bled white. The battle solves nothing, but at terrible cost.",
+          effects: [
+            "Both factions reduce their Power Level in this district by 1.",
+            "Both gangs that participated lose D3 random fighters permanently.",
+            "Neither gang may be selected for operations next Campaign Phase (recovering).",
           ],
         },
       },

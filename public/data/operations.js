@@ -36,8 +36,8 @@ export default {
       name: "Home Turf Advantage",
       type: "common",
       description: `
-        For this phase, each time this gang's faction is attacked on this district
-        or one connected to it, the player from this faction fighting the battle
+        For this phase, each time this gang's faction is attacked on this district,
+        the player from this faction fighting the battle
         can choose the theatre instead of the player from the attacking faction.
       `,
     },

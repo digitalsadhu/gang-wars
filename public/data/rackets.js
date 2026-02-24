@@ -26,7 +26,7 @@ export default {
       name: "Smuggling Route",
       description: `
         Once per campaign phase, a gang from this faction may use the Relocate
-        operation to move to this district or any district connected to it, even
+        operation to move to this district, even
         if they have already selected a different operation this phase.
       `,
     },
