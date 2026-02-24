@@ -1329,3 +1329,69 @@ body {
 .outcome-effects li {
   margin-bottom: 4px;
 }
+
+/* Mission badges */
+.mission-badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.mission-battle-size {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: #2a6aa6;
+  color: #fff;
+}
+
+.mission-racket-reward {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid #4caf50;
+  color: #81c784;
+}
+
+/* Win conditions */
+.win-conditions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.win-condition {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.win-condition.attacker {
+  background: rgba(39, 174, 96, 0.1);
+  border-left: 3px solid #27ae60;
+  color: #81c784;
+}
+
+.win-condition.defender {
+  background: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid #e74c3c;
+  color: #e57373;
+}
+
+.win-condition.draw {
+  background: rgba(243, 156, 18, 0.1);
+  border-left: 3px solid #f39c12;
+  color: #f5b041;
+}
+
+.win-condition strong {
+  color: #fff;
+}

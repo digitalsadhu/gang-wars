@@ -807,6 +807,21 @@ function displayMission(index) {
     `;
   }).join('');
 
+  // Build win conditions HTML if present
+  let winConditionsHtml = '';
+  if (mission.winConditions) {
+    winConditionsHtml = `
+      <div class="mission-section">
+        <h4>Win Conditions</h4>
+        <div class="win-conditions">
+          <div class="win-condition attacker"><strong>Attacker Wins:</strong> ${escapeHtml(mission.winConditions.attacker)}</div>
+          <div class="win-condition defender"><strong>Defender Wins:</strong> ${escapeHtml(mission.winConditions.defender)}</div>
+          <div class="win-condition draw"><strong>Draw:</strong> ${escapeHtml(mission.winConditions.draw)}</div>
+        </div>
+      </div>
+    `;
+  }
+
   // Build campaign outcomes HTML
   const outcome = mission.campaignOutcome;
   const outcomesHtml = `
@@ -833,14 +848,23 @@ function displayMission(index) {
     </div>
   `;
 
+  // Build battle size and racket reward badges
+  const battleSizeBadge = mission.battleSize ? `<span class="mission-battle-size">${mission.battleSize}pts</span>` : '';
+  const racketBadge = mission.racketReward ? `<span class="mission-racket-reward">${escapeHtml(mission.racketReward)}</span>` : '';
+
   content.innerHTML = `
-    <span class="mission-operation-type">${escapeHtml(mission.operationType)}</span>
+    <div class="mission-badges">
+      ${battleSizeBadge}
+      ${racketBadge}
+    </div>
     <p class="mission-flavour">${escapeHtml(mission.flavourText)}</p>
 
     <div class="mission-section">
       <h4>Mission Objectives</h4>
       <div class="mission-objectives">${objectivesHtml}</div>
     </div>
+
+    ${winConditionsHtml}
 
     <div class="mission-section">
       <h4>Mission Rules</h4>

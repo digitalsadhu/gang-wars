@@ -80,9 +80,9 @@ export default {
           type: "Progressive",
           description: "Each defensive position must be rigged for destruction.",
           scoring: `
-            A model in base contact with an objective marker may spend an
-            action to 'rig' it. Once rigged, the Attacker scores 3VP. A rigged
-            marker cannot be rigged again.
+            A model in base contact with an objective marker may rig it
+            instead of taking a normal action (Move/Rush/Charge/Hold). Once
+            rigged, the Attacker scores 3VP. A marker cannot be rigged again.
           `,
         },
         {
@@ -90,44 +90,47 @@ export default {
           type: "End Game",
           description: "The charges are set - now get out before everything blows.",
           scoring: `
-            At the end of round 4, the Attacker scores 2VP for each of their
-            models that exits via their deployment zone edge. Models still on
-            the battlefield score 1VP each if within 6" of their deployment
-            zone edge.
+            During round 4, Attacker models that move off any table edge are
+            removed from play. At the end of round 4, score 1VP for each
+            model that exited this way.
           `,
         },
       ],
+      winConditions: {
+        attacker: "7+ VP (rig at least 2 objectives and extract some models, or rig all 3)",
+        defender: "4 VP or less (attacker rigged at most 1 objective)",
+        draw: "5-6 VP",
+      },
       missionRules: [
         {
-          name: "Infiltration",
+          name: "Demolition Targets",
           description: `
-            The Attacker deploys second but takes the first turn. Attacker
-            models may deploy anywhere on the battlefield more than 9" from
-            any Defender model.
+            The Defender places 3 objective markers representing defensive
+            structures. Markers must be placed in the Defender's half of the
+            battlefield, more than 6" from each other, and more than 6" from
+            any table edge.
+          `,
+        },
+        {
+          name: "Defender Deployment",
+          description: `
+            The Defender deploys first, within 6" of their table edge.
           `,
         },
         {
           name: "Skeleton Crew",
           description: `
             The Defender deploys only 50pts of models initially. At the start
-            of round 2, the remaining models arrive as reinforcements within
-            3" of any battlefield edge.
+            of round 2, the remaining models arrive from any point on the
+            Defender's table edge.
           `,
         },
         {
-          name: "Demolition Targets",
+          name: "Infiltration",
           description: `
-            The Defender places 3 objective markers representing defensive
-            structures. Markers must be placed more than 6" from each other
-            and more than 6" from the Attacker's deployment zone.
-          `,
-        },
-        {
-          name: "Explosive Charges",
-          description: `
-            At the end of the battle, each rigged objective marker explodes.
-            Any model within 3" of a rigged marker must pass a Quality test
-            or be removed as a casualty.
+            The Attacker deploys second but takes the first turn. Attacker
+            models may deploy anywhere on the battlefield more than 9" from
+            any Defender model and more than 6" from any objective marker.
           `,
         },
       ],
@@ -147,8 +150,8 @@ export default {
             The defenses stand, and the attackers pay the price for failure.
           `,
           effects: [
+            "The Defender retains their Fortifications.",
             "The Defender may capture one surviving Attacker model (Attacker's choice). That fighter misses the next two battles.",
-            "Add 1 to the Defending faction's Power Level at this district.",
           ],
         },
         draw: {
