@@ -220,8 +220,7 @@ export default {
         {
           name: "Valuable Cargo",
           description: `
-            A model carrying the Informant reduces their movement by 2" but
-            gains +1 to Defense rolls (using the Informant as a human shield).
+            A model carrying the Informant reduces their movement by 2" (minimum 3").
           `,
         },
         {
@@ -241,23 +240,25 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Informant Network racket in this district.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
           flavourText: `
             The informant is recovered - and will be made an example of.
-            The enemy's intelligence network in this district is compromised.
+            The enemy's intelligence networks are compromised.
           `,
           effects: [
-            "If the Attacker has an Informant Network in this or any adjacent district, it is destroyed.",
-            "Add 1 to the Defending faction's Power Level at this district.",
+            "If the Attacker has an Informant Network in an adjacent district, it is destroyed (attackers choice which if multiple exist).",
+            "Add 1 to the Defending faction's Power Level at this district. (maximum 4).",
           ],
         },
         draw: {
           flavourText: "The informant escapes in the chaos, their loyalties and location now unknown.",
           effects: [
             "The Defender retains their Informant Network.",
-            "Both gangs that participated may not use Informant Network benefits in the next Campaign Phase.",
+            "Both gangs that participated lost 1 Power Level in this district.",
           ],
         },
       },
@@ -279,10 +280,13 @@ export default {
           type: "Progressive",
           description: "Only one cache is real. The others are decoys or traps.",
           scoring: `
-            When a model moves into base contact with a face-down objective
-            marker, flip it. Decoys are removed (score 1VP for eliminating
-            possibilities). The real cache is revealed - that player scores
-            5VP immediately.
+            At the end of each round, if a player controls an unrevealed
+            marker, they search it. For the first marker searched, roll D3:
+            on a 1, it's the real cache. For the second marker, roll D2: on
+            a 1, it's the real cache. If the real cache is not found in the
+            first two searches, the third marker is automatically the real cache.
+            The player who finds the real cache scores 5VP.
+            Finding a decoy scores 1VP and the marker is removed.
           `,
         },
         {
@@ -291,25 +295,39 @@ export default {
           description: "Once found, the cache must be held against all comers.",
           scoring: `
             At the end of round 4, the player controlling the revealed cache
-            (model within 3", no enemy models within 3") scores 6VP.
+            scores 6VP.
           `,
         },
       ],
+      winConditions: {
+        attacker: "More VP than Defender",
+        defender: "More VP than Attacker",
+        draw: "Equal VP",
+      },
       missionRules: [
         {
           name: "Hidden Caches",
           description: `
-            The Defender places 3 face-down objective markers (one real cache,
-            two decoys) anywhere on the battlefield more than 9" from either
-            deployment zone and more than 6" from each other. The Defender
-            secretly notes which is the real cache.
+            The Defender places 3 face-down objective markers anywhere on the
+            battlefield more than 9" from either deployment zone and more than
+            6" from each other. Neither player knows which marker is real -
+            this is determined by die roll when searched.
+          `,
+        },
+        {
+          name: "Searching",
+          description: `
+            At the end of each round, a marker is searched if a unit is within
+            3" of it while enemies aren't. If units from both sides are within
+            3", the marker is contested and cannot be searched.
           `,
         },
         {
           name: "Booby Traps",
           description: `
-            When a decoy is revealed, roll D6. On a 1-2, it's booby-trapped:
-            the model that revealed it takes a hit with AP(1).
+            When a decoy is revealed, roll D3. On a 1, the marker was
+            booby-trapped: the nearest model to the marker takes a hit
+            with AP(1).
           `,
         },
         {
@@ -318,14 +336,6 @@ export default {
             Both players deploy within 6" of opposite battlefield corners
             (diagonally opposite). The small battlefield and scattered
             objectives reward splitting forces.
-          `,
-        },
-        {
-          name: "Desperate Search",
-          description: `
-            Models may spend an action to 'search' while in base contact with
-            an unrevealed marker, allowing them to flip it without ending
-            their activation.
           `,
         },
       ],
@@ -337,6 +347,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Safe House racket in this district.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -345,8 +357,8 @@ export default {
             nothing, and your faction's hidden resources stay hidden.
           `,
           effects: [
-            "The Defender's Safe House cannot be destroyed by any means during the next Campaign Phase.",
-            "Add 1 to the Defending faction's Power Level at this district.",
+            "The Defender retains their Safe House.",
+            "Add 1 to the Defending faction's Power Level at this district. (maximum 4).",
           ],
         },
         draw: {
