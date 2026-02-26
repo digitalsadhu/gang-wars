@@ -258,7 +258,7 @@ export default {
           flavourText: "The informant escapes in the chaos, their loyalties and location now unknown.",
           effects: [
             "The Defender retains their Informant Network.",
-            "Both gangs that participated lost 1 Power Level in this district.",
+            "Both gangs that participated lose 1 Power Level in this district.",
           ],
         },
       },
@@ -381,8 +381,8 @@ export default {
       racketReward: "Smuggling Route",
       flavourText: `
         A smuggling corridor runs through this district - whoever controls
-        the checkpoints controls the flow of contraband. Seize all three
-        positions simultaneously to claim the route.
+        the checkpoints controls the flow of contraband. The defenders have
+        their routes established. The attackers must seize them.
       `,
       objectives: [
         {
@@ -391,7 +391,7 @@ export default {
           description: "Each checkpoint must be held to control the route.",
           scoring: `
             At the end of each round (starting round 2), score 1VP for each
-            objective marker you control. Score 3VP bonus if you control
+            objective marker you control. Score a 3VP bonus if you control
             all three simultaneously.
           `,
         },
@@ -406,6 +406,11 @@ export default {
           `,
         },
       ],
+      winConditions: {
+        attacker: "More VP than Defender",
+        defender: "More VP than Attacker",
+        draw: "Equal VP",
+      },
       missionRules: [
         {
           name: "The Corridor",
@@ -417,27 +422,22 @@ export default {
           `,
         },
         {
-          name: "Running Battle",
+          name: "Established Routes",
           description: `
-            Players deploy within 9" of opposite long battlefield edges.
-            The battle is fought across the width of the table rather than
-            the length.
+            The Defender controls the center checkpoint at the start of the
+            game. Additionally, the Defender deploys first, within 6" of the
+            center line (not their table edge). The Attacker then deploys
+            within 9" of either long table edge.
           `,
         },
         {
-          name: "Contested Ground",
+          name: "Smuggler's Shortcut",
           description: `
-            An objective marker is only controlled if you have a model within
-            3" and no enemy models within 3". Contested markers are not
-            controlled by either player.
-          `,
-        },
-        {
-          name: "Reinforcement Tunnels",
-          description: `
-            Once per battle, each player may remove a model within 3" of an
-            objective marker they control and immediately place it within
-            3" of a different objective marker (at least 1" from enemies).
+            Once per battle, at the start of any round after round 1, a
+            player may remove one of their models within 3" of a checkpoint
+            they control. Immediately place that model within 3" of a
+            different checkpoint (at least 1" from enemies). The model may
+            activate normally this round.
           `,
         },
       ],
@@ -449,6 +449,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Smuggling Route racket in this district.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -457,7 +459,7 @@ export default {
             and your faction's supply lines continue uninterrupted.
           `,
           effects: [
-            "The Defender retains their Smuggling Route and may immediately move one gang from an adjacent district to this district for free.",
+            "The Defender retains their Smuggling Route and may immediately move one gang belonging to themselves or an alliance member from an adjacent district to this district for free.",
             "Add 1 to the Defending faction's Power Level at this district.",
           ],
         },
@@ -465,7 +467,7 @@ export default {
           flavourText: "The checkpoints change hands multiple times. Neither side can claim clear control.",
           effects: [
             "The Defender retains their Smuggling Route.",
-            "Both factions' gangs in this district may not use Relocate operations next Campaign Phase (routes are too contested).",
+            "No change to either the Defender's Power or the Attacker's Power Level.",
           ],
         },
       },
@@ -498,25 +500,31 @@ export default {
           type: "Progressive",
           description: "The crowd respects only strength. Prove yours.",
           scoring: `
-            At the end of each round, score 2VP if you have more models
-            within 6" of the pit center than your opponent. Score 1VP for
-            each enemy model killed inside the pit.
+            At the end of each round (starting round 2), score 2VP if you have
+            more models within 6" of the pit center than your opponent.
+            Score 1VP for each enemy model killed inside the pit by your
+            models that are also in the pit (maximum 2VP per round from these kills).
           `,
         },
       ],
+      winConditions: {
+        attacker: "More VP than Defender",
+        defender: "More VP than Attacker",
+        draw: "Equal VP",
+      },
       missionRules: [
         {
           name: "The Pit",
           description: `
             The center of the battlefield is a sunken fighting pit (6" radius
-            circle). Models in the pit cannot draw line of sight to models
-            outside the pit and vice versa. The pit edge is difficult terrain.
+            circle). Models can draw line of sight normally across the pit edge.
+            The pit edge is difficult terrain.
           `,
         },
         {
           name: "The Pit Boss",
           description: `
-            The Pit Boss is a Q4+ model with 3 wounds, Tough(3), and a
+            The Pit Boss is a Q4+ model with 3 wounds (Tough(3)), and a
             brutal melee weapon (A3, AP(1)). They are hostile to all gangs.
             At the end of each round, the Pit Boss charges the nearest model
             within 12" (or moves toward the nearest model if none in range).
@@ -528,6 +536,14 @@ export default {
             A model that wins melee against an enemy within 3" of the pit
             edge may push them into the pit instead of dealing damage.
             The pushed model takes a hit with AP(0) from the fall.
+          `,
+        },
+        {
+          name: "Kill Credit",
+          description: `
+            For VP scoring, a model that is destroyed by fall damage after being
+            pushed counts as killed by the model that pushed it. Models removed
+            by the Pit Boss do not award VP to either player.
           `,
         },
         {
@@ -547,7 +563,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Fighting Pit racket in this district.",
-            "The Attacker may immediately recruit one basic fighter (up to 30pts) for free.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -556,8 +573,7 @@ export default {
             defenders. The Fighting Pit remains under your faction's control.
           `,
           effects: [
-            "The Defender may execute one captured Attacker model (if any were captured) in the pit for a free advancement on any Hero.",
-            "Add 1 to the Defending faction's Power Level at this district.",
+            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
           ],
         },
         draw: {
