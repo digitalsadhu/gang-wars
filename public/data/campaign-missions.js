@@ -133,6 +133,17 @@ export default {
             any Defender model and more than 6" from any objective marker.
           `,
         },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            they may choose one Attacker model after deployment to make a
+            free 6" move (must end more than 9" from enemy models).
+            If the Defender's faction has Power Level 3+ in this district,
+            they deploy 25 additional points during Skeleton Crew setup
+            (75pts total in round 1 instead of 50pts).
+          `,
+        },
       ],
       campaignOutcome: {
         attackerWins: {
@@ -229,6 +240,17 @@ export default {
             The battle lasts only 3 rounds. At the end of round 3, if the
             Informant has not been extracted, the player whose model is
             closest to the Informant scores 3VP.
+          `,
+        },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            they may make one free 6" move with a single model after
+            deployment (must end more than 9" from enemy models).
+            If the Defender's faction has Power Level 3+ in this district,
+            the Defender chooses the Informant's starting position anywhere
+            within 6" of the battlefield center instead of exactly at center.
           `,
         },
       ],
@@ -338,6 +360,16 @@ export default {
             objectives reward splitting forces.
           `,
         },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            they may reroll one Search roll each round.
+            If the Defender's faction has Power Level 3+ in this district,
+            the first decoy marker they reveal each battle automatically
+            triggers a booby trap (no D3 roll required).
+          `,
+        },
       ],
       campaignOutcome: {
         attackerWins: {
@@ -438,6 +470,17 @@ export default {
             they control. Immediately place that model within 3" of a
             different checkpoint (at least 1" from enemies). The model may
             activate normally this round.
+          `,
+        },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            the Attacker may use Smuggler's Shortcut one additional time
+            this battle.
+            If the Defender's faction has Power Level 3+ in this district,
+            the Defender may use Smuggler's Shortcut once during round 1
+            (instead of after round 1).
           `,
         },
       ],
@@ -554,6 +597,17 @@ export default {
             (crowd interference).
           `,
         },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            Attacker models in the pit score +1VP the first time each round
+            they remove an enemy model as a casualty (maximum +1VP per round).
+            If the Defender's faction has Power Level 3+ in this district,
+            the Pit Boss does not target Defender models in rounds 1-2 unless
+            no Attacker model is within 12".
+          `,
+        },
       ],
       campaignOutcome: {
         attackerWins: {
@@ -662,6 +716,17 @@ export default {
             Morale tests while within their own deployment zone.
           `,
         },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            they may field 575pts instead of 550pts.
+            If the Defender's faction has Power Level 3+ in this district,
+            they choose one:
+            (a) place 1 additional barricade, or
+            (b) Defensive Positions lasts through round 3 instead of round 2.
+          `,
+        },
       ],
       campaignOutcome: {
         attackerWins: {
@@ -767,6 +832,16 @@ export default {
             may exceed 500pts by up to 50pts (defensive preparations).
           `,
         },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            one Attacker unit may make a free 6" move after deployment
+            (must end more than 9" from enemy models).
+            If the Defender's faction has Power Level 3+ in this district,
+            they may exceed 500pts by up to 75pts instead of 50pts.
+          `,
+        },
       ],
       campaignOutcome: {
         attackerWins: {
@@ -870,6 +945,15 @@ export default {
           description: `
             This battle lasts until one side is wiped out, retreats, or
             5 rounds have passed, whichever comes first.
+          `,
+        },
+        {
+          name: "Power Level Advantage (3+)",
+          description: `
+            If the Attacker's faction has Power Level 3+ in this district,
+            the Attacker gains 2VP immediately after deployment.
+            If the Defender's faction has Power Level 3+ in this district,
+            the Defender gains 2VP immediately after deployment.
           `,
         },
       ],
