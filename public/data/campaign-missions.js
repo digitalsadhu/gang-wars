@@ -925,15 +925,13 @@ export default {
           `,
           effects: [
             "The Defender retains their Stronghold.",
-            "The Defender chooses one: the Attacker's Leader is captured (misses next 2 Campaign Phases), or the Attacker loses D3 random non-Leader fighters permanently.",
-            "Add 2 to the Defending faction's Power Level at this district (maximum 4).",
-            "The Attacking faction cannot declare any operations against this district for 2 Campaign Phases.",
+            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "The battle rages to exhaustion. The Stronghold stands, but barely.",
           effects: [
-            "The Defender retains their Stronghold, but it is damaged - they lose all Stronghold benefits next Campaign Phase.",
+            "The Defender retains their Stronghold, but it is damaged",
             "Both factions reduce their Power Level in this district by 1.",
           ],
         },
@@ -965,35 +963,28 @@ export default {
           type: "End Game",
           description: "When a gang breaks, they lose everything.",
           scoring: `
-            If one gang is completely wiped out or voluntarily retreats
-            (removes all remaining models), the other player scores 10VP.
-            At the end of round 4, the player with more surviving models
-            scores 5VP.
+            If one gang is completely wiped out, the other player scores 10VP.
+            If the battle reaches the end of round 4, the player with more
+            surviving models scores 5VP.
           `,
         },
       ],
+      winConditions: {
+        attacker: "More VP than Defender",
+        defender: "More VP than Attacker",
+        draw: "Equal VP",
+      },
       missionRules: [
         {
           name: "No Quarter",
           description: `
-            This is a fight to the death. There are no objective markers.
-            Deployment zones are 12" from opposite battlefield edges.
-          `,
-        },
-        {
-          name: "Fighting Retreat",
-          description: `
-            At the start of any round after round 2, a player may declare
-            a retreat. All their remaining models are removed from the
-            battlefield. These models count as casualties for VP purposes
-            but do not roll on injury tables.
-          `,
-        },
-        {
-          name: "Committed Forces",
-          description: `
-            Both sides have committed everything. No reinforcements. No
-            reserves. What you deploy is what you have.
+            This is a battle of annihilation fought on a standard 4'x4'
+            battlefield. There are no objective markers.
+            The Defender chooses one table edge as their deployment edge. The
+            Attacker deploys from the opposite edge. The Defender deploys
+            first, with all units wholly within 12" of their table edge. The
+            Attacker deploys second, with all units wholly within 12" of their
+            table edge. The Attacker takes the first turn in round 1.
           `,
         },
         {
@@ -1006,17 +997,19 @@ export default {
         {
           name: "Decisive Battle",
           description: `
-            This battle lasts until one side is wiped out, retreats, or
-            5 rounds have passed, whichever comes first.
+            This battle lasts until one side is wiped out, or 4 rounds have
+            passed, whichever comes first.
           `,
         },
         {
           name: "Power Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
-            the Attacker gains 2VP immediately after deployment.
+            If the Attacker's faction has Power Level 3+ in this district
+            one Attacker unit may make a free 6" move after deployment
+            (must end more than 9" from enemy models).
             If the Defender's faction has Power Level 3+ in this district,
-            the Defender gains 2VP immediately after deployment.
+            once per battle, after failing a Morale test, one Defender unit
+            may treat that test as passed instead.
           `,
         },
       ],
@@ -1027,27 +1020,25 @@ export default {
             the depths. This district belongs to your faction now.
           `,
           effects: [
-            "Destroy all Defender Rackets in this district.",
-            "The Defending gang must relocate to an adjacent district.",
+            "One gang from the defending alliance in the contested district must relocate to an adjacent district chosen by the Defending faction.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
           flavourText: `
             The assault is crushed utterly. The attackers retreat in disarray,
-            their ambitions in this district shattered for the foreseeable future.
+            their ambitions in this district shattered.
           `,
           effects: [
-            "Reduce the Attacking faction's Power Level in this district by 2 (minimum 0).",
-            "The Attacking gang cannot declare Turf War operations against this district for 2 Campaign Phases.",
-            "Add 1 to the Defending faction's Power Level at this district.",
+            "Reduce the Attacking faction's Power Level in this district by 1 (minimum 0).",
+            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "Both sides are bled white. The battle solves nothing, but at terrible cost.",
           effects: [
             "Both factions reduce their Power Level in this district by 1.",
-            "Both gangs that participated lose D3 random fighters permanently.",
-            "Neither gang may be selected for operations next Campaign Phase (recovering).",
           ],
         },
       },
