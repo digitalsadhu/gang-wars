@@ -659,10 +659,16 @@ export default {
           type: "Progressive",
           description: "The defensive line must be breached before the gate can be seized.",
           scoring: `
-            The battlefield is divided into three zones: Attacker's zone,
-            No-Man's Land, and Defender's zone. At the end of each round,
-            the Attacker scores 2VP for each model in the Defender's zone.
-            The Defender scores 1VP for each model in their own zone.
+            At the end of each round (starting round 2):
+            - The Attacker scores 2VP if they control at least one Breach marker.
+            - The Attacker scores +1VP if they control both Breach markers.
+            - The Attacker scores +1VP if at least one non-Shaken Attacker unit
+              is wholly within the Defender's zone.
+            - The Defender scores 2VP if they control at least one Breach marker,
+              the Attacker controls no Breach markers, and the Attacker has no
+              non-Shaken units wholly within the Defender's zone.
+            A marker is controlled if one player has one or more non-Shaken
+            units within 3" of it and the other player has none.
           `,
         },
         {
@@ -671,19 +677,39 @@ export default {
           description: "The toll gate itself is the prize.",
           scoring: `
             An objective marker represents the Toll Gate in the center of
-            the Defender's zone. At the end of round 4, the player controlling
+            the Defender's zone. At the end of round 5, the player controlling
             the gate scores 8VP. If contested, no one scores.
+            The Attacker may only control the Toll Gate if they control at
+            least one Breach marker.
           `,
         },
       ],
+      winConditions: {
+        attacker: "More VP than Defender",
+        defender: "More VP than Attacker",
+        draw: "Equal VP",
+      },
       missionRules: [
         {
           name: "Fortified Crossing",
           description: `
+            Split the battlefield into three equal zones between the Attacker's
+            table edge and the Defender's table edge: Attacker's zone,
+            No-Man's Land, and Defender's zone.
             The Defender places the Toll Gate objective in the center of
-            their deployment zone (the back third of the table). They may
-            place up to 4 barricade terrain pieces anywhere in No-Man's Land
-            or their deployment zone.
+            their zone. Place 2 Breach markers on the boundary line between
+            No-Man's Land and the Defender's zone, each 12" from a side
+            table edge. The Defender may place up to 4 barricade terrain
+            pieces anywhere in No-Man's Land or their zone.
+          `,
+        },
+        {
+          name: "Assault Deployment",
+          description: `
+            The Defender deploys first, and all Defender units must deploy
+            wholly within the Defender's zone. The Attacker deploys second,
+            and all Attacker units must deploy wholly within the Attacker's
+            zone. The Attacker takes the first turn in round 1.
           `,
         },
         {
@@ -704,9 +730,11 @@ export default {
           name: "Grinding Assault",
           description: `
             This battle lasts 5 rounds instead of 4. Reinforcements matter:
-            at the start of round 3, both players may deploy up to 50pts of
-            previously destroyed basic fighters within 3" of their deployment
-            zone edge.
+            at the start of round 3, each player may return one destroyed
+            non-Hero unit worth 50pts or less from their starting roster, at
+            full original composition and equipment. The returned unit is
+            placed wholly within 6" of that player's table edge, in coherency,
+            and more than 9" from all enemy units.
           `,
         },
         {
@@ -736,6 +764,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Toll Gate racket in this district.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -746,7 +776,7 @@ export default {
           effects: [
             "The Defender retains their Toll Gate, and it cannot be destroyed by any means next Campaign Phase.",
             "The Attacking gang that participated cannot declare Turf War operations next Campaign Phase.",
-            "Add 1 to the Defending faction's Power Level at this district.",
+            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
           ],
         },
         draw: {
@@ -777,8 +807,8 @@ export default {
           scoring: `
             Three objective markers are placed in a line leading to the
             Stronghold (Outer Gate, Inner Courtyard, Command Center). The
-            Attacker scores 3VP the first time they control each marker.
-            Markers must be captured in order.
+            Attacker scores 3VP the first time they seize each marker from
+            the Defender. Markers must be captured in order.
           `,
         },
         {
@@ -786,27 +816,55 @@ export default {
           type: "End Game",
           description: "The Command Center is the heart of enemy operations.",
           scoring: `
-            At the end of round 4, the player controlling the Command Center
-            marker scores 10VP. The Defender scores 5VP if no markers have
-            been captured.
+            At the end of round 5, the player controlling the Command Center
+            marker scores 10VP. The Defender scores 5VP if the Attacker scored
+            0VP from Breach the Defenses.
           `,
         },
       ],
+      winConditions: {
+        attacker: "More VP than Defender",
+        defender: "More VP than Attacker",
+        draw: "Equal VP",
+      },
       missionRules: [
         {
           name: "Fortified Stronghold",
           description: `
-            The Defender places their Stronghold terrain in the center of
-            their deployment zone. The Command Center marker is placed inside.
-            The Inner Courtyard marker is placed 6" in front of it. The Outer
-            Gate marker is placed at the edge of the Defender's deployment zone.
+            The Defender places their Stronghold terrain near the center line
+            of their half of the battlefield. Place the Command Center marker
+            on the center line, 6" from the Defender table edge (inside the
+            Stronghold terrain if possible). Place the Inner Courtyard marker
+            on the same center line, 12" from the Defender table edge. Place
+            the Outer Gate marker on the same center line, 18" from the
+            Defender table edge.
+          `,
+        },
+        {
+          name: "Siege Deployment",
+          description: `
+            The Defender chooses one table edge as their deployment edge. The
+            Attacker deploys from the opposite edge. The Defender deploys
+            first, with all units wholly within 12" of their table edge. The
+            Attacker deploys second, with all units wholly within 12" of their
+            table edge. The Attacker takes the first turn in round 1.
+          `,
+        },
+        {
+          name: "Layered Capture",
+          description: `
+            The Defender starts the battle controlling all three objective
+            markers. The Attacker may only seize the Inner Courtyard while
+            controlling the Outer Gate, and may only seize the Command Center
+            while controlling the Inner Courtyard.
           `,
         },
         {
           name: "Layered Defense",
           description: `
             Each objective marker provides benefits while controlled by the
-            Defender: Outer Gate - models within 6" gain Heavy Cover. Inner
+            Defender: Outer Gate - models within 6" gain +1 to Defense rolls
+            against shooting attacks. Inner
             Courtyard - models within 6" gain +1 to hit. Command Center -
             models within 6" automatically pass Morale tests.
           `,
@@ -821,15 +879,18 @@ export default {
         {
           name: "Desperate Defense",
           description: `
-            When the Defender loses control of an objective marker, they may
-            immediately activate one Hero that has already activated this round.
+            The first time each round that the Defender loses control of an
+            objective marker, this effect is set to trigger. At the start of
+            the next round, before the first activation, one non-Shaken
+            Defender Hero may make a free 6" move (must end more than 1" from
+            enemy models). This effect may trigger only once per round.
           `,
         },
         {
           name: "Total Commitment",
           description: `
-            The Attacker fields their entire available roster. The Defender
-            may exceed 500pts by up to 50pts (defensive preparations).
+            Both sides have committed major forces. The Attacker may field up
+            to 550pts. The Defender may field up to 550pts.
           `,
         },
         {
@@ -839,7 +900,7 @@ export default {
             one Attacker unit may make a free 6" move after deployment
             (must end more than 9" from enemy models).
             If the Defender's faction has Power Level 3+ in this district,
-            they may exceed 500pts by up to 75pts instead of 50pts.
+            they may field up to 575pts instead of 550pts.
           `,
         },
       ],
@@ -853,6 +914,8 @@ export default {
           effects: [
             "The Attacker takes over the Defender's Stronghold racket in this district.",
             "Destroy all other Defender Rackets in this district.",
+            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
+            "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -862,8 +925,8 @@ export default {
           `,
           effects: [
             "The Defender retains their Stronghold.",
-            "The Attacker's Leader is captured (misses next 2 Campaign Phases) OR the Attacker loses D3 random fighters permanently.",
-            "Add 2 to the Defending faction's Power Level at this district.",
+            "The Defender chooses one: the Attacker's Leader is captured (misses next 2 Campaign Phases), or the Attacker loses D3 random non-Leader fighters permanently.",
+            "Add 2 to the Defending faction's Power Level at this district (maximum 4).",
             "The Attacking faction cannot declare any operations against this district for 2 Campaign Phases.",
           ],
         },

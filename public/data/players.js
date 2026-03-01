@@ -9,5 +9,6 @@ export default {
     { name: "Valentin", faction: "Static Dominion" },
     { name: "Richard", faction: "Ashfall Covenant" },
     { name: "Kiran", faction: "Ashfall Covenant" },
+    { name: "Mikkel", faction: "Ashfall Covenant" },
   ],
 };

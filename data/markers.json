@@ -1,3 +1,76 @@
 {
-  "markers": []
+  "markers": [
+    {
+      "id": "1772272203635",
+      "x": 2700,
+      "y": 2600,
+      "title": "Stronghold",
+      "description": "",
+      "faction": "The Undergrid Syndicate",
+      "createdAt": "2026-02-28T09:50:03.635Z"
+    },
+    {
+      "id": "1772272237657",
+      "x": 2460,
+      "y": 2084,
+      "title": "William",
+      "description": "",
+      "faction": "The Undergrid Syndicate",
+      "createdAt": "2026-02-28T09:50:37.657Z"
+    },
+    {
+      "id": "1772272295084",
+      "x": 2888,
+      "y": 2660,
+      "title": "Informant Network",
+      "description": "",
+      "faction": "The Undergrid Syndicate",
+      "createdAt": "2026-02-28T09:51:35.084Z"
+    },
+    {
+      "id": "1772272632809",
+      "x": 3188,
+      "y": 2400,
+      "title": "Power Level 4",
+      "description": "",
+      "faction": "The Undergrid Syndicate",
+      "createdAt": "2026-02-28T09:57:12.809Z"
+    },
+    {
+      "id": "1772272646682",
+      "x": 2936,
+      "y": 2232,
+      "title": "Power Level 3",
+      "description": "",
+      "faction": "Static Dominion",
+      "createdAt": "2026-02-28T09:57:26.682Z"
+    },
+    {
+      "id": "1772272654982",
+      "x": 2604,
+      "y": 2496,
+      "title": "Power Level 2",
+      "description": "",
+      "faction": "Ashfall Covenant",
+      "createdAt": "2026-02-28T09:57:34.982Z"
+    },
+    {
+      "id": "1772272830988",
+      "x": 2212,
+      "y": 2716,
+      "title": "Informant Network",
+      "description": "",
+      "faction": "The Undergrid Syndicate",
+      "createdAt": "2026-02-28T10:00:30.988Z"
+    },
+    {
+      "id": "1772273799132",
+      "x": 1340,
+      "y": 2244,
+      "title": "Mikkel",
+      "description": "",
+      "faction": "Ashfall Covenant",
+      "createdAt": "2026-02-28T10:16:39.132Z"
+    }
+  ]
 }
