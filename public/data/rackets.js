@@ -9,17 +9,15 @@ export default {
         Each time a gang from this faction wins a battle at this or a connected
         district, they can treat their faction's Power Level at that district
         as 1 higher or lower than it actually is for the purposes of that
-        battle's Campaign Outcomes.
+        battle and that battle's Campaign Outcomes.
       `,
     },
     {
       name: "Fortifications",
       description: `
-        The minimum Power Level of this faction in this district is increased
-        by 1. When this racket is built, if it increases the minimum Power Level
-        above the current Power Level at this district, increase the Power Level
-        accordingly. Each time a rule would reduce the faction's Power Level
-        below that point, the Fortifications in that district is destroyed instead.
+        Increase the Power Level of this faction in this district
+        by 1. The first time a rule would reduce the faction's Power Level by 1, 
+        the Fortifications in that district is destroyed instead.
       `,
     },
     {
@@ -33,8 +31,10 @@ export default {
     {
       name: "Informant Network",
       description: `
-        During the Reveal Operations step, this faction's player may look at one
-        opposing faction's selected operations before revealing their own.
+        During the Reveal Operations step, the faction that owns this racket may look at one
+        opposing faction's selected operations before revealing their own and 1 player from that faction may
+        change their selected operation. This benefit may only be applied once per phase regardless of how many
+        Informant Network rackets a faction has.
         Additionally, when defending a Turf War in this district, the defender
         chooses the theatre instead of the attacker.
       `,
@@ -42,10 +42,8 @@ export default {
     {
       name: "Fighting Pit",
       description: `
-        After a battle in this or a connected district, if a gang from this
-        faction participated (win or lose), that gang's controlling player may
-        add one basic fighter of up to 30 pts to their gang roster for the next
-        battle at no cost. This fighter is removed after that battle.
+        During any battle in this district, the faction owning this racket may
+        add one basic fighter of up to 30 pts to their gang roster for that battle.
       `,
     },
     {
@@ -58,8 +56,8 @@ export default {
     {
       name: "Safe House",
       description: `
-        When a gang from this faction loses a battle in this or a connected
-        district, their controlling player may choose to have that gang 'go to
+        When a gang from this faction loses a battle in this district,
+        their controlling player may choose to have that gang 'go to
         ground.' If they do, ignore all negative Campaign Outcomes from that
         battle, after that, the safe house is destroyed.
       `,
