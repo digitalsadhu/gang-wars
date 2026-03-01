@@ -31,8 +31,8 @@ export default {
       description: `
         Players who selected Establish Racket do so now. If multiple players
         targeted the same district with the same racket, a Turf War battle must
-        be fought to determine who establishes the racket. Place a new racket
-        marker of the correct type in the target district.
+        be fought (choose the turf war type based on the type of racket) to determine
+        who establishes the racket. Place a new racket marker of the correct type in the target district.
       `,
     },
     {
@@ -45,11 +45,8 @@ export default {
         available theatres in that district unless the defender has an informant
         network in that district or they or an ally at this location have taken
         the "Home Turf Advantage" operation in which case the defender chooses
-        the theatre. The winner increases their faction's Power Level in that
-        district by 1 (maximum 4) and the loser decreases their faction's Power
-        Level in that district by 1 (minimum 0). Additionally, the winner applies
-        the Campaign Outcomes for that battle. If the defender wins, the attacker
-        applies the negative Campaign Outcomes instead.
+        the theatre. The winner applies the Campaign Outcomes for that battle
+        as described in the mission description.
       `,
     },
     {
@@ -89,8 +86,8 @@ export default {
       description: `
         Each alliance may establish one racket in one district where an alliance
         gang is currently located. If multiple players target the same district
-        with the same racket, a Turf War battle must be fought to determine who
-        establishes the racket. Place a new racket marker of the correct type in
+        with the same racket, a Turf War battle must be fought (choose the turf war type based on the type of racket)
+        to determine who establishes the racket. Place a new racket marker of the correct type in
         the target district.
       `,
     },
