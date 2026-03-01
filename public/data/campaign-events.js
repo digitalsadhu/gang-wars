@@ -5,7 +5,7 @@ export default {
   title: "Underhive Upheaval",
   description: `
     As the gang war intensifies, the hive itself reacts to the violence.
-    Authorities crack down, old alliances shatter, and the desperate masses
+    Authorities crack down, old factions shatter, and the desperate masses
     become pawns in the struggle for dominance.
   `,
 
@@ -82,7 +82,7 @@ export default {
         {
           roll: "5",
           name: "Factional Strife",
-          flavourText: "Internal divisions threaten to tear alliances apart as ambitious underbosses make their moves.",
+          flavourText: "Internal divisions threaten to tear factions apart as ambitious underbosses make their moves.",
           effect: `
             Each faction must secretly select one of their own gangs. Those
             gangs cannot be selected for any operations in the next Campaign

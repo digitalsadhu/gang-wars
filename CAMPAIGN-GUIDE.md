@@ -48,7 +48,7 @@ Each campaign round follows this sequence:
 6. **Resolve Subvert Influence** - Sabotage attempts are resolved
 7. **Campaign Events** - Random events shake up the campaign
 8. **Free Relocate** - All players may move their gang to an adjacent district
-9. **Alliance Racket** - Each faction may establish one free racket
+9. **Faction Racket** - Each faction may establish one free racket
 
 ## Operations
 

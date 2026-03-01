@@ -10,7 +10,7 @@ export default {
       name: "Select Operations",
       description: `
         In this step, each player selects one Campaign Operation. Players should
-        work together with other members of their Alliance to build a strategy.
+        work together with other members of their faction to build a strategy.
         Players then inform the Gamemaster of their decisions. Some Campaign
         Operations will require additional information; for example, a Turf war
         Operation will require the player to decide which type of Turf war
@@ -84,7 +84,7 @@ export default {
       number: 9,
       name: "Establish Racket",
       description: `
-        Each alliance may establish one racket in one district where an alliance
+        Each faction may establish one racket in one district where a faction
         gang is currently located. If multiple players target the same district
         with the same racket, a Turf War battle must be fought (choose the turf war type based on the type of racket)
         to determine who establishes the racket. Place a new racket marker of the correct type in

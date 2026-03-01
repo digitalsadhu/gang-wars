@@ -10,5 +10,6 @@ export default {
     { name: "Richard", faction: "Ashfall Covenant" },
     { name: "Kiran", faction: "Ashfall Covenant" },
     { name: "Mikkel", faction: "Ashfall Covenant" },
+    { name: "Johannes", faction: "Ashfall Covenant" },
   ],
 };

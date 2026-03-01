@@ -111,7 +111,7 @@ async function loadConfig() {
   try {
     const module = await import('/data/config.js');
     configData = module.default;
-    populateAllianceDropdowns();
+    populateFactionDropdowns();
     await preloadIcons();
   } catch (error) {
     console.error('Failed to load config:', error);
@@ -155,11 +155,11 @@ function getFactionColors(faction) {
   return { background: '#666666', border: '#888888' };
 }
 
-// Populate alliance dropdowns from config
-function populateAllianceDropdowns() {
+// Populate faction dropdowns from config
+function populateFactionDropdowns() {
   const selects = [
-    document.getElementById('infra-alliance'),
-    document.getElementById('power-alliance')
+    document.getElementById('infra-faction'),
+    document.getElementById('power-faction')
   ];
 
   if (!configData || !configData.factions) return;
@@ -1596,7 +1596,7 @@ function openInfraModal(markerId = null, x = null, y = null) {
     document.getElementById('infra-x').value = marker.x;
     document.getElementById('infra-y').value = marker.y;
     document.getElementById('infra-type').value = marker.title;
-    document.getElementById('infra-alliance').value = marker.faction || 'imperium';
+    document.getElementById('infra-faction').value = marker.faction || 'imperium';
     deleteBtn.classList.remove('hidden');
   } else {
     title.textContent = 'Add Racket';
@@ -1623,7 +1623,7 @@ async function handleInfraSubmit(e) {
     x: parseFloat(document.getElementById('infra-x').value),
     y: parseFloat(document.getElementById('infra-y').value),
     title: document.getElementById('infra-type').value,
-    faction: document.getElementById('infra-alliance').value,
+    faction: document.getElementById('infra-faction').value,
     markerType: 'racket'
   };
 
@@ -1717,7 +1717,7 @@ function openPowerModal(markerId = null, x = null, y = null) {
     document.getElementById('power-x').value = marker.x;
     document.getElementById('power-y').value = marker.y;
     document.getElementById('power-level').value = powerLevel;
-    document.getElementById('power-alliance').value = marker.faction || 'imperium';
+    document.getElementById('power-faction').value = marker.faction || 'imperium';
     deleteBtn.classList.remove('hidden');
   } else {
     title.textContent = 'Add Power';
@@ -1745,7 +1745,7 @@ async function handlePowerSubmit(e) {
     y: parseFloat(document.getElementById('power-y').value),
     title: `Power Level ${powerLevel}`,
     powerLevel: powerLevel,
-    faction: document.getElementById('power-alliance').value,
+    faction: document.getElementById('power-faction').value,
     markerType: 'power'
   };
 

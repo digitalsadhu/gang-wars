@@ -502,7 +502,7 @@ export default {
             and your faction's supply lines continue uninterrupted.
           `,
           effects: [
-            "The Defender retains their Smuggling Route and may immediately move one gang belonging to themselves or an alliance member from an adjacent district to this district for free.",
+            "The Defender retains their Smuggling Route and may immediately move one gang belonging to themselves or a faction member from an adjacent district to this district for free.",
             "Add 1 to the Defending faction's Power Level at this district.",
           ],
         },
@@ -1020,7 +1020,7 @@ export default {
             the depths. This district belongs to your faction now.
           `,
           effects: [
-            "One gang from the defending alliance in the contested district must relocate to an adjacent district chosen by the Defending faction.",
+            "One gang from the defending faction in the contested district must relocate to an adjacent district chosen by the Defending faction.",
             "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
             "Then the attacker gains 1 Power Level in that district (maximum 4).",
           ],
