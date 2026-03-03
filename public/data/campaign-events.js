@@ -37,7 +37,6 @@ export default {
       "If multiple factions are tied for dominant or trailing status, no Hubris or Desperate Gambits event is generated this phase.",
       "If an event requires selecting a district and multiple districts are tied, randomly determine the district among tied candidates.",
       "If an event has already been rolled in a previous phase, re-roll it.",
-      "For every Special Event random choice, use open dice rolls (or a shared RNG app) before any player decisions are made.",
     ],
   },
 
@@ -131,8 +130,8 @@ export default {
           flavourText: "The oppressed masses rise against their overlords, sabotaging operations and burning strongholds.",
           effect: `
             The War Master selects one district where the dominant faction has
-            their highest Power Level, excluding their Stronghold district if
-            possible (if tied, random among tied districts). Roll D6 for each
+            their highest Power Level, excluding their Stronghold district
+            (if tied, random among tied districts). Roll D6 for each
             Racket the dominant faction has in that district: on a 4+, that
             Racket is destroyed. Roll D6 for each Power Level the dominant
             faction has in that district: on a 5+, reduce their Power Level by
