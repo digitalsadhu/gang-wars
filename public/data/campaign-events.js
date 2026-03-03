@@ -14,7 +14,7 @@ export default {
     steps: [
       {
         name: "Check for Hubris of the Mighty",
-        condition: "If one faction has 3 or more total Power Level than each other faction across all districts, that faction is the dominant faction.",
+        condition: "If one faction has 3 or more total Power Level more than each other faction across all districts, that faction is the dominant faction.",
         trigger: "Roll D6: on a 4+, generate one Hubris of the Mighty event.",
       },
       {
@@ -25,12 +25,19 @@ export default {
       {
         name: "Check for Underhive Upheaval",
         condition: "Always check.",
-        trigger: "Roll D6, adding +1 if this is Campaign Phase 4 or later. On a 4+, generate one Underhive Upheaval event.",
+        trigger: "Roll D6, adding +1 if this is Campaign Phase 3. On a 4+, generate one Underhive Upheaval event.",
+      },
+      {
+        name: "Check for Special Event",
+        condition: "Always check after resolving all generated events above.",
+        trigger: "Roll D6. On a 6, generate one Special Event. Roll D3 to determine which Special Event is used this phase.",
       },
     ],
     tieBreakers: [
       "If multiple factions are tied for dominant or trailing status, no Hubris or Desperate Gambits event is generated this phase.",
       "If an event requires selecting a district and multiple districts are tied, randomly determine the district among tied candidates.",
+      "If an event has already been rolled in a previous phase, re-roll it.",
+      "For every Special Event random choice, use open dice rolls (or a shared RNG app) before any player decisions are made.",
     ],
   },
 
@@ -93,7 +100,7 @@ export default {
           effect: `
             Each faction must secretly select one of their own gangs. Those
             gangs cannot be selected for any operations in the next Campaign
-            Phase. If a faction only has one gang, they are immune to this event.
+            Phase. (But they may still be selected to defend against Turf War operations declared by other factions.)
           `,
         },
         {
@@ -208,35 +215,34 @@ export default {
       name: "Hive Quake",
       flavourText: "The ancient foundations shudder and collapse, reshaping the underhive's geography.",
       effect: `
-        The War Master redraws district connections. Some previously connected
-        districts become disconnected, and some previously separate districts
-        become connected. This affects all future operations.
+        Randomly select two currently connected district pairs and remove those
+        connections. Re-roll any impossible result.
+        This affects all future operations.
       `,
-      trigger: "War Master discretion at dramatic moments.",
+      trigger: "Only when the Special Event check succeeds and this event is randomly rolled on D3.",
     },
     {
       name: "The Purge",
       flavourText: "Inquisitorial forces descend upon the underhive, hunting for heretics with extreme prejudice.",
       effect: `
         For the next Campaign Phase, at the start of each battle, both players
-        roll D6. On a 1, that player must remove one random model from their
-        gang before deployment (Purge casualties). Models removed this way miss
-        the next battle as well while recovering.
+        roll D6. On a 1-2, that player must remove one random model from their
+        battle roster before deployment (Purge casualties).
       `,
-      trigger: "War Master discretion at dramatic moments.",
+      trigger: "Only when the Special Event check succeeds and this event is randomly rolled on D3.",
     },
     {
       name: "Guild War",
       flavourText: "The Merchant Guilds pick sides, flooding favored factions with resources while strangling others.",
       effect: `
-        The War Master assigns each faction a Guild Favor rating from 1-3
-        (based on narrative or random). In the next Campaign Phase: Factions
+        Each faction rolls D3 to determine its Guild Favor rating (1-3). In
+        the next Campaign Phase: Factions
         with Favor 3 may establish one additional free non-Stronghold Racket
         during the Faction Racket step. Factions with Favor 1 cannot declare
         Establish Racket operations and cannot establish free Rackets during
         the Faction Racket step.
       `,
-      trigger: "War Master discretion at dramatic moments.",
+      trigger: "Only when the Special Event check succeeds and this event is randomly rolled on D3.",
     },
   ],
 };

@@ -69,8 +69,9 @@ export default {
       number: 7,
       name: "Campaign Events",
       description: `
-        The Gamemaster rolls on the Campaign Events table to determine what
-        external factors affect the campaign this phase.
+        The Gamemaster resolves Campaign Events in order: Hubris check,
+        Desperate Gambits check, Underhive Upheaval check, then the Special
+        Event check. All random rolls are made openly to all players.
       `,
     },
     {
