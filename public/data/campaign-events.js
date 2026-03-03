@@ -19,7 +19,7 @@ export default {
       },
       {
         name: "Check for Desperate Gambits",
-        condition: "If one faction has 3 or less total Power Level than each other faction across all districts, that faction is the trailing faction.",
+        condition: "If one faction has 3 or more total Power Level less than each other faction across all districts, that faction is the trailing faction.",
         trigger: "Roll D6: on a 4+, generate one Desperate Gambits event.",
       },
       {
@@ -27,6 +27,10 @@ export default {
         condition: "Always check.",
         trigger: "Roll D6, adding +1 if this is Campaign Phase 4 or later. On a 4+, generate one Underhive Upheaval event.",
       },
+    ],
+    tieBreakers: [
+      "If multiple factions are tied for dominant or trailing status, no Hubris or Desperate Gambits event is generated this phase.",
+      "If an event requires selecting a district and multiple districts are tied, randomly determine the district among tied candidates.",
     ],
   },
 
@@ -52,7 +56,8 @@ export default {
           flavourText: "A catastrophic chemical leak renders entire sectors uninhabitable, forcing desperate relocations.",
           effect: `
             The War Master selects the district with the lowest total combined
-            Power Level. All factions reduce their Power Level in that district
+            Power Level (if tied, random among tied districts).
+            All factions reduce their Power Level in that district
             to 0. Each gang currently in that district must immediately Relocate
             to a connected district (controlling player's choice).
           `,
@@ -63,9 +68,9 @@ export default {
           flavourText: "Old territorial claims mean nothing as power shifts reshape the underhive's boundaries.",
           effect: `
             Starting with the faction with the highest total Power Level and
-            proceeding in descending order, each faction may remove their
-            Stronghold racket from one district and immediately build it in
-            another district where they have Power Level 1+.
+            proceeding in descending order (random among tied factions), each
+            faction may remove their Stronghold racket from one district and
+            immediately build it in another district where they have Power Level 1+.
           `,
         },
         {
@@ -74,9 +79,11 @@ export default {
           flavourText: "Economic collapse grips the underhive. Credits dry up and even the gangs feel the pinch.",
           effect: `
             In the next Campaign Phase: Gangs cannot declare Establish Racket
-            operations. When a gang wins a battle, they may loot D6x10 points
-            of equipment from the losing gang's roster (losing player chooses
-            what to give up).
+            operations, and factions cannot establish free Rackets during the
+            Faction Racket step. The first time each faction wins a battle that
+            phase,
+            that faction gains +1 Power Level in the battle's district
+            (maximum 4).
           `,
         },
         {
@@ -95,9 +102,13 @@ export default {
           flavourText: "Ancient technology has been unearthed in the deep foundations, drawing opportunists like flies.",
           effect: `
             The War Master selects the three districts with the lowest total
-            Power Level. In the next Campaign Phase, any gang that wins a battle
-            in one of these districts gains one piece of Rare equipment (up to
-            50 pts) for free, added to their roster permanently.
+            Power Level (if tied, random among tied districts until three are
+            selected). In the next Campaign Phase, the first gang from each
+            faction that wins a battle in one of these districts grants their
+            faction one Archeotech Claim (maximum one claim per faction). During
+            that phase's Faction Racket step, each claim may be spent to
+            establish one additional free non-Stronghold Racket in a district
+            where that faction has a gang.
           `,
         },
       ],
@@ -113,11 +124,12 @@ export default {
           flavourText: "The oppressed masses rise against their overlords, sabotaging operations and burning strongholds.",
           effect: `
             The War Master selects one district where the dominant faction has
-            their highest Power Level (excluding their Stronghold district).
-            Roll D6 for each Racket the dominant faction has in that district:
-            on a 4+, that Racket is destroyed. Roll D6 for each Power Level
-            the dominant faction has in that district: on a 5+, reduce their
-            Power Level by 1.
+            their highest Power Level, excluding their Stronghold district if
+            possible (if tied, random among tied districts). Roll D6 for each
+            Racket the dominant faction has in that district: on a 4+, that
+            Racket is destroyed. Roll D6 for each Power Level the dominant
+            faction has in that district: on a 5+, reduce their Power Level by
+            1 (minimum 0).
           `,
         },
         {
@@ -154,10 +166,10 @@ export default {
           name: "Borrowed Muscle",
           flavourText: "Desperate times call for desperate measures. Mercenaries, pit fighters, and hired guns flock to the cause.",
           effect: `
-            In the next Campaign Phase: Each gang belonging to the trailing
-            faction may add one Hero model (up to 75 pts) to their roster for
-            free. This model is removed from the roster at the end of the
-            Campaign Phase.
+            In the next Campaign Phase, each gang belonging to the trailing
+            faction may exceed the selected mission battle size by:
+            +25pts in 100pt missions, +40pts in 200pt missions, or +50pts in
+            500pt missions. Extra points may only be spent on non-Hero units.
           `,
         },
         {
@@ -165,10 +177,12 @@ export default {
           name: "Scorched Earth",
           flavourText: "If we can't hold it, no one will. Retreating gangers leave nothing but ashes behind.",
           effect: `
-            The trailing faction may select up to two Rackets belonging to
-            other factions and destroy them. For each Racket destroyed this
-            way, the trailing faction may immediately build one Racket of any
-            type (except Stronghold) in a district where they have Power Level 1+.
+            The trailing faction may select up to two enemy Rackets in
+            districts where the trailing faction has Power Level 1+.
+            Roll D6 for each selected Racket: on a 4+, that Racket is
+            destroyed. For each Racket destroyed this way, the trailing faction
+            may immediately build one non-Stronghold Racket in a district where
+            they have Power Level 1+ (maximum one built per district).
           `,
         },
         {
@@ -176,10 +190,13 @@ export default {
           name: "Underground Railroad",
           flavourText: "Hidden routes and smuggler contacts allow rapid redeployment of forces and assets.",
           effect: `
-            The trailing faction may immediately: Move any number of their
-            gangs to any districts (ignoring connection requirements). Relocate
-            any number of their Rackets to different districts where they have
-            Power Level 1+. Increase their Power Level by 1 in any two districts.
+            The trailing faction may immediately choose up to two of the
+            following options (each option may be chosen once):
+            (a) Move up to two of their gangs to any districts (ignoring
+            connection requirements).
+            (b) Relocate one of their Rackets to a different district where
+            they have Power Level 1+.
+            (c) Increase their Power Level by 1 in one district (maximum 4).
           `,
         },
       ],
@@ -214,8 +231,10 @@ export default {
       effect: `
         The War Master assigns each faction a Guild Favor rating from 1-3
         (based on narrative or random). In the next Campaign Phase: Factions
-        with Favor 3 may build one free Racket. Factions with Favor 1 must pay
-        double to build Rackets.
+        with Favor 3 may establish one additional free non-Stronghold Racket
+        during the Faction Racket step. Factions with Favor 1 cannot declare
+        Establish Racket operations and cannot establish free Rackets during
+        the Faction Racket step.
       `,
       trigger: "War Master discretion at dramatic moments.",
     },

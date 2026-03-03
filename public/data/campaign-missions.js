@@ -34,6 +34,7 @@ export default {
     {
       points: 100,
       name: "Covert Operations",
+      allowedTeamFormats: ["1v1"],
       description: `
         Small strike teams of fighters sent on high-risk, high-reward
         missions. Speed, stealth, and precision are essential - there's no
@@ -43,6 +44,7 @@ export default {
     {
       points: 200,
       name: "Tactical Raids",
+      allowedTeamFormats: ["1v1", "2v1", "2v2"],
       description: `
         Balanced strike forces conducting focused operations with clear
         objectives. Enough fighters to hold ground, but not so many that
@@ -52,6 +54,7 @@ export default {
     {
       points: 500,
       name: "All-Out Assault",
+      allowedTeamFormats: ["1v1", "2v1", "2v2", "3v1", "3v2", "3v3"],
       description: `
         Major operations with full gang commitment. These are decisive battles
         that can reshape the balance of power in a district. High stakes,

@@ -37,6 +37,14 @@ export default {
     },
     {
       number: 4,
+      name: "Resolve Relocate Operations",
+      description: `
+        Players who selected the Relocate operation move their gang marker to an
+        adjacent district.
+      `,
+    },
+    {
+      number: 5,
       name: "Resolve Turf War Operations",
       description: `
         Players who selected the Turf War operation attack enemy positions based
@@ -47,14 +55,6 @@ export default {
         the "Home Turf Advantage" operation in which case the defender chooses
         the theatre. The winner applies the Campaign Outcomes for that battle
         as described in the mission description.
-      `,
-    },
-    {
-      number: 5,
-      name: "Resolve Relocate Operations",
-      description: `
-        Players who selected the Relocate operation move their gang marker to an
-        adjacent district.
       `,
     },
     {

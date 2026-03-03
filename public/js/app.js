@@ -645,13 +645,23 @@ function openCampaignEventsModal() {
 
   // Render generation rules
   const rulesContainer = document.getElementById('events-generation-rules');
-  rulesContainer.innerHTML = campaignEventsData.generationRules.steps.map(step => `
+  const stepsHtml = campaignEventsData.generationRules.steps.map(step => `
     <div class="events-generation-step">
       <div class="events-generation-step-name">${escapeHtml(step.name)}</div>
       <div class="events-generation-step-condition">${escapeHtml(step.condition)}</div>
       <div class="events-generation-step-trigger">${escapeHtml(step.trigger)}</div>
     </div>
   `).join('');
+
+  const tieBreakers = campaignEventsData.generationRules.tieBreakers || [];
+  const tieBreakersHtml = tieBreakers.length > 0 ? `
+    <div class="events-generation-step">
+      <div class="events-generation-step-name">Tie-Breakers</div>
+      ${tieBreakers.map(rule => `<div class="events-generation-step-condition">${escapeHtml(rule)}</div>`).join('')}
+    </div>
+  ` : '';
+
+  rulesContainer.innerHTML = `${stepsHtml}${tieBreakersHtml}`;
 
   // Populate event table dropdown
   const select = document.getElementById('events-table-select');
@@ -732,12 +742,25 @@ function openCampaignMissionsModal() {
 
   // Render mission selection rules
   const rulesContainer = document.getElementById('missions-selection-rules');
+  const battleSizeTeamFormatsHtml = (campaignMissionsData.battleSizes || [])
+    .map((battleSize) => {
+      const formats = (battleSize.allowedTeamFormats || []).map(format => escapeHtml(format)).join(', ');
+      return `<li><strong>${battleSize.points}pts:</strong> ${formats}</li>`;
+    })
+    .join('');
+
   rulesContainer.innerHTML = `
     <h4>Mission Selection</h4>
     <p>${escapeHtml(campaignMissionsData.missionSelection.description)}</p>
     <ul>
       ${campaignMissionsData.missionSelection.rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join('')}
     </ul>
+    ${battleSizeTeamFormatsHtml ? `
+      <div class="missions-team-formats">
+        <h5>Allowed Team Formats By Battle Size</h5>
+        <ul>${battleSizeTeamFormatsHtml}</ul>
+      </div>
+    ` : ''}
   `;
 
   // Populate missions dropdown
@@ -849,12 +872,20 @@ function displayMission(index) {
   `;
 
   // Build battle size and racket reward badges
+  const battleSizeConfig = (campaignMissionsData.battleSizes || []).find(size => size.points === mission.battleSize);
+  const teamFormats = battleSizeConfig && Array.isArray(battleSizeConfig.allowedTeamFormats)
+    ? battleSizeConfig.allowedTeamFormats
+    : [];
   const battleSizeBadge = mission.battleSize ? `<span class="mission-battle-size">${mission.battleSize}pts</span>` : '';
+  const teamFormatsBadge = teamFormats.length > 0
+    ? `<span class="mission-team-formats">${teamFormats.map(format => escapeHtml(format)).join(', ')}</span>`
+    : '';
   const racketBadge = mission.racketReward ? `<span class="mission-racket-reward">${escapeHtml(mission.racketReward)}</span>` : '';
 
   content.innerHTML = `
     <div class="mission-badges">
       ${battleSizeBadge}
+      ${teamFormatsBadge}
       ${racketBadge}
     </div>
     <p class="mission-flavour">${escapeHtml(mission.flavourText)}</p>

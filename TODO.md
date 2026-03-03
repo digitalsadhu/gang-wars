@@ -2,7 +2,7 @@
 
 ## Refinements
 * [ ] - Events
-* [ ] - Missions
-* [ ] - Districts
-* [ ] - Rackets
-* [ ] - Theatres
+* [x] - Missions
+* [x] - Districts
+* [x] - Rackets
+* [x] - Theatres
