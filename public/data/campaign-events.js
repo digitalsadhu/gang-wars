@@ -1,5 +1,5 @@
 // Campaign Events - external factors that shake up the campaign
-// Generated based on faction power levels and campaign phase
+// Generated based on faction influence levels and campaign phase
 
 export default {
   title: "Underhive Upheaval",
@@ -14,12 +14,12 @@ export default {
     steps: [
       {
         name: "Check for Hubris of the Mighty",
-        condition: "If one faction has 3 or more total Power Level more than each other faction across all districts, that faction is the dominant faction.",
+        condition: "If one faction has 3 or more total Influence Level more than each other faction across all districts, that faction is the dominant faction.",
         trigger: "Roll D6: on a 4+, generate one Hubris of the Mighty event.",
       },
       {
         name: "Check for Desperate Gambits",
-        condition: "If one faction has 3 or more total Power Level less than each other faction across all districts, that faction is the trailing faction.",
+        condition: "If one faction has 3 or more total Influence Level less than each other faction across all districts, that faction is the trailing faction.",
         trigger: "Roll D6: on a 4+, generate one Desperate Gambits event.",
       },
       {
@@ -62,8 +62,8 @@ export default {
           flavourText: "A catastrophic chemical leak renders entire sectors uninhabitable, forcing desperate relocations.",
           effect: `
             The War Master selects the district with the lowest total combined
-            Power Level (if tied, random among tied districts).
-            All factions reduce their Power Level in that district
+            Influence Level (if tied, random among tied districts).
+            All factions reduce their Influence Level in that district
             to 0. Each gang currently in that district must immediately Relocate
             to a connected district (controlling player's choice).
           `,
@@ -71,12 +71,12 @@ export default {
         {
           roll: "3",
           name: "Turf Reshuffle",
-          flavourText: "Old territorial claims mean nothing as power shifts reshape the underhive's boundaries.",
+          flavourText: "Old territorial claims mean nothing as influence shifts reshape the underhive's boundaries.",
           effect: `
-            Starting with the faction with the highest total Power Level and
+            Starting with the faction with the highest total Influence Level and
             proceeding in descending order (random among tied factions), each
             faction may remove their Stronghold racket from one district and
-            immediately build it in another district where they have Power Level 1+.
+            immediately build it in another district where they have Influence Level 1+.
           `,
         },
         {
@@ -88,7 +88,7 @@ export default {
             operations, and factions cannot establish free Rackets during the
             Faction Racket step. The first time each faction wins a battle that
             phase,
-            that faction gains +1 Power Level in the battle's district
+            that faction gains +1 Influence Level in the battle's district
             (maximum 4).
           `,
         },
@@ -108,7 +108,7 @@ export default {
           flavourText: "Ancient technology has been unearthed in the deep foundations, drawing opportunists like flies.",
           effect: `
             The War Master selects the three districts with the lowest total
-            Power Level (if tied, random among tied districts until three are
+            Influence Level (if tied, random among tied districts until three are
             selected). In the next Campaign Phase, the first gang from each
             faction that wins a battle in one of these districts grants their
             faction one Archeotech Claim (maximum one claim per faction). During
@@ -130,11 +130,11 @@ export default {
           flavourText: "The oppressed masses rise against their overlords, sabotaging operations and burning strongholds.",
           effect: `
             The War Master selects one district where the dominant faction has
-            their highest Power Level, excluding their Stronghold district
+            their highest Influence Level, excluding their Stronghold district
             (if tied, random among tied districts). Roll D6 for each
             Racket the dominant faction has in that district: on a 4+, that
-            Racket is destroyed. Roll D6 for each Power Level the dominant
-            faction has in that district: on a 5+, reduce their Power Level by
+            Racket is destroyed. Roll D6 for each Influence Level the dominant
+            faction has in that district: on a 5+, reduce their Influence Level by
             1 (minimum 0).
           `,
         },
@@ -144,7 +144,7 @@ export default {
           flavourText: "Rival factions set aside their differences to oppose the common threat.",
           effect: `
             In the next Campaign Phase: When any gang fights a battle against
-            the dominant faction, they may treat their faction's Power Level
+            the dominant faction, they may treat their faction's Influence Level
             in that district as 1 higher for Mission Rules and Campaign Outcomes.
             Gangs from non-dominant factions gain +1 to hit in the first round
             of any battle against the dominant faction.
@@ -184,11 +184,11 @@ export default {
           flavourText: "If we can't hold it, no one will. Retreating gangers leave nothing but ashes behind.",
           effect: `
             The trailing faction may select up to two enemy Rackets in
-            districts where the trailing faction has Power Level 1+.
+            districts where the trailing faction has Influence Level 1+.
             Roll D6 for each selected Racket: on a 4+, that Racket is
             destroyed. For each Racket destroyed this way, the trailing faction
             may immediately build one non-Stronghold Racket in a district where
-            they have Power Level 1+ (maximum one built per district).
+            they have Influence Level 1+ (maximum one built per district).
           `,
         },
         {
@@ -201,8 +201,8 @@ export default {
             (a) Move up to two of their gangs to any districts (ignoring
             connection requirements).
             (b) Relocate one of their Rackets to a different district where
-            they have Power Level 1+.
-            (c) Increase their Power Level by 1 in one district (maximum 4).
+            they have Influence Level 1+.
+            (c) Increase their Influence Level by 1 in one district (maximum 4).
           `,
         },
       ],

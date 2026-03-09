@@ -22,11 +22,11 @@ export default {
     ],
   },
 
-  powerLevelRules: {
-    description: "Power Level changes when the attacker wins a battle:",
+  influenceLevelRules: {
+    description: "Influence Level changes when the attacker wins a battle:",
     rules: [
-      "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-      "Then the attacker gains 1 Power Level in that district (maximum 4).",
+      "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+      "Then the attacker gains 1 Influence Level in that district (maximum 4).",
     ],
   },
 
@@ -57,7 +57,7 @@ export default {
       allowedTeamFormats: ["1v1", "2v1", "2v2", "3v1", "3v2", "3v3"],
       description: `
         Major operations with full gang commitment. These are decisive battles
-        that can reshape the balance of power in a district. High stakes,
+        that can reshape the balance of influence in a district. High stakes,
         high casualties, high rewards.
       `,
     },
@@ -137,12 +137,12 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             they may choose one Attacker model after deployment to make a
             free 6" move (must end more than 9" from enemy models).
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             they deploy 25 additional points during Skeleton Crew setup
             (75pts total in round 1 instead of 50pts).
           `,
@@ -156,8 +156,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Fortifications racket in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -167,14 +167,14 @@ export default {
           `,
           effects: [
             "The Defender retains their Fortifications.",
-            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
+            "Add 1 to the Defending faction's Influence Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "Some charges detonate, others are defused. The damage is done, but not decisively.",
           effects: [
             "The Defender retains their Fortifications, but roll D6: on 4+, it is destroyed.",
-            "No Power Level changes occur.",
+            "No Influence Level changes occur.",
           ],
         },
       },
@@ -246,12 +246,12 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             they may make one free 6" move with a single model after
             deployment (must end more than 9" from enemy models).
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             the Defender chooses the Informant's starting position anywhere
             within 6" of the battlefield center instead of exactly at center.
           `,
@@ -265,8 +265,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Informant Network racket in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -276,14 +276,14 @@ export default {
           `,
           effects: [
             "If the Attacker has an Informant Network in an adjacent district, it is destroyed (attackers choice which if multiple exist).",
-            "Add 1 to the Defending faction's Power Level at this district. (maximum 4).",
+            "Add 1 to the Defending faction's Influence Level at this district. (maximum 4).",
           ],
         },
         draw: {
           flavourText: "The informant escapes in the chaos, their loyalties and location now unknown.",
           effects: [
             "The Defender retains their Informant Network.",
-            "Both gangs that participated lose 1 Power Level in this district.",
+            "Both gangs that participated lose 1 Influence Level in this district.",
           ],
         },
       },
@@ -364,11 +364,11 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             they may reroll one Search roll each round.
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             the first decoy marker they reveal each battle automatically
             triggers a booby trap (no D3 roll required).
           `,
@@ -382,8 +382,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Safe House racket in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -393,14 +393,14 @@ export default {
           `,
           effects: [
             "The Defender retains their Safe House.",
-            "Add 1 to the Defending faction's Power Level at this district. (maximum 4).",
+            "Add 1 to the Defending faction's Influence Level at this district. (maximum 4).",
           ],
         },
         draw: {
           flavourText: "Both sides withdraw, the cache's true location still contested.",
           effects: [
             "The Defender retains their Safe House.",
-            "No Power Level changes occur.",
+            "No Influence Level changes occur.",
           ],
         },
       },
@@ -476,12 +476,12 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             the Attacker may use Smuggler's Shortcut one additional time
             this battle.
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             the Defender may use Smuggler's Shortcut once during round 1
             (instead of after round 1).
           `,
@@ -495,8 +495,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Smuggling Route racket in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -506,14 +506,14 @@ export default {
           `,
           effects: [
             "The Defender retains their Smuggling Route and may immediately move one gang belonging to themselves or a faction member from an adjacent district to this district for free.",
-            "Add 1 to the Defending faction's Power Level at this district.",
+            "Add 1 to the Defending faction's Influence Level at this district.",
           ],
         },
         draw: {
           flavourText: "The checkpoints change hands multiple times. Neither side can claim clear control.",
           effects: [
             "The Defender retains their Smuggling Route.",
-            "No change to either the Defender's Power or the Attacker's Power Level.",
+            "No change to either the Defender's Influence or the Attacker's Influence Level.",
           ],
         },
       },
@@ -601,12 +601,12 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             Attacker models in the pit score +1VP the first time each round
             they remove an enemy model as a casualty (maximum +1VP per round).
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             the Pit Boss does not target Defender models in rounds 1-2 unless
             no Attacker model is within 12".
           `,
@@ -620,8 +620,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Fighting Pit racket in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -630,14 +630,14 @@ export default {
             defenders. The Fighting Pit remains under your faction's control.
           `,
           effects: [
-            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
+            "Add 1 to the Defending faction's Influence Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "Both gangs retreat battered and bloody, neither able to claim the pit.",
           effects: [
             "The Defender retains their Fighting Pit.",
-            "No Power Level changes occur.",
+            "No Influence Level changes occur.",
           ],
         },
       },
@@ -748,11 +748,11 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             they may field 575pts instead of 550pts.
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             they choose one:
             (a) place 1 additional barricade, or
             (b) Defensive Positions lasts through round 3 instead of round 2.
@@ -767,8 +767,8 @@ export default {
           `,
           effects: [
             "The Attacker takes over the Defender's Toll Gate racket in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -779,14 +779,14 @@ export default {
           effects: [
             "The Defender retains their Toll Gate, and it cannot be destroyed by any means next Campaign Phase.",
             "The Attacking gang that participated cannot declare Turf War operations next Campaign Phase.",
-            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
+            "Add 1 to the Defending faction's Influence Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "The battle grinds to a stalemate. The chokepoint remains contested.",
           effects: [
             "The Defender retains their Toll Gate.",
-            "Both factions reduce their Power Level in this district by 1 (casualties and exhaustion).",
+            "Both factions reduce their Influence Level in this district by 1 (casualties and exhaustion).",
           ],
         },
       },
@@ -798,49 +798,45 @@ export default {
       battleSize: 500,
       racketReward: "Stronghold",
       flavourText: `
-        A full-scale assault on a faction's seat of power. The defenders
+        A full-scale assault on a faction's seat of influence. The defenders
         fight for everything they've built. The attackers seek to tear it
         all down. This is the endgame.
       `,
       objectives: [
         {
-          name: "Breach the Defenses",
+          name: "Control the Approaches",
           type: "Progressive",
-          description: "The Stronghold has multiple defensive layers.",
+          description: "Seize and hold objective markers around the Stronghold.",
           scoring: `
-            Three objective markers are placed in a line leading to the
-            Stronghold (Outer Gate, Inner Courtyard, Command Center). The
-            Attacker scores 3VP the first time they seize each marker from
-            the Defender. Markers must be captured in order.
+            At the end of each round, objective markers are controlled and
+            contested using standard objective rules.
           `,
         },
         {
-          name: "Take the Stronghold",
+          name: "Break Their Hold",
           type: "End Game",
-          description: "The Command Center is the heart of enemy operations.",
+          description: "Control more objective markers than your opponent.",
           scoring: `
-            At the end of round 5, the player controlling the Command Center
-            marker scores 10VP. The Defender scores 5VP if the Attacker scored
-            0VP from Breach the Defenses.
+            At the end of round 4, the player controlling the most objective
+            markers wins the battle. If tied on controlled markers, the
+            Defender wins.
           `,
         },
       ],
       winConditions: {
-        attacker: "More VP than Defender",
-        defender: "More VP than Attacker",
-        draw: "Equal VP",
+        attacker: "Control more objective markers than the Defender at end of round 4",
+        defender: "Control at least as many objective markers as the Attacker at end of round 4",
+        draw: "Not possible (Defender wins ties)",
       },
       missionRules: [
         {
           name: "Fortified Stronghold",
           description: `
-            The Defender places their Stronghold terrain near the center line
-            of their half of the battlefield. Place the Command Center marker
-            on the center line, 6" from the Defender table edge (inside the
-            Stronghold terrain if possible). Place the Inner Courtyard marker
-            on the same center line, 12" from the Defender table edge. Place
-            the Outer Gate marker on the same center line, 18" from the
-            Defender table edge.
+            The Defender places their Stronghold terrain against their table
+            edge. Place three objective markers: Outer Gate (outside the
+            Stronghold walls near the gate), Inner Courtyard (inside the
+            walls), and Command Center (inside the Stronghold, at least 7"
+            from Inner Courtyard if possible).
           `,
         },
         {
@@ -854,39 +850,17 @@ export default {
           `,
         },
         {
-          name: "Layered Capture",
+          name: "Entrenched Position",
           description: `
             The Defender starts the battle controlling all three objective
-            markers. The Attacker may only seize the Inner Courtyard while
-            controlling the Outer Gate, and may only seize the Command Center
-            while controlling the Inner Courtyard.
+            markers.
           `,
         },
         {
-          name: "Layered Defense",
+          name: "Standard Duration",
           description: `
-            Each objective marker provides benefits while controlled by the
-            Defender: Outer Gate - models within 6" gain +1 to Defense rolls
-            against shooting attacks. Inner
-            Courtyard - models within 6" gain +1 to hit. Command Center -
-            models within 6" automatically pass Morale tests.
-          `,
-        },
-        {
-          name: "All In",
-          description: `
-            Both sides have committed everything. This battle lasts 5 rounds.
+            This battle lasts 4 rounds.
             No models may voluntarily leave the battlefield.
-          `,
-        },
-        {
-          name: "Desperate Defense",
-          description: `
-            The first time each round that the Defender loses control of an
-            objective marker, this effect is set to trigger. At the start of
-            the next round, before the first activation, one non-Shaken
-            Defender Hero may make a free 6" move (must end more than 1" from
-            enemy models). This effect may trigger only once per round.
           `,
         },
         {
@@ -897,12 +871,12 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district,
+            If the Attacker's faction has Influence Level 3+ in this district,
             one Attacker unit may make a free 6" move after deployment
             (must end more than 9" from enemy models).
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             they may field up to 575pts instead of 550pts.
           `,
         },
@@ -911,14 +885,14 @@ export default {
         attackerWins: {
           flavourText: `
             The Stronghold falls. Your gang plants their banner in the
-            smoldering ruins of enemy command. Their power in this district
+            smoldering ruins of enemy command. Their influence in this district
             is broken utterly.
           `,
           effects: [
             "The Attacker takes over the Defender's Stronghold racket in this district.",
             "Destroy all other Defender Rackets in this district.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -928,14 +902,14 @@ export default {
           `,
           effects: [
             "The Defender retains their Stronghold.",
-            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
+            "Add 1 to the Defending faction's Influence Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "The battle rages to exhaustion. The Stronghold stands, but barely.",
           effects: [
             "The Defender retains their Stronghold, but it is damaged",
-            "Both factions reduce their Power Level in this district by 1.",
+            "Both factions reduce their Influence Level in this district by 1.",
           ],
         },
       },
@@ -1005,12 +979,12 @@ export default {
           `,
         },
         {
-          name: "Power Level Advantage (3+)",
+          name: "Influence Level Advantage (3+)",
           description: `
-            If the Attacker's faction has Power Level 3+ in this district
+            If the Attacker's faction has Influence Level 3+ in this district
             one Attacker unit may make a free 6" move after deployment
             (must end more than 9" from enemy models).
-            If the Defender's faction has Power Level 3+ in this district,
+            If the Defender's faction has Influence Level 3+ in this district,
             once per battle, after failing a Morale test, one Defender unit
             may treat that test as passed instead.
           `,
@@ -1024,8 +998,8 @@ export default {
           `,
           effects: [
             "One gang from the defending faction in the contested district must relocate to an adjacent district chosen by the Defending faction.",
-            "If the defender's Power Level in the district is less than or equal to the attacker's Power Level, the defender loses 1 Power Level first.",
-            "Then the attacker gains 1 Power Level in that district (maximum 4).",
+            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
+            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
         },
         defenderWins: {
@@ -1034,14 +1008,14 @@ export default {
             their ambitions in this district shattered.
           `,
           effects: [
-            "Reduce the Attacking faction's Power Level in this district by 1 (minimum 0).",
-            "Add 1 to the Defending faction's Power Level at this district (maximum 4).",
+            "Reduce the Attacking faction's Influence Level in this district by 1 (minimum 0).",
+            "Add 1 to the Defending faction's Influence Level at this district (maximum 4).",
           ],
         },
         draw: {
           flavourText: "Both sides are bled white. The battle solves nothing, but at terrible cost.",
           effects: [
-            "Both factions reduce their Power Level in this district by 1.",
+            "Both factions reduce their Influence Level in this district by 1.",
           ],
         },
       },

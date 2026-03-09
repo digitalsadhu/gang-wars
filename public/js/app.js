@@ -9,10 +9,10 @@ const IMAGE_HEIGHT = 3024;
 // Rackets data (loaded from JSON)
 let racketsData = [];
 
-// Power Level description
-const POWER_DESCRIPTION = `Each district tracks a Power Level (0 - 4) for each faction.
-Power Level represents influence, control, and effectiveness in that district.
-Power Levels affect:
+// Influence Level description
+const INFLUENCE_DESCRIPTION = `Each district tracks an Influence Level (0 - 4) for each faction.
+Influence Level represents influence, control, and effectiveness in that district.
+Influence Levels affect:
 • Mission gameplay and outcomes
 • Racket placement priority
 • Event resolution`;
@@ -29,7 +29,7 @@ const iconCache = {};
 let map;
 let markers = [];
 let markerLayer;
-let addMode = null; // null, 'gang', 'racket', 'power', or 'theatre'
+let addMode = null; // null, 'gang', 'racket', 'influence', or 'theatre'
 let isAuthenticated = false;
 let theatresData = null;
 let operationsData = null;
@@ -38,6 +38,7 @@ let districtsData = null;
 let districtLabelLayer;
 let campaignEventsData = null;
 let campaignMissionsData = null;
+const REFERENCE_ROUTE_PATHS = ['operations', 'missions', 'phases', 'rackets', 'events'];
 
 // Theatre navigation state (for cycling through district theatres)
 let currentDistrictTheatres = [];
@@ -73,6 +74,7 @@ async function initMap() {
   await loadDistricts();
   await loadMarkers();
   setupEventListeners();
+  applyReferenceRouteFromUrl();
 }
 
 // Check authentication status
@@ -159,7 +161,7 @@ function getFactionColors(faction) {
 function populateFactionDropdowns() {
   const selects = [
     document.getElementById('infra-faction'),
-    document.getElementById('power-faction')
+    document.getElementById('influence-faction')
   ];
 
   if (!configData || !configData.factions) return;
@@ -522,11 +524,23 @@ function displayOperation(index) {
 }
 
 // Operations modal functions
-function openOperationsModal() {
+function openOperationsModal({ updateUrl = true } = {}) {
+  if (updateUrl) setReferenceRoutePath('/operations');
   document.getElementById('operations-modal').classList.remove('hidden');
+
+  const select = document.getElementById('operations-select');
+  const queryIndex = getQueryIndex('operation', operationsData.length);
+  if (queryIndex !== null) {
+    select.value = String(queryIndex);
+    displayOperation(queryIndex);
+  } else {
+    select.value = '';
+    document.getElementById('operations-content').classList.add('hidden');
+  }
 }
 
-function closeOperationsModal() {
+function closeOperationsModal({ updateUrl = true } = {}) {
+  if (updateUrl) clearReferenceRoutePath();
   document.getElementById('operations-modal').classList.add('hidden');
 }
 
@@ -541,8 +555,9 @@ async function loadPhases() {
 }
 
 // Phases modal functions
-function openPhasesModal() {
+function openPhasesModal({ updateUrl = true } = {}) {
   if (!phasesData) return;
+  if (updateUrl) setReferenceRoutePath('/phases');
 
   document.getElementById('phases-modal-title').textContent = phasesData.title || 'Campaign Phases';
   document.getElementById('phases-description').textContent = phasesData.description || '';
@@ -562,15 +577,38 @@ function openPhasesModal() {
   `).join('');
 
   document.getElementById('phases-modal').classList.remove('hidden');
+
+  const phaseNumber = getQueryIndex('phase');
+  if (phaseNumber !== null && phaseNumber > 0) {
+    const phaseIndex = phasesData.phases.findIndex((phase, index) =>
+      phase.number === phaseNumber || (index + 1) === phaseNumber
+    );
+    if (phaseIndex >= 0) openPhaseByIndex(phaseIndex);
+  }
 }
 
-function closePhasesModal() {
+function closePhasesModal({ updateUrl = true } = {}) {
+  if (updateUrl) clearReferenceRoutePath();
   document.getElementById('phases-modal').classList.add('hidden');
 }
 
 // Toggle phase accordion item
+function openPhaseByIndex(index) {
+  const content = document.getElementById(`phase-content-${index}`);
+  if (!content) return;
+
+  document.querySelectorAll('.phase-content.open').forEach(el => {
+    el.classList.remove('open');
+    el.previousElementSibling.classList.remove('open');
+  });
+
+  content.classList.add('open');
+  content.previousElementSibling.classList.add('open');
+}
+
 window.togglePhase = function(index) {
   const content = document.getElementById(`phase-content-${index}`);
+  if (!content) return;
   const header = content.previousElementSibling;
   const isOpen = content.classList.contains('open');
 
@@ -584,6 +622,11 @@ window.togglePhase = function(index) {
   if (!isOpen) {
     content.classList.add('open');
     header.classList.add('open');
+    const phase = phasesData && phasesData.phases ? phasesData.phases[index] : null;
+    const phaseNumber = phase ? phase.number : index + 1;
+    updateReferenceQueryParam('phases', 'phase', phaseNumber);
+  } else {
+    updateReferenceQueryParam('phases', 'phase', null);
   }
 };
 
@@ -617,12 +660,24 @@ function displayRacketReference(index) {
 }
 
 // Rackets reference modal functions
-function openRacketsReferenceModal() {
+function openRacketsReferenceModal({ updateUrl = true } = {}) {
+  if (updateUrl) setReferenceRoutePath('/rackets');
   populateRacketsReferenceDropdown();
   document.getElementById('rackets-modal').classList.remove('hidden');
+
+  const select = document.getElementById('rackets-select');
+  const queryIndex = getQueryIndex('racket', racketsData.length);
+  if (queryIndex !== null) {
+    select.value = String(queryIndex);
+    displayRacketReference(queryIndex);
+  } else {
+    select.value = '';
+    document.getElementById('rackets-content').classList.add('hidden');
+  }
 }
 
-function closeRacketsReferenceModal() {
+function closeRacketsReferenceModal({ updateUrl = true } = {}) {
+  if (updateUrl) clearReferenceRoutePath();
   document.getElementById('rackets-modal').classList.add('hidden');
 }
 
@@ -637,8 +692,9 @@ async function loadCampaignEvents() {
 }
 
 // Campaign events modal functions
-function openCampaignEventsModal() {
+function openCampaignEventsModal({ updateUrl = true } = {}) {
   if (!campaignEventsData) return;
+  if (updateUrl) setReferenceRoutePath('/events');
 
   // Set description
   document.getElementById('events-description').textContent = campaignEventsData.description;
@@ -690,9 +746,16 @@ function openCampaignEventsModal() {
   `).join('');
 
   document.getElementById('events-modal').classList.remove('hidden');
+
+  const queryIndex = getQueryIndex('table', campaignEventsData.eventTables.length);
+  if (queryIndex !== null) {
+    select.value = String(queryIndex);
+    displayEventTable(queryIndex);
+  }
 }
 
-function closeCampaignEventsModal() {
+function closeCampaignEventsModal({ updateUrl = true } = {}) {
+  if (updateUrl) clearReferenceRoutePath();
   document.getElementById('events-modal').classList.add('hidden');
 }
 
@@ -734,8 +797,9 @@ async function loadCampaignMissions() {
 }
 
 // Campaign missions modal functions
-function openCampaignMissionsModal() {
+function openCampaignMissionsModal({ updateUrl = true } = {}) {
   if (!campaignMissionsData) return;
+  if (updateUrl) setReferenceRoutePath('/missions');
 
   // Set description
   document.getElementById('missions-description').textContent = campaignMissionsData.description;
@@ -777,9 +841,16 @@ function openCampaignMissionsModal() {
   document.getElementById('missions-content').classList.add('hidden');
 
   document.getElementById('missions-modal').classList.remove('hidden');
+
+  const queryIndex = getQueryIndex('mission', campaignMissionsData.missions.length);
+  if (queryIndex !== null) {
+    select.value = String(queryIndex);
+    displayMission(queryIndex);
+  }
 }
 
-function closeCampaignMissionsModal() {
+function closeCampaignMissionsModal({ updateUrl = true } = {}) {
+  if (updateUrl) clearReferenceRoutePath();
   document.getElementById('missions-modal').classList.add('hidden');
 }
 
@@ -1066,23 +1137,17 @@ function renderMarkers() {
   markerLayer.clearLayers();
 
   markers.forEach(marker => {
-    const isPwr = isPower(marker);
+    const isPwr = isInfluence(marker);
     const faction = marker.faction || '';
     const colors = getFactionColors(faction);
 
     let icon;
     if (isPwr) {
-      // Power marker - show the power level number
-      let powerLevel = marker.powerLevel;
-      if (powerLevel === undefined && marker.title) {
-        // Extract from title like "Power Level 3"
-        const match = marker.title.match(/Power Level (\d)/);
-        powerLevel = match ? parseInt(match[1]) : 0;
-      }
-      powerLevel = powerLevel !== undefined ? powerLevel : 0;
+      // Influence marker - show the influence level number
+      const influenceLevel = getInfluenceLevel(marker);
       icon = L.divIcon({
-        className: 'custom-marker power-marker',
-        html: `<div class="power-number" style="background: ${colors.background}; border-color: ${colors.border};">${powerLevel}</div>`,
+        className: 'custom-marker influence-marker',
+        html: `<div class="influence-number" style="background: ${colors.background}; border-color: ${colors.border};">${influenceLevel}</div>`,
         iconSize: [24, 24],
         iconAnchor: [12, 12]
       });
@@ -1138,11 +1203,16 @@ function isRacket(marker) {
   return isRacketName(marker.title);
 }
 
-// Check if marker is power
-function isPower(marker) {
+// Check if marker is influence
+function isInfluence(marker) {
+  if (marker.markerType === 'influence') return true;
+  // Legacy support for existing stored marker payloads
   if (marker.markerType === 'power') return true;
-  // Fallback: check if title starts with "Power Level"
-  return marker.title && marker.title.startsWith('Power Level');
+  // Fallback: check if title starts with either marker naming convention
+  return marker.title && (
+    marker.title.startsWith('Influence Level') ||
+    marker.title.startsWith('Power Level')
+  );
 }
 
 // Check if marker is theatre
@@ -1158,17 +1228,28 @@ function getTheatreByName(name) {
   return theatresData.find(t => t.name === name);
 }
 
+function getInfluenceLevel(marker) {
+  if (marker.influenceLevel !== undefined) return marker.influenceLevel;
+  // Legacy support for existing stored marker payloads
+  if (marker.powerLevel !== undefined) return marker.powerLevel;
+  if (marker.title) {
+    const match = marker.title.match(/(?:Influence|Power) Level (\d)/);
+    if (match) return parseInt(match[1]);
+  }
+  return 0;
+}
+
 // Create popup HTML content
 function createPopupContent(marker) {
   const isInfra = isRacket(marker);
-  const isPwr = isPower(marker);
+  const isPwr = isInfluence(marker);
   const isThtr = isTheatre(marker);
   const faction = marker.faction || '';
   const colors = getFactionColors(faction);
 
   let editFunction = 'editMarker';
   if (isInfra) editFunction = 'editRacket';
-  if (isPwr) editFunction = 'editPower';
+  if (isPwr) editFunction = 'editInfluence';
   if (isThtr) editFunction = 'editTheatre';
 
   const editButton = isAuthenticated
@@ -1178,16 +1259,11 @@ function createPopupContent(marker) {
   const factionBadge = faction ? `<span class="popup-faction" style="background: ${colors.background};">${escapeHtml(faction)}</span>` : '';
 
   if (isPwr) {
-    let powerLevel = marker.powerLevel;
-    if (powerLevel === undefined && marker.title) {
-      const match = marker.title.match(/Power Level (\d)/);
-      powerLevel = match ? parseInt(match[1]) : 0;
-    }
-    powerLevel = powerLevel !== undefined ? powerLevel : 0;
+    const influenceLevel = getInfluenceLevel(marker);
     return `
-      <div class="popup-title">Power Level ${powerLevel}</div>
+      <div class="popup-title">Influence Level ${influenceLevel}</div>
       ${factionBadge}
-      <div class="popup-description power-description">${POWER_DESCRIPTION.replace(/\n/g, '<br>')}</div>
+      <div class="popup-description influence-description">${INFLUENCE_DESCRIPTION.replace(/\n/g, '<br>')}</div>
       ${editButton}
     `;
   }
@@ -1231,6 +1307,79 @@ function capitalizeFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function normalizePathname(pathname) {
+  if (!pathname) return '/';
+  const normalized = pathname.replace(/\/+$/, '');
+  return normalized || '/';
+}
+
+function getReferenceRouteKeyFromPath(pathname) {
+  const normalized = normalizePathname(pathname);
+  const key = normalized.startsWith('/') ? normalized.slice(1) : normalized;
+  return REFERENCE_ROUTE_PATHS.includes(key) ? key : null;
+}
+
+function setReferenceRoutePath(path, { replace = false } = {}) {
+  const normalizedTarget = normalizePathname(path);
+  const current = normalizePathname(window.location.pathname);
+  if (current === normalizedTarget) return;
+
+  const method = replace ? 'replaceState' : 'pushState';
+  history[method]({}, '', normalizedTarget);
+}
+
+function clearReferenceRoutePath({ replace = false } = {}) {
+  if (!getReferenceRouteKeyFromPath(window.location.pathname)) return;
+  setReferenceRoutePath('/', { replace });
+}
+
+function getQueryIndex(paramName, maxExclusive) {
+  const rawValue = new URLSearchParams(window.location.search).get(paramName);
+  if (rawValue === null) return null;
+
+  const index = parseInt(rawValue, 10);
+  if (Number.isNaN(index) || index < 0) return null;
+  if (typeof maxExclusive === 'number' && index >= maxExclusive) return null;
+  return index;
+}
+
+function updateReferenceQueryParam(routeKey, paramName, value, { replace = true } = {}) {
+  if (getReferenceRouteKeyFromPath(window.location.pathname) !== routeKey) return;
+
+  const params = new URLSearchParams(window.location.search);
+  if (value === null || value === undefined || value === '') {
+    params.delete(paramName);
+  } else {
+    params.set(paramName, String(value));
+  }
+
+  const search = params.toString();
+  const nextUrl = `${normalizePathname(window.location.pathname)}${search ? `?${search}` : ''}`;
+  const currentUrl = `${normalizePathname(window.location.pathname)}${window.location.search}`;
+  if (nextUrl === currentUrl) return;
+
+  const method = replace ? 'replaceState' : 'pushState';
+  history[method]({}, '', nextUrl);
+}
+
+function applyReferenceRouteFromUrl() {
+  closeAllModals({ updateUrl: false });
+
+  const routeKey = getReferenceRouteKeyFromPath(window.location.pathname);
+  if (!routeKey) return;
+
+  const routeOpeners = {
+    operations: openOperationsModal,
+    missions: openCampaignMissionsModal,
+    phases: openPhasesModal,
+    rackets: openRacketsReferenceModal,
+    events: openCampaignEventsModal
+  };
+
+  const openRouteModal = routeOpeners[routeKey];
+  if (openRouteModal) openRouteModal({ updateUrl: false });
+}
+
 // Set up event listeners
 function setupEventListeners() {
   // Operations reference
@@ -1240,8 +1389,10 @@ function setupEventListeners() {
     const index = e.target.value;
     if (index !== '') {
       displayOperation(parseInt(index));
+      updateReferenceQueryParam('operations', 'operation', index);
     } else {
       document.getElementById('operations-content').classList.add('hidden');
+      updateReferenceQueryParam('operations', 'operation', null);
     }
   });
 
@@ -1252,8 +1403,10 @@ function setupEventListeners() {
     const index = e.target.value;
     if (index !== '') {
       displayMission(parseInt(index));
+      updateReferenceQueryParam('missions', 'mission', index);
     } else {
       document.getElementById('missions-content').classList.add('hidden');
+      updateReferenceQueryParam('missions', 'mission', null);
     }
   });
 
@@ -1268,8 +1421,10 @@ function setupEventListeners() {
     const index = e.target.value;
     if (index !== '') {
       displayRacketReference(parseInt(index));
+      updateReferenceQueryParam('rackets', 'racket', index);
     } else {
       document.getElementById('rackets-content').classList.add('hidden');
+      updateReferenceQueryParam('rackets', 'racket', null);
     }
   });
 
@@ -1280,8 +1435,10 @@ function setupEventListeners() {
     const index = e.target.value;
     if (index !== '') {
       displayEventTable(parseInt(index));
+      updateReferenceQueryParam('events', 'table', index);
     } else {
       document.getElementById('events-table-content').classList.add('hidden');
+      updateReferenceQueryParam('events', 'table', null);
     }
   });
 
@@ -1299,8 +1456,8 @@ function setupEventListeners() {
   // Add racket
   document.getElementById('add-infra-btn').addEventListener('click', () => toggleAddMode('racket'));
 
-  // Add power
-  document.getElementById('add-power-btn').addEventListener('click', () => toggleAddMode('power'));
+  // Add influence
+  document.getElementById('add-influence-btn').addEventListener('click', () => toggleAddMode('influence'));
 
   // Add theatre
   document.getElementById('add-theatre-btn').addEventListener('click', () => toggleAddMode('theatre'));
@@ -1324,10 +1481,10 @@ function setupEventListeners() {
   // Racket type change - show rule
   document.getElementById('infra-type').addEventListener('change', updateInfraRuleDisplay);
 
-  // Power form
-  document.getElementById('power-form').addEventListener('submit', handlePowerSubmit);
-  document.getElementById('power-cancel-btn').addEventListener('click', closePowerModal);
-  document.getElementById('power-delete-btn').addEventListener('click', handlePowerDelete);
+  // Influence form
+  document.getElementById('influence-form').addEventListener('submit', handleInfluenceSubmit);
+  document.getElementById('influence-cancel-btn').addEventListener('click', closeInfluenceModal);
+  document.getElementById('influence-delete-btn').addEventListener('click', handleInfluenceDelete);
 
   // Theatre form
   document.getElementById('theatre-form').addEventListener('submit', handleTheatreSubmit);
@@ -1354,6 +1511,9 @@ function setupEventListeners() {
   document.querySelectorAll('.modal').forEach(modal => {
     modal.addEventListener('click', handleModalBackgroundClick);
   });
+
+  // Keep reference modal state in sync with browser back/forward navigation
+  window.addEventListener('popstate', applyReferenceRouteFromUrl);
 }
 
 // Handle Escape key to close modals
@@ -1372,7 +1532,7 @@ function handleModalBackgroundClick(e) {
 }
 
 // Close all open modals
-function closeAllModals() {
+function closeAllModals({ updateUrl = true } = {}) {
   document.querySelectorAll('.modal').forEach(modal => {
     modal.classList.add('hidden');
   });
@@ -1385,6 +1545,8 @@ function closeAllModals() {
   // Clear theatre navigation state
   currentDistrictTheatres = [];
   currentDistrictTheatreIndex = 0;
+
+  if (updateUrl) clearReferenceRoutePath();
 }
 
 // Update racket rule display
@@ -1465,7 +1627,7 @@ function toggleAddMode(mode) {
   // Update button states
   document.getElementById('add-marker-btn').classList.toggle('active', addMode === 'gang');
   document.getElementById('add-infra-btn').classList.toggle('active', addMode === 'racket');
-  document.getElementById('add-power-btn').classList.toggle('active', addMode === 'power');
+  document.getElementById('add-influence-btn').classList.toggle('active', addMode === 'influence');
   document.getElementById('add-theatre-btn').classList.toggle('active', addMode === 'theatre');
 
   // Update instructions
@@ -1478,8 +1640,8 @@ function toggleAddMode(mode) {
       instructionsText.textContent = 'Click on the map to place a gang marker';
     } else if (addMode === 'racket') {
       instructionsText.textContent = 'Click on the map to place a racket';
-    } else if (addMode === 'power') {
-      instructionsText.textContent = 'Click on the map to place a power marker';
+    } else if (addMode === 'influence') {
+      instructionsText.textContent = 'Click on the map to place an influence marker';
     } else if (addMode === 'theatre') {
       instructionsText.textContent = 'Click on the map to place a theatre marker';
     }
@@ -1500,8 +1662,8 @@ function handleMapClick(e) {
     openMarkerModal(null, x, y);
   } else if (addMode === 'racket') {
     openInfraModal(null, x, y);
-  } else if (addMode === 'power') {
-    openPowerModal(null, x, y);
+  } else if (addMode === 'influence') {
+    openInfluenceModal(null, x, y);
   } else if (addMode === 'theatre') {
     openTheatreModal(null, x, y);
   }
@@ -1722,12 +1884,12 @@ window.editRacket = function(id) {
   openInfraModal(id);
 };
 
-// Power modal
-function openPowerModal(markerId = null, x = null, y = null) {
-  const modal = document.getElementById('power-modal');
-  const form = document.getElementById('power-form');
-  const title = document.getElementById('power-modal-title');
-  const deleteBtn = document.getElementById('power-delete-btn');
+// Influence modal
+function openInfluenceModal(markerId = null, x = null, y = null) {
+  const modal = document.getElementById('influence-modal');
+  const form = document.getElementById('influence-form');
+  const title = document.getElementById('influence-modal-title');
+  const deleteBtn = document.getElementById('influence-delete-btn');
 
   form.reset();
 
@@ -1735,49 +1897,44 @@ function openPowerModal(markerId = null, x = null, y = null) {
     const marker = markers.find(m => m.id === markerId);
     if (!marker) return;
 
-    // Extract power level from marker or from title
-    let powerLevel = marker.powerLevel;
-    if (powerLevel === undefined && marker.title) {
-      const match = marker.title.match(/Power Level (\d)/);
-      powerLevel = match ? parseInt(match[1]) : 0;
-    }
-    powerLevel = powerLevel !== undefined ? powerLevel : 0;
+    // Extract influence level from marker or from title
+    const influenceLevel = getInfluenceLevel(marker);
 
-    title.textContent = 'Edit Power';
-    document.getElementById('power-id').value = marker.id;
-    document.getElementById('power-x').value = marker.x;
-    document.getElementById('power-y').value = marker.y;
-    document.getElementById('power-level').value = powerLevel;
-    document.getElementById('power-faction').value = marker.faction || 'imperium';
+    title.textContent = 'Edit Influence';
+    document.getElementById('influence-id').value = marker.id;
+    document.getElementById('influence-x').value = marker.x;
+    document.getElementById('influence-y').value = marker.y;
+    document.getElementById('influence-level').value = influenceLevel;
+    document.getElementById('influence-faction').value = marker.faction || 'imperium';
     deleteBtn.classList.remove('hidden');
   } else {
-    title.textContent = 'Add Power';
-    document.getElementById('power-id').value = '';
-    document.getElementById('power-x').value = x;
-    document.getElementById('power-y').value = y;
+    title.textContent = 'Add Influence';
+    document.getElementById('influence-id').value = '';
+    document.getElementById('influence-x').value = x;
+    document.getElementById('influence-y').value = y;
     deleteBtn.classList.add('hidden');
   }
 
   modal.classList.remove('hidden');
 }
 
-function closePowerModal() {
-  document.getElementById('power-modal').classList.add('hidden');
+function closeInfluenceModal() {
+  document.getElementById('influence-modal').classList.add('hidden');
 }
 
-// Handle power form submission
-async function handlePowerSubmit(e) {
+// Handle influence form submission
+async function handleInfluenceSubmit(e) {
   e.preventDefault();
 
-  const id = document.getElementById('power-id').value;
-  const powerLevel = parseInt(document.getElementById('power-level').value);
+  const id = document.getElementById('influence-id').value;
+  const influenceLevel = parseInt(document.getElementById('influence-level').value);
   const data = {
-    x: parseFloat(document.getElementById('power-x').value),
-    y: parseFloat(document.getElementById('power-y').value),
-    title: `Power Level ${powerLevel}`,
-    powerLevel: powerLevel,
-    faction: document.getElementById('power-faction').value,
-    markerType: 'power'
+    x: parseFloat(document.getElementById('influence-x').value),
+    y: parseFloat(document.getElementById('influence-y').value),
+    title: `Influence Level ${influenceLevel}`,
+    influenceLevel: influenceLevel,
+    faction: document.getElementById('influence-faction').value,
+    markerType: 'influence'
   };
 
   try {
@@ -1794,23 +1951,23 @@ async function handlePowerSubmit(e) {
       alert('Session expired. Please log in again.');
       isAuthenticated = false;
       updateAuthUI();
-      closePowerModal();
+      closeInfluenceModal();
       return;
     }
 
     await loadMarkers();
-    closePowerModal();
+    closeInfluenceModal();
   } catch (error) {
-    console.error('Failed to save power marker:', error);
+    console.error('Failed to save influence marker:', error);
   }
 }
 
-// Handle power deletion
-async function handlePowerDelete() {
-  const id = document.getElementById('power-id').value;
+// Handle influence deletion
+async function handleInfluenceDelete() {
+  const id = document.getElementById('influence-id').value;
   if (!id) return;
 
-  if (!confirm('Are you sure you want to delete this power marker?')) return;
+  if (!confirm('Are you sure you want to delete this influence marker?')) return;
 
   try {
     const response = await fetch(`/api/markers/${id}`, { method: 'DELETE' });
@@ -1819,22 +1976,22 @@ async function handlePowerDelete() {
       alert('Session expired. Please log in again.');
       isAuthenticated = false;
       updateAuthUI();
-      closePowerModal();
+      closeInfluenceModal();
       return;
     }
 
     await loadMarkers();
-    closePowerModal();
+    closeInfluenceModal();
   } catch (error) {
-    console.error('Failed to delete power marker:', error);
+    console.error('Failed to delete influence marker:', error);
   }
 }
 
-// Edit power (called from popup)
-window.editPower = function(id) {
+// Edit influence (called from popup)
+window.editInfluence = function(id) {
   if (!isAuthenticated) return;
   map.closePopup();
-  openPowerModal(id);
+  openInfluenceModal(id);
 };
 
 // Initialize

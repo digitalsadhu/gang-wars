@@ -95,18 +95,18 @@
     </div>
   </div>
 
-  <!-- Power Form Modal -->
-  <div id="power-modal" class="modal hidden">
+  <!-- Influence Form Modal -->
+  <div id="influence-modal" class="modal hidden">
     <div class="modal-content">
-      <h2 id="power-modal-title">Add Power</h2>
-      <form id="power-form">
-        <input type="hidden" id="power-id" />
-        <input type="hidden" id="power-x" />
-        <input type="hidden" id="power-y" />
+      <h2 id="influence-modal-title">Add Influence</h2>
+      <form id="influence-form">
+        <input type="hidden" id="influence-id" />
+        <input type="hidden" id="influence-x" />
+        <input type="hidden" id="influence-y" />
 
         <div class="form-group">
-          <label for="power-level">Power Level</label>
-          <select id="power-level" required>
+          <label for="influence-level">Influence Level</label>
+          <select id="influence-level" required>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -116,16 +116,16 @@
         </div>
 
         <div class="form-group">
-          <label for="power-faction">Faction</label>
-          <select id="power-faction" required>
+          <label for="influence-faction">Faction</label>
+          <select id="influence-faction" required>
             <!-- Options loaded dynamically from config.json -->
           </select>
         </div>
 
         <div class="button-group">
           <button type="submit" class="btn btn-primary">Save</button>
-          <button type="button" class="btn btn-secondary" id="power-cancel-btn">Cancel</button>
-          <button type="button" class="btn btn-danger hidden" id="power-delete-btn">Delete</button>
+          <button type="button" class="btn btn-secondary" id="influence-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-danger hidden" id="influence-delete-btn">Delete</button>
         </div>
       </form>
     </div>
@@ -305,7 +305,7 @@
       <span id="user-display"></span>
       <button id="add-marker-btn" class="control-btn" title="Add Gang">+ Gang</button>
       <button id="add-infra-btn" class="control-btn" title="Add Racket">+ Racket</button>
-      <button id="add-power-btn" class="control-btn" title="Add Power">+ Power</button>
+      <button id="add-influence-btn" class="control-btn" title="Add Influence">+ Influence</button>
       <button id="add-theatre-btn" class="control-btn" title="Add Theatre">+ Theatre</button>
       <button id="logout-btn" class="control-btn logout">Logout</button>
     </div>

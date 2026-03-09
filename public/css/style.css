@@ -71,8 +71,8 @@ body {
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
 }
 
-/* Power markers */
-.leaflet-marker-icon.power-marker {
+/* Influence markers */
+.leaflet-marker-icon.influence-marker {
   width: 24px !important;
   height: 24px !important;
   display: flex !important;
@@ -80,7 +80,7 @@ body {
   justify-content: center !important;
 }
 
-.power-number {
+.influence-number {
   width: 24px;
   height: 24px;
   display: flex;
@@ -173,7 +173,7 @@ body {
   max-width: 280px;
 }
 
-.power-description {
+.influence-description {
   font-size: 12px;
   line-height: 1.6;
   color: #aaa;

@@ -30,3 +30,28 @@
   from = "/api/auth/status"
   to = "/.netlify/functions/auth-status"
   status = 200
+
+[[redirects]]
+  from = "/operations"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/missions"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/phases"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/rackets"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/events"
+  to = "/index.html"
+  status = 200

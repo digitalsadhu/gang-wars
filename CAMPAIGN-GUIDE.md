@@ -4,7 +4,7 @@ A campaign system for One Page Rules Grimdark Future Firefight.
 
 ## Overview
 
-Three factions battle for control of the underhive. Each faction fields multiple gangs who fight to expand their territory, establish criminal operations, and crush their rivals. The faction with the most total Power Level across all districts at the end of the campaign wins.
+Three factions battle for control of the underhive. Each faction fields multiple gangs who fight to expand their territory, establish criminal operations, and crush their rivals. The faction with the most total Influence Level across all districts at the end of the campaign wins.
 
 ## Factions
 
@@ -30,11 +30,11 @@ The campaign takes place across 9 districts:
 
 Districts are connected to each other, and your gang can only move to or attack adjacent districts.
 
-## Power Level
+## Influence Level
 
-Each faction tracks a Power Level (0-4) in each district. Power Level represents your faction's influence and control. Higher Power Level gives advantages in battles and affects campaign outcomes.
+Each faction tracks an Influence Level (0-4) in each district. Influence Level represents your faction's influence and control. Higher Influence Level gives advantages in battles and affects campaign outcomes.
 
-**You win by having the highest total Power Level across all districts at the end of the campaign.**
+**You win by having the highest total Influence Level across all districts at the end of the campaign.**
 
 ## Campaign Phases
 
@@ -60,7 +60,7 @@ Each phase, you choose one operation for your gang:
 | **Relocate** | Move your gang to an adjacent district |
 | **Establish Racket** | Build a racket in your current district |
 | **Home Turf Advantage** | If attacked this phase, you choose the battlefield |
-| **Subvert Influence** | Attempt to reduce enemy Power Levels nearby |
+| **Subvert Influence** | Attempt to reduce enemy Influence Levels nearby |
 
 ## Battles
 
@@ -82,11 +82,11 @@ At the start of each battle, roll D6 to determine which **Twist** applies. Twist
 ### Winning Battles
 
 The winner of a battle:
-- Increases their faction's Power Level in that district by 1
+- Increases their faction's Influence Level in that district by 1
 - Applies positive Campaign Outcomes (varies by mission)
 
 The loser:
-- Decreases their faction's Power Level by 1
+- Decreases their faction's Influence Level by 1
 - May suffer negative Campaign Outcomes
 
 ## Rackets
@@ -95,8 +95,8 @@ Rackets are persistent assets that provide ongoing benefits. Your faction can es
 
 | Racket | Benefit |
 |--------|---------|
-| **Stronghold** | Manipulate Power Level for campaign outcomes |
-| **Fortifications** | Minimum Power Level of 1; protects against reduction |
+| **Stronghold** | Manipulate Influence Level for campaign outcomes |
+| **Fortifications** | Minimum Influence Level of 1; protects against reduction |
 | **Smuggling Route** | Extra movement options for your gangs |
 | **Informant Network** | See enemy plans; choose theatre when defending |
 | **Fighting Pit** | Gain temporary fighters after battles |

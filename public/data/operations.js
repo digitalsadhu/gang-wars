@@ -46,7 +46,7 @@ export default {
       type: "common",
       description: `
         Select this gang's district or one beside it. For each opposing faction,
-        the war master rolls one D6; on a 5+, that faction's power level is
+        the war master rolls one D6; on a 5+, that faction's influence level is
         reduced by 1.
       `,
     },

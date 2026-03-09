@@ -62,7 +62,7 @@ export default {
       name: "Resolve Subvert Influence Operations",
       description: `
         The Gamemaster rolls to see which Subvert Influence Operations succeed
-        and reduces gang Power Levels accordingly.
+        and reduces gang Influence Levels accordingly.
       `,
     },
     {

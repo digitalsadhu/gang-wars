@@ -7,7 +7,7 @@ export default {
       name: "Stronghold",
       description: `
         Each time a gang from this faction wins a battle at this or a connected
-        district, they can treat their faction's Power Level at that district
+        district, they can treat their faction's Influence Level at that district
         as 1 higher or lower than it actually is for the purposes of that
         battle and that battle's Campaign Outcomes.
       `,
@@ -15,8 +15,8 @@ export default {
     {
       name: "Fortifications",
       description: `
-        Increase the Power Level of this faction in this district
-        by 1. The first time a rule would reduce the faction's Power Level by 1, 
+        Increase the Influence Level of this faction in this district
+        by 1. The first time a rule would reduce the faction's Influence Level by 1, 
         the Fortifications in that district is destroyed instead.
       `,
     },

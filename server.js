@@ -152,6 +152,11 @@ app.delete('/api/markers/:id', requireAuth, (req, res) => {
   }
 });
 
+// Reference modal deep-link routes (SPA entry)
+app.get(['/operations', '/missions', '/phases', '/rackets', '/events'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Vespator Star Map server running at http://localhost:${PORT}`);
 });

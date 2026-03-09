@@ -256,7 +256,7 @@ export default {
         {
           roll: "3-4",
           name: "Momentum",
-          flavourText: "Speed is power in the corridors - the faster you move, the harder you hit.",
+          flavourText: "Speed is influence in the corridors - the faster you move, the harder you hit.",
           rule: `
             Models that move more than 3" from their starting position gain +1 to hit
             when shooting until the end of the round. Models that Charge more than 6"
