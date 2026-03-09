@@ -5,7 +5,7 @@ export default {
   operations: [
     {
       name: "Turf War",
-      type: "common",
+      executionPhase: "Resolve Turf War Operations",
       description: `
         When selecting this campaign operation, select one of the campaign attack
         types, select this gang's district or one adjacent district, then select
@@ -18,12 +18,12 @@ export default {
     },
     {
       name: "Relocate",
-      type: "common",
+      executionPhase: "Resolve Relocate Operations",
       description: "Move this gang to one adjacent district on the map.",
     },
     {
       name: "Establish Racket",
-      type: "common",
+      executionPhase: "Resolve Establish Racket Operations",
       description: `
         Establish a racket in this gang's district. You may not select the same
         racket twice in the same district, but you may select the same racket in
@@ -34,7 +34,7 @@ export default {
     },
     {
       name: "Home Turf Advantage",
-      type: "common",
+      executionPhase: "Resolve Turf War Operations",
       description: `
         For this phase, each time this gang's faction is attacked on this district,
         the player from this faction fighting the battle
@@ -43,7 +43,7 @@ export default {
     },
     {
       name: "Subvert Influence",
-      type: "common",
+      executionPhase: "Resolve Subvert Influence Operations",
       description: `
         Select this gang's district or one beside it. For each opposing faction,
         the war master rolls one D6; on a 5+, that faction's influence level is

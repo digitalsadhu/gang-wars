@@ -517,7 +517,8 @@ function displayOperation(index) {
     return;
   }
 
-  document.getElementById('operations-type').textContent = operation.type;
+  const executionPhase = operation.executionPhase || 'Not specified';
+  document.getElementById('operations-phase').textContent = `Executes in phase: ${executionPhase}`;
   document.getElementById('operations-description').textContent = operation.description;
 
   content.classList.remove('hidden');
