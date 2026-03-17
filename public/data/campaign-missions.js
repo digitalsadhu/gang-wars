@@ -32,7 +32,7 @@ export default {
 
   battleSizes: [
     {
-      points: 100,
+      points: 200,
       name: "Covert Operations",
       allowedTeamFormats: ["1v1"],
       description: `
@@ -42,7 +42,7 @@ export default {
       `,
     },
     {
-      points: 200,
+      points: 300,
       name: "Tactical Raids",
       allowedTeamFormats: ["1v1", "2v1", "2v2"],
       description: `
@@ -65,12 +65,12 @@ export default {
 
   missions: [
     // =========================================================================
-    // 100 POINTS - COVERT OPERATIONS
+    // 200 POINTS - COVERT OPERATIONS
     // =========================================================================
     {
       id: "sabotage-run",
       name: "Sabotage Run",
-      battleSize: 100,
+      battleSize: 200,
       racketReward: "Fortifications",
       flavourText: `
         A small demolition team infiltrates enemy territory to destroy
@@ -93,16 +93,16 @@ export default {
           type: "End Game",
           description: "The charges are set - now get out before everything blows.",
           scoring: `
-            During round 4, Attacker models that move off any table edge are
+            During round 4, Attacker units that move off any table edge are
             removed from play. At the end of round 4, score 1VP for each
-            model that exited this way.
+            unit that exited this way.
           `,
         },
       ],
       winConditions: {
-        attacker: "7+ VP (rig at least 2 objectives and extract some models, or rig all 3)",
-        defender: "4 VP or less (attacker rigged at most 1 objective)",
-        draw: "5-6 VP",
+        attacker: "8+ VP (rig at least 2 objectives and extract some models, or rig all 3)",
+        defender: "5 VP or less (attacker rigged at most 1 objective)",
+        draw: "6-7 VP",
       },
       missionRules: [
         {
@@ -111,29 +111,28 @@ export default {
             The Defender places 3 objective markers representing defensive
             structures. Markers must be placed in the Defender's half of the
             battlefield, more than 6" from each other, and more than 6" from
-            any table edge.
+            any table edge and more than 6" from their deployment zone.
           `,
         },
         {
           name: "Defender Deployment",
           description: `
-            The Defender deploys first, within 6" of their table edge.
+            The Defender deploys first, within their standard 12" deployment zone.
           `,
         },
         {
           name: "Skeleton Crew",
           description: `
-            The Defender deploys only 50pts of models initially. At the start
-            of round 2, the remaining models arrive from any point on the
-            Defender's table edge.
+            The Defender deploys only 100pts of models initially. At the start
+            of round 2, the remaining models arrive from anywhere inside the defenders 12" deployment zone.
           `,
         },
         {
           name: "Infiltration",
           description: `
             The Attacker deploys second but takes the first turn. Attacker
-            models may deploy anywhere on the battlefield more than 9" from
-            any Defender model and more than 6" from any objective marker.
+            models may deploy anywhere on the battlefield 9" or more from
+            any Defender model and any objective marker.
           `,
         },
         {
@@ -141,10 +140,9 @@ export default {
           description: `
             If the Attacker's faction has Influence Level 3+ in this district,
             they may choose one Attacker model after deployment to make a
-            free 6" move (must end more than 9" from enemy models).
+            free 6" move.
             If the Defender's faction has Influence Level 3+ in this district,
-            they deploy 25 additional points during Skeleton Crew setup
-            (75pts total in round 1 instead of 50pts).
+            they deploy all models during Skeleton Crew setup instead of the usual 100pts.
           `,
         },
       ],
@@ -155,7 +153,7 @@ export default {
             crumble. The enemy's fortifications are nothing but rubble now.
           `,
           effects: [
-            "The Attacker takes over the Defender's Fortifications racket in this district.",
+            "The Attacker destroys the Defender's Fortifications racket in this district.",
             "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
             "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
@@ -183,7 +181,7 @@ export default {
     {
       id: "flip-the-asset",
       name: "Flip the Asset",
-      battleSize: 100,
+      battleSize: 200,
       racketReward: "Informant Network",
       flavourText: `
         Intelligence reports indicate a double agent is ready to defect -
@@ -196,20 +194,29 @@ export default {
           type: "Progressive",
           description: "The informant will join whoever reaches them first.",
           scoring: `
-            The first model to move into base contact with the Informant
-            'secures' them - that player scores 5VP immediately. The Informant
-            then moves with that model (4" movement, no actions).
+            Moving into base contact with the Informant 'secures' them at the end of that round.
+            The first time this occurs - that player scores 5VP.
+            When secured, the Informant moves with the securing model.
+            Treat the informant like a mobile objective marker which can be contested.
+            Once contested, the Informant is no longer secured and cannot be secured again until uncontested.
           `,
         },
         {
           name: "Extract the Asset",
+          type: "Any Time",
+          description: "Getting the informant is only half the battle.",
+          scoring: `
+            A unit that has secured the Informant can move to within 3" of a table edge to extract them.
+            If this occurs, that unit's player scores 10VP and the mission ends.
+          `,
+        },
+        {
+          name: "Protect the Asset",
           type: "End Game",
           description: "Getting the informant is only half the battle.",
           scoring: `
-            If the Informant is carried off a player's deployment zone edge,
-            that player scores 8VP. If the model carrying the Informant is
-            killed, the Informant is 'dropped' and can be secured again by
-            any model moving into base contact.
+            At the end of round 4, if the informant has not been extracted, 
+            whoever has the informant secured scores 10VP. If the informant is contested or unsecured, no one scores this.
           `,
         },
       ],
@@ -218,15 +225,13 @@ export default {
           name: "The Informant",
           description: `
             Place a neutral 'Informant' model at the center of the battlefield.
-            The Informant cannot be targeted by attacks until secured. Once
-            secured, the Informant can be targeted normally - if reduced to
-            0 wounds, both players lose (the asset is dead).
+            The Informant cannot be targeted by attacks.
           `,
         },
         {
           name: "Covert Approach",
           description: `
-            Both players deploy within 6" of opposite battlefield edges.
+            Both players deploy within 12" of opposite battlefield edges.
             All models gain Stealth until they make an attack or secure
             the Informant.
           `,
@@ -234,15 +239,7 @@ export default {
         {
           name: "Valuable Cargo",
           description: `
-            A model carrying the Informant reduces their movement by 2" (minimum 3").
-          `,
-        },
-        {
-          name: "Time Pressure",
-          description: `
-            The battle lasts only 3 rounds. At the end of round 3, if the
-            Informant has not been extracted, the player whose model is
-            closest to the Informant scores 3VP.
+            A model with the Informant secured gains the "slow" keyword until they no longer have the Informant secured.
           `,
         },
         {
@@ -264,7 +261,7 @@ export default {
             enemy movements and plans will prove invaluable in battles to come.
           `,
           effects: [
-            "The Attacker takes over the Defender's Informant Network racket in this district.",
+            "The Attacker destroys the Defender's Informant Network racket in this district.",
             "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
             "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
