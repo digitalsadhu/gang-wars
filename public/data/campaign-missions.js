@@ -347,17 +347,9 @@ export default {
         {
           name: "Booby Traps",
           description: `
-            When a decoy is revealed, roll D3. On a 1, the marker was
+            When a cache is searched, roll D3. On a 1, the marker was
             booby-trapped: the nearest model to the marker takes a hit
             with AP(1).
-          `,
-        },
-        {
-          name: "Small Teams",
-          description: `
-            Both players deploy within 6" of opposite battlefield corners
-            (diagonally opposite). The small battlefield and scattered
-            objectives reward splitting forces.
           `,
         },
         {
@@ -366,19 +358,18 @@ export default {
             If the Attacker's faction has Influence Level 3+ in this district,
             they may reroll one Search roll each round.
             If the Defender's faction has Influence Level 3+ in this district,
-            the first decoy marker they reveal each battle automatically
-            triggers a booby trap (no D3 roll required).
+            the first time the attacker searches a cache they automatically
+            trigger a booby trap (no D3 roll required).
           `,
         },
       ],
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            The safe house is yours. A hidden bolt-hole where your gang can
-            lie low, store supplies, and escape the consequences of failure.
+            The enemy's safe house has been uncovered, compromised and rendered useless.
           `,
           effects: [
-            "The Attacker takes over the Defender's Safe House racket in this district.",
+            "The Attacker destroys the Defender's Safe House racket in this district.",
             "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
             "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
@@ -394,7 +385,7 @@ export default {
           ],
         },
         draw: {
-          flavourText: "Both sides withdraw, the cache's true location still contested.",
+          flavourText: "Both sides withdraw, the safe house still hidden.",
           effects: [
             "The Defender retains their Safe House.",
             "No Influence Level changes occur.",
@@ -404,12 +395,12 @@ export default {
     },
 
     // =========================================================================
-    // 200 POINTS - TACTICAL RAIDS
+    // 300 POINTS - TACTICAL RAIDS
     // =========================================================================
     {
       id: "run-the-gauntlet",
       name: "Run the Gauntlet",
-      battleSize: 200,
+      battleSize: 300,
       racketReward: "Smuggling Route",
       flavourText: `
         A smuggling corridor runs through this district - whoever controls
@@ -418,23 +409,11 @@ export default {
       `,
       objectives: [
         {
-          name: "Secure the Checkpoints",
-          type: "Progressive",
-          description: "Each checkpoint must be held to control the route.",
-          scoring: `
-            At the end of each round (starting round 2), score 1VP for each
-            objective marker you control. Score a 3VP bonus if you control
-            all three simultaneously.
-          `,
-        },
-        {
           name: "Lock Down the Route",
           type: "End Game",
-          description: "Total control means total profit.",
+          description: "Each checkpoint must be held to control the route. Total control means total profit.",
           scoring: `
-            At the end of round 4, score 5VP if you control all three
-            objective markers. Score 2VP if you control more markers than
-            your opponent.
+            At the end of round 4, score 1VP for each objective marker you control.
           `,
         },
       ],
@@ -447,8 +426,8 @@ export default {
         {
           name: "The Corridor",
           description: `
-            Place three objective markers in a line down the center of the
-            battlefield, each 12" apart. These represent the smuggling
+            Place five objective markers in a line down the center of the
+            battlefield, evenly spaced 6" apart. These represent the smuggling
             checkpoints. Terrain should create a 'corridor' feel with
             approaches from both sides.
           `,
@@ -459,13 +438,13 @@ export default {
             The Defender controls the center checkpoint at the start of the
             game. Additionally, the Defender deploys first, within 6" of the
             center line (not their table edge). The Attacker then deploys
-            within 9" of either long table edge.
+            within 12" of either long table edge (parallel to the line of checkpoints).
           `,
         },
         {
           name: "Smuggler's Shortcut",
           description: `
-            Once per battle, at the start of any round after round 1, a
+            Once per battle, at the start of any round after round 1, each
             player may remove one of their models within 3" of a checkpoint
             they control. Immediately place that model within 3" of a
             different checkpoint (at least 1" from enemies). The model may
@@ -479,19 +458,18 @@ export default {
             the Attacker may use Smuggler's Shortcut one additional time
             this battle.
             If the Defender's faction has Influence Level 3+ in this district,
-            the Defender may use Smuggler's Shortcut once during round 1
-            (instead of after round 1).
+            the Defender may use Smuggler's Shortcut one additional time
+            this battle.
           `,
         },
       ],
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            The smuggling route is yours. Contraband, weapons, and fighters
-            can now move freely through this district under your control.
+            The enemy's smuggling route is no more. Their ability to transport Contraband, weapons, and fighters ended.
           `,
           effects: [
-            "The Attacker takes over the Defender's Smuggling Route racket in this district.",
+            "The Attacker destroys the Defender's Smuggling Route racket in this district.",
             "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
             "Then the attacker gains 1 Influence Level in that district (maximum 4).",
           ],
@@ -502,7 +480,8 @@ export default {
             and your faction's supply lines continue uninterrupted.
           `,
           effects: [
-            "The Defender retains their Smuggling Route and may immediately move one gang belonging to themselves or a faction member from an adjacent district to this district for free.",
+            "The Defender retains their Smuggling Route and may immediately move one gang",
+            "belonging to themselves or a faction member from an adjacent district to this district for free.",
             "Add 1 to the Defending faction's Influence Level at this district.",
           ],
         },
@@ -519,7 +498,7 @@ export default {
     {
       id: "blood-sport",
       name: "Blood Sport",
-      battleSize: 200,
+      battleSize: 300,
       racketReward: "Fighting Pit",
       flavourText: `
         An underground fighting ring operates in this district. Take over
