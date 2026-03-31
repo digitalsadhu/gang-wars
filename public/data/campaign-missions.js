@@ -1,6 +1,6 @@
 // Campaign Missions - battle scenarios for Turf War operations
-// Each mission is tied to a battle size and rewards a specific Racket type
-// 100pts = Covert Ops, 200pts = Tactical Raids, 500pts = All-Out Assault
+// Most missions have a fixed battle size and reward a specific Racket type.
+// Gang Clash is the exception and can be played at 200/300/500 points.
 
 export default {
   title: "Underhive Operations",
@@ -13,20 +13,14 @@ export default {
   missionSelection: {
     description: "When a Turf War operation results in a battle, the attacker chooses the mission:",
     rules: [
-      "The attacker chooses the mission based on what they want to achieve. Each mission has an associated battle size (100, 200, or 500 points).",
-      "A mission can only be chosen if the defender has the associated Racket in the district (e.g., Sabotage Run requires the defender to have Fortifications). Total War is the exception and can always be chosen.",
+      "The attacker chooses the mission based on what they want to achieve. Each mission has an associated battle size (200, 300, or 500 points).",
+      "A mission can only be chosen if the defender has the associated Racket in the district (e.g., Sabotage Run requires the defender to have Fortifications). Gang Clash is the exception and can always be chosen.",
       "Both gangs must field a roster matching the mission's battle size.",
+      "When Gang Clash is selected, the attacker chooses 200/300/500 points when that battle is resolved. 300pts requires the Defender to have Influence Level 2+ in the district. 500pts requires the Defender to have Influence Level 3+ in the district, and the attacking gang must be in that same district (not an adjacent district).",
+      "If multiple Turf Wars target the same district, resolve battles in descending order of the attacker's current Influence Level in that district. If tied, use highest total faction Influence across all districts; if still tied, randomize.",
       "The attacker chooses the Theatre for the battle.",
       "If the defender has an Informant Network in the district, OR if any gang in the defender's faction selected the Home Turf Advantage operation in this district this phase, the defender chooses the Theatre instead.",
-      "Winning a mission allows the attacker to take over the defender's associated Racket - it is removed from the defender and the attacker gains it in that district.",
-    ],
-  },
-
-  influenceLevelRules: {
-    description: "Influence Level changes when the attacker wins a battle:",
-    rules: [
-      "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
-      "Then the attacker gains 1 Influence Level in that district (maximum 4).",
+      "Winning a mission provides benefits as described in the mission description.",
     ],
   },
 
@@ -289,7 +283,7 @@ export default {
     {
       id: "dead-drop",
       name: "Dead Drop",
-      battleSize: 100,
+      battleSize: 200,
       racketReward: "Safe House",
       flavourText: `
         A hidden cache has been located - supplies, weapons, and a secure
@@ -438,7 +432,8 @@ export default {
             The Defender controls the center checkpoint at the start of the
             game. Additionally, the Defender deploys first, within 6" of the
             center line (not their table edge). The Attacker then deploys
-            within 12" of either long table edge (parallel to the line of checkpoints).
+            within 12" of either long table edge (parallel to the line of checkpoints)
+            and may split their forces across the two sides as they wish.
           `,
         },
         {
@@ -546,10 +541,11 @@ export default {
         {
           name: "The Pit Boss",
           description: `
-            The Pit Boss is a Q4+ model with 3 wounds (Tough(3)), and a
-            brutal melee weapon (A3, AP(1)). They are hostile to all gangs.
+            The Pit Boss is a Q4+ model with 3 wounds (Tough(6)), and a
+            brutal melee weapon (A3, AP(4)). They are hostile to all gangs.
             At the end of each round, the Pit Boss charges the nearest model
-            within 12" (or moves toward the nearest model if none in range).
+            within 12" (or rushes toward the nearest model if none in range)
+            but does not leave the pit.
           `,
         },
         {
@@ -893,22 +889,22 @@ export default {
 
     {
       id: "total-war",
-      name: "Total War",
-      battleSize: 500,
+      name: "Gang Clash",
+      battleSize: null,
       racketReward: null,
       flavourText: `
-        No objectives. No tricks. This is a battle of annihilation - drive
-        the enemy from this district entirely, or be driven out yourself.
-        Only one faction walks away.
+        No objectives. No tricks. This is a direct gang-on-gang collision.
+        The attacker sets the scale of violence at 200, 300, or 500 points
+        when the battle resolves.
       `,
       objectives: [
         {
           name: "Annihilation",
           type: "Progressive",
-          description: "Every enemy fighter removed is a step toward total victory.",
+          description: "Every enemy fighter removed is a step toward victory.",
           scoring: `
             Score 1VP for each enemy model removed as a casualty. Score 2VP
-            instead for Heroes and 3VP for the enemy Leader.
+            instead for models with the tough keyword.
           `,
         },
         {
@@ -929,15 +925,22 @@ export default {
       },
       missionRules: [
         {
+          name: "Choose the Scale",
+          description: `
+            When this battle is resolved, the Attacker chooses to fight at
+            200, 300, or 500 points:
+            - 200pts: no additional requirement.
+            - 300pts: Defender must have Influence Level 2+ in this district.
+            - 500pts: Defender must have Influence Level 3+ in this district,
+              and the attacking gang must be in this district (cannot attack from adjacent districts).
+          `,
+        },
+        {
           name: "No Quarter",
           description: `
             This is a battle of annihilation fought on a standard 4'x4'
             battlefield. There are no objective markers.
-            The Defender chooses one table edge as their deployment edge. The
-            Attacker deploys from the opposite edge. The Defender deploys
-            first, with all units wholly within 12" of their table edge. The
-            Attacker deploys second, with all units wholly within 12" of their
-            table edge. The Attacker takes the first turn in round 1.
+            Standard deployment rules apply.
           `,
         },
         {
@@ -969,29 +972,30 @@ export default {
       campaignOutcome: {
         attackerWins: {
           flavourText: `
-            Total victory. The defenders are broken, scattered, driven into
-            the depths. This district belongs to your faction now.
+            The defenders are broken and driven back. Your faction gains a
+            stronger hold in this district.
           `,
           effects: [
-            "One gang from the defending faction in the contested district must relocate to an adjacent district chosen by the Defending faction.",
-            "If the defender's Influence Level in the district is less than or equal to the attacker's Influence Level, the defender loses 1 Influence Level first.",
-            "Then the attacker gains 1 Influence Level in that district (maximum 4).",
+            "If fought at 200pts: The Attacker gains +1 Influence Level in this district (maximum 4).",
+            "If fought at 300pts: The Defender loses 1 Influence Level in this district (minimum 0), then the Attacker gains +1 Influence Level (maximum 4).",
+            "If fought at 500pts: The Defender loses 2 Influence Levels in this district (minimum 0), then the Attacker gains +1 Influence Level (maximum 4).",
           ],
         },
         defenderWins: {
           flavourText: `
-            The assault is crushed utterly. The attackers retreat in disarray,
-            their ambitions in this district shattered.
+            The assault is crushed and the attackers are driven back from
+            their attempted takeover.
           `,
           effects: [
-            "Reduce the Attacking faction's Influence Level in this district by 1 (minimum 0).",
-            "Add 1 to the Defending faction's Influence Level at this district (maximum 4).",
+            "If fought at 200pts: The Defender gains +1 Influence Level in this district (maximum 4).",
+            "If fought at 300pts: The Attacker loses 1 Influence Level in this district (minimum 0), then the Defender gains +1 Influence Level (maximum 4).",
+            "If fought at 500pts: The Attacker loses 2 Influence Levels in this district (minimum 0), then the Defender gains +1 Influence Level (maximum 4).",
           ],
         },
         draw: {
-          flavourText: "Both sides are bled white. The battle solves nothing, but at terrible cost.",
+          flavourText: "Both sides are bled white. Neither gang can force a breakthrough.",
           effects: [
-            "Both factions reduce their Influence Level in this district by 1.",
+            "No Influence Level changes occur.",
           ],
         },
       },
