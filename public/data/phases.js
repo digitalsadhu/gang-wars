@@ -30,9 +30,8 @@ export default {
       name: "Resolve Establish Racket Operations",
       description: `
         Players who selected Establish Racket do so now. If multiple players
-        targeted the same district with the same racket, a Turf War battle must
-        be fought (choose the turf war type based on the type of racket) to determine
-        who establishes the racket. Place a new racket marker of the correct type in the target district.
+        targeted the same district with the same racket, order placement is determined by the highest Influence Level in that district
+        (highest first).
       `,
     },
     {
