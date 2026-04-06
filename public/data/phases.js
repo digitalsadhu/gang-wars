@@ -21,8 +21,11 @@ export default {
       number: 2,
       name: "Reveal Operations",
       description: `
-        Once all operations have been selected and sent to the Gamemaster, the
-        Gamemaster reveals all chosen Operations.
+        Once all operations have been selected and sent to the Gamemaster,
+        factions with informant networks may choose to target another faction and
+        the gamemaster will reveal the operations of that faction to them.
+        After that, one of their players may choose to change their opertion
+        for the phase before the gamemaster reveals all operations to all players.
       `,
     },
     {
