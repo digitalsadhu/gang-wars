@@ -822,13 +822,6 @@ export default {
           `,
         },
         {
-          name: "Entrenched Position",
-          description: `
-            The Defender starts the battle controlling all three objective
-            markers.
-          `,
-        },
-        {
           name: "Standard Duration",
           description: `
             This battle lasts 4 rounds.
@@ -836,20 +829,13 @@ export default {
           `,
         },
         {
-          name: "Total Commitment",
-          description: `
-            Both sides have committed major forces. The Attacker may field up
-            to 550pts. The Defender may field up to 550pts.
-          `,
-        },
-        {
           name: "Influence Level Advantage (3+)",
           description: `
             If the Attacker's faction has Influence Level 3+ in this district,
-            one Attacker unit may make a free 6" move after deployment
+            up to two Attacker units may make a free 6" move after deployment
             (must end more than 9" from enemy models).
             If the Defender's faction has Influence Level 3+ in this district,
-            they may field up to 575pts instead of 550pts.
+            they may field up to 525pts instead of 500pts.
           `,
         },
       ],
