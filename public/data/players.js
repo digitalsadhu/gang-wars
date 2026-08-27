@@ -5,7 +5,7 @@ export default {
   players: [
     { name: "Mikkel", faction: "The Undergrid Syndicate" },
     { name: "William", faction: "The Undergrid Syndicate" },
-    { name: "Misael", faction: "The Undergrid Syndicate" },
+    { name: "Alex", faction: "The Undergrid Syndicate" },
     { name: "Fabien", faction: "Static Dominion" },
     { name: "Valentin", faction: "Static Dominion" },
     { name: "Richard/Kiran", faction: "Static Dominion" },
